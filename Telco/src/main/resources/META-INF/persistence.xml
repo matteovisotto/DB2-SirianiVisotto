@@ -8,7 +8,27 @@
         <class>it.polimi.db2.telco.entities.Administrator</class>
         <class>it.polimi.db2.telco.entities.OptionalProduct</class>
         <class>it.polimi.db2.telco.entities.ServicePackage</class>
-        <class>it.polimi.db2.telco.entities.Subscription</class>
+        <class>it.polimi.db2.telco.entities.User</class>
+        <class>it.polimi.db2.telco.entities.OptionalProductInPackageId</class>
+        <class>it.polimi.db2.telco.entities.OptionalProductInPackage</class>
+        <class>it.polimi.db2.telco.entities.OptionalProductOrderId</class>
+        <class>it.polimi.db2.telco.entities.OptionalProductOrder</class>
+        <class>it.polimi.db2.telco.entities.ServiceInPackageId</class>
+        <class>it.polimi.db2.telco.entities.ServiceInPackage</class>
+        <class>it.polimi.db2.telco.entities.AveragePurchaseOptionalPackage</class>
+        <class>it.polimi.db2.telco.entities.FailedPayment</class>
+        <class>it.polimi.db2.telco.entities.TotalPurchaseOptional</class>
+        <class>it.polimi.db2.telco.entities.TotalPurchasePackage</class>
+        <class>it.polimi.db2.telco.entities.TotalPurchasePackageOptionalId</class>
+        <class>it.polimi.db2.telco.entities.TotalPurchasePackageOptional</class>
+        <class>it.polimi.db2.telco.entities.TotalPurchasePackageValidityId</class>
+        <class>it.polimi.db2.telco.entities.TotalPurchasePackageValidity</class>
+        <class>it.polimi.db2.telco.entities.InsolventUser</class>
+        <class>it.polimi.db2.telco.entities.SuspendedOrderId</class>
+        <class>it.polimi.db2.telco.entities.SuspendedOrder</class>
+        <class>it.polimi.db2.telco.entities.Activation</class>
+        <class>it.polimi.db2.telco.entities.Order</class>
+        <class>it.polimi.db2.telco.entities.PaymentHistory</class>
         <properties>
             <property name="eclipselink.logging.level" value="FINE" />
             <property name="eclipselink.cache.shared.default" value="false" />

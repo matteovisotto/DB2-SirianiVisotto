@@ -1,7 +1,9 @@
 package it.polimi.db2.telco.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -27,15 +29,48 @@ public class User {
     @Column(name = "password", nullable = false, length = 225)
     private String password;
 
-    @OneToMany(mappedBy = "user")
-    private Set<Subscription> subscriptions = new LinkedHashSet<>();
+    @Column(name = "insolvent", nullable = false)
+    private Integer insolvent;
 
-    public Set<Subscription> getSubscriptions() {
-        return subscriptions;
+    @OneToMany(mappedBy = "user")
+    private List<PaymentHistory> paymentHistories = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Alert> alerts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders = new ArrayList<>();
+
+    public List<Order> getOrders() {
+        return orders;
     }
 
-    public void setSubscriptions(Set<Subscription> subscriptions) {
-        this.subscriptions = subscriptions;
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public List<Alert> getAlerts() {
+        return alerts;
+    }
+
+    public void setAlerts(List<Alert> alerts) {
+        this.alerts = alerts;
+    }
+
+    public List<PaymentHistory> getPaymentHistories() {
+        return paymentHistories;
+    }
+
+    public void setPaymentHistories(List<PaymentHistory> paymentHistories) {
+        this.paymentHistories = paymentHistories;
+    }
+
+    public Integer getInsolvent() {
+        return insolvent;
+    }
+
+    public void setInsolvent(Integer insolvent) {
+        this.insolvent = insolvent;
     }
 
     public String getPassword() {
@@ -85,6 +120,4 @@ public class User {
     public void setId(Integer id) {
         this.id = id;
     }
-
-    //TODO Reverse Engineering! Migrate other columns to the entity
 }

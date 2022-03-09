@@ -1,7 +1,9 @@
 package it.polimi.db2.telco.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,41 +18,41 @@ public class ServicePackage {
     private String name;
 
     @OneToMany(mappedBy = "_package")
-    private Set<PackagePrice> packagePrices = new LinkedHashSet<>();
+    private List<PackagePrice> packagePrices = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "optional_product_in_package",
             joinColumns = @JoinColumn(name = "package_id"),
             inverseJoinColumns = @JoinColumn(name = "optional_product_id"))
-    private Set<OptionalProduct> optionalProducts = new LinkedHashSet<>();
+    private List<OptionalProduct> optionalProducts = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "service_in_package",
             joinColumns = @JoinColumn(name = "package_id"),
             inverseJoinColumns = @JoinColumn(name = "service_id"))
-    private Set<Service> services = new LinkedHashSet<>();
+    private List<Service> services = new ArrayList<>();
 
-    public Set<Service> getServices() {
+    public List<Service> getServices() {
         return services;
     }
 
-    public void setServices(Set<Service> services) {
+    public void setServices(List<Service> services) {
         this.services = services;
     }
 
-    public Set<OptionalProduct> getOptionalProducts() {
+    public List<OptionalProduct> getOptionalProducts() {
         return optionalProducts;
     }
 
-    public void setOptionalProducts(Set<OptionalProduct> optionalProducts) {
+    public void setOptionalProducts(List<OptionalProduct> optionalProducts) {
         this.optionalProducts = optionalProducts;
     }
 
-    public Set<PackagePrice> getPackagePrices() {
+    public List<PackagePrice> getPackagePrices() {
         return packagePrices;
     }
 
-    public void setPackagePrices(Set<PackagePrice> packagePrices) {
+    public void setPackagePrices(List<PackagePrice> packagePrices) {
         this.packagePrices = packagePrices;
     }
 

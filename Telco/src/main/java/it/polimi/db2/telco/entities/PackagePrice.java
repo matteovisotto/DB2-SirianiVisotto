@@ -9,6 +9,7 @@ public class PackagePrice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "package_id")
     private ServicePackage _package;
@@ -50,6 +51,4 @@ public class PackagePrice {
     public void setId(Integer id) {
         this.id = id;
     }
-
-    //TODO Reverse Engineering! Migrate other columns to the entity
 }

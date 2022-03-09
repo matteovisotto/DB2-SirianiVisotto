@@ -1,6 +1,10 @@
 package it.polimi.db2.telco.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "optional_product")
@@ -18,6 +22,17 @@ public class OptionalProduct {
 
     @Column(name = "description")
     private String description;
+
+    @ManyToMany(mappedBy = "optionalProducts")
+    private List<ServicePackage> servicePackages = new ArrayList<>();
+
+    public List<ServicePackage> getServicePackages() {
+        return servicePackages;
+    }
+
+    public void setServicePackages(List<ServicePackage> servicePackages) {
+        this.servicePackages = servicePackages;
+    }
 
     public String getDescription() {
         return description;

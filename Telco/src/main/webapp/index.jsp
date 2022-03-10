@@ -8,6 +8,10 @@
 <h1><%= "Hello World!" %>
 </h1>
 <br/>
-<a href="hello-servlet">Hello Servlet</a>
+<form method="post" action="${pageContext.request.contextPath}/login">
+    <input type="text" name="j_username"/>
+    <input type="password" name="j_password" />
+    <input type="submit" value="Login"/>
+</form>
 </body>
 </html>

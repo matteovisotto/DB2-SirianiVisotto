@@ -32,5 +32,4 @@ public class UserController {
     public User getUserById(Integer userId) throws UserException {
         return userService.getUserById(userId);
     }
-
 }

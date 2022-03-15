@@ -1,6 +1,7 @@
 package it.polimi.db2.telco.services;
 
 import it.polimi.db2.telco.entities.PaymentHistory;
+import it.polimi.db2.telco.exceptions.payment.PaymentNotFoundException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,29 +14,35 @@ public class PaymentService {
 
     public PaymentService(){}
 
-    public PaymentHistory getPaymentById(Integer paymentHistoryId) {
+    public PaymentHistory getPaymentById(Integer paymentHistoryId) throws PaymentNotFoundException {
         PaymentHistory paymentHistory = em.find(PaymentHistory.class, paymentHistoryId);
-/*        if(servicePackage == null){
-            throw new ServicePackageNotFound();
-        }*/
+        if(paymentHistory == null){
+            throw new PaymentNotFoundException();
+        }
         return paymentHistory;
     }
 
-    public List<PaymentHistory> getPaymentHistoryOfUser(Integer userId) {
+    public List<PaymentHistory> getPaymentHistoryOfUser(Integer userId) throws PaymentNotFoundException {
         TypedQuery<PaymentHistory> query = em.createQuery("SELECT p FROM PaymentHistory p WHERE p.user.id = :userId", PaymentHistory.class);
         query.setParameter("userId", userId);
         List<PaymentHistory> paymentHistories = query.getResultList();
+        if (paymentHistories.size() == 0) {
+            throw new PaymentNotFoundException();
+        }
         return paymentHistories;
     }
 
-    public List<PaymentHistory> getPaymentHistoryOfOrder(Integer orderId) {
+    public List<PaymentHistory> getPaymentHistoryOfOrder(Integer orderId) throws PaymentNotFoundException {
         TypedQuery<PaymentHistory> query = em.createQuery("SELECT p FROM PaymentHistory p WHERE p.order.id = :orderId", PaymentHistory.class);
         query.setParameter("orderId", orderId);
         List<PaymentHistory> paymentHistories = query.getResultList();
+        if (paymentHistories.size() == 0) {
+            throw new PaymentNotFoundException();
+        }
         return paymentHistories;
     }
 
-    public Integer makePayment(PaymentHistory paymentHistory){
+    public Integer makePayment(PaymentHistory paymentHistory) {
         em.persist(paymentHistory);
         em.flush();
         return paymentHistory.getId();

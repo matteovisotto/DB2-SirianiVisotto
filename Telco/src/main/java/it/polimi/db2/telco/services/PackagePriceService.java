@@ -1,6 +1,7 @@
 package it.polimi.db2.telco.services;
 
 import it.polimi.db2.telco.entities.PackagePrice;
+import it.polimi.db2.telco.exceptions.packagePrice.PackagePriceNotFoundException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,49 +14,49 @@ public class PackagePriceService {
 
     public PackagePriceService(){}
 
-    public PackagePrice getPackagePriceById(Integer packagePriceId) {
+    public PackagePrice getPackagePriceById(Integer packagePriceId) throws PackagePriceNotFoundException {
         PackagePrice packagePrice = em.find(PackagePrice.class, packagePriceId);
-/*        if(servicePackage == null){
-            throw new ServicePackageNotFound();
-        }*/
+        if(packagePrice == null){
+            throw new PackagePriceNotFoundException();
+        }
         return packagePrice;
     }
 
-    public Double getPriceByValidityPeriodAndPackage(Integer validityPeriod, Integer packageId) throws Exception {
+    public Double getPriceByValidityPeriodAndPackage(Integer validityPeriod, Integer packageId) throws PackagePriceNotFoundException {
         TypedQuery<PackagePrice> query = em.createQuery("SELECT p FROM PackagePrice p WHERE p.validityPeriod = :validityPeriod AND p._package = :packageId", PackagePrice.class);
         query.setParameter("validityPeriod", validityPeriod);
         query.setParameter("packageId", packageId);
-        PackagePrice packagePrices = query.getSingleResult();
-        if (packagePrices == null) {
-            throw new Exception("");
+        PackagePrice packagePrice = query.getSingleResult();
+        if (packagePrice == null) {
+            throw new PackagePriceNotFoundException();
         }
-        return packagePrices.getPrice();
-/*        if(servicePackage == null){
-            throw new ServicePackageNotFound();
-        }*/
+        return packagePrice.getPrice();
     }
 
-    public List<PackagePrice> getPackagePricesOfPackage(Integer packageId) {
+    public List<PackagePrice> getPackagePricesOfPackage(Integer packageId) throws PackagePriceNotFoundException {
         TypedQuery<PackagePrice> query = em.createQuery("SELECT p FROM PackagePrice p WHERE p._package.id = :packageId", PackagePrice.class);
         query.setParameter("packageId", packageId);
         List<PackagePrice> packagePrices = query.getResultList();
+        if (packagePrices.size() == 0) {
+            throw new PackagePriceNotFoundException();
+        }
         return packagePrices;
     }
 
-    public Integer createPackagePrice(PackagePrice packagePrice){
+    public Integer createPackagePrice(PackagePrice packagePrice) {
         em.persist(packagePrice);
         em.flush();
         return packagePrice.getId();
     }
 
-    public Integer updatePackagePrice(PackagePrice packagePrice){
+    public Integer updatePackagePrice(PackagePrice packagePrice) {
         packagePrice = em.merge(packagePrice);
         em.flush();
         return packagePrice.getId();
     }
 
 
-    public void deletePackagePrice(PackagePrice packagePrice){
+    public void deletePackagePrice(PackagePrice packagePrice) {
         if (!em.contains(packagePrice)) {
             packagePrice = em.merge(packagePrice);
         }

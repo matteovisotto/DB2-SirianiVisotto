@@ -2,7 +2,7 @@ package it.polimi.db2.telco.servlet;
 
 import it.polimi.db2.telco.controllers.UserController;
 import it.polimi.db2.telco.entities.User;
-import it.polimi.db2.telco.exceptions.UserException;
+import it.polimi.db2.telco.exceptions.user.UserException;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.inject.Inject;

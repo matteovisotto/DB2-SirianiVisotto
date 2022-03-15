@@ -1,7 +1,7 @@
 package it.polimi.db2.telco.services;
 
 import it.polimi.db2.telco.entities.User;
-import it.polimi.db2.telco.exceptions.UserNotFoundException;
+import it.polimi.db2.telco.exceptions.user.UserNotFoundException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

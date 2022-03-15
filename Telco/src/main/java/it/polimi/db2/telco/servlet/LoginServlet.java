@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
                 user = userController.loginUserByUsername(username, sha256hex);
             }
         } catch (UserException e) {
-            resp.sendRedirect(getServletContext().getContextPath()+"/?evn=error");
+            resp.sendRedirect(getServletContext().getContextPath()+"/?evn=error&err=bad_credential");
             return;
         }
 

@@ -9,6 +9,7 @@ import java.util.Objects;
 @Embeddable
 public class SuspendedOrderId implements Serializable {
     private static final long serialVersionUID = -6558232249729298768L;
+
     @Column(name = "order_id", nullable = false)
     private Integer orderId;
     @Column(name = "user_id", nullable = false)

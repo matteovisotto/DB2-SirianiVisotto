@@ -1,10 +1,8 @@
 package it.polimi.db2.telco.controllers;
 
-import it.polimi.db2.telco.entities.OptionalProductOrder;
 import it.polimi.db2.telco.entities.ServiceInPackage;
 import it.polimi.db2.telco.exceptions.serviceInPackage.ServiceInPackageAlreadyExistingException;
 import it.polimi.db2.telco.exceptions.serviceInPackage.ServiceInPackageException;
-import it.polimi.db2.telco.exceptions.suspendedOrder.SuspendedOrderException;
 import it.polimi.db2.telco.services.ServiceInPackageService;
 
 import javax.inject.Inject;

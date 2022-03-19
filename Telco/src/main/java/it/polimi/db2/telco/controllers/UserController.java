@@ -35,7 +35,7 @@ public class UserController {
     public Integer createUser(User user) throws UserException {
         Integer userId;
         if (userService.getUserByEmail(user.getEmail()) == null) {
-            if (userService.getUserByUsername(user.getEmail()) == null) {
+            if (userService.getUserByUsername(user.getUsername()) == null) {
                 //Hash the password
                 userId = userService.createUser(user);
             } else {

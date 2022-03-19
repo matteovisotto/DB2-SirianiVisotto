@@ -19,11 +19,11 @@ public class FailedPaymentController {
 
     public FailedPaymentController(){}
 
-    public FailedPayment getFailedPaymentById(Integer failedPaymentId) throws PaymentException {
-        return failedPaymentService.getFailedPaymentById(failedPaymentId);
+    public FailedPayment getFailedPaymentByUserId(Integer failedPaymentId) throws PaymentException {
+        return failedPaymentService.getFailedPaymentByUserId(failedPaymentId);
     }
 
-    public List<FailedPayment> getFailedPaymentsByUser(Integer userId) throws PaymentException, UserException {
+    public List<FailedPayment> getFailedPaymentsOfUser(Integer userId) throws PaymentException, UserException {
         User user = userService.getUserById(userId);
         if (user != null) {
             return failedPaymentService.getFailedPaymentsOfUser(userId);

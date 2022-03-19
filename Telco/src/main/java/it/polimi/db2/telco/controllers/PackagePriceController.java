@@ -36,14 +36,6 @@ public class PackagePriceController {
         }
     }
 
-    public List<PackagePrice> getPricesByValidityPeriodAndPackage(Integer validityPeriod, Integer packageId) throws PackagePriceException, ValidityPeriodException {
-        if (validityPeriod == 12 || validityPeriod == 24 || validityPeriod == 36) {
-            return packagePriceService.getPackagePricesOfPackage(packageId);
-        } else {
-            throw new InvalidValidityPeriodException();
-        }
-    }
-
     public Integer createPackagePrice(PackagePrice packagePrice) throws PackagePriceException {
         Integer packagePriceId;
         if ((packagePriceService.getPriceByValidityPeriodAndPackage(packagePrice.getValidityPeriod(), packagePrice.get_package().getId()) == null) && (packagePrice.getValidityPeriod() == 12 || packagePrice.getValidityPeriod() == 24 || packagePrice.getValidityPeriod() == 36)){
@@ -54,7 +46,7 @@ public class PackagePriceController {
         return packagePriceId;
     }
 
-    public Integer updatePackagePrice(PackagePrice packagePrice) throws PackagePriceNotFoundException {
+    public Integer updatePackagePrice(PackagePrice packagePrice) throws PackagePriceException {
         Integer packagePriceId;
         if (packagePriceService.getPriceByValidityPeriodAndPackage(packagePrice.getValidityPeriod(), packagePrice.get_package().getId()) != null){
             packagePriceId = packagePriceService.updatePackagePrice(packagePrice);
@@ -64,7 +56,7 @@ public class PackagePriceController {
         return packagePriceId;
     }
 
-    public void deletePackagePrice(Integer packagePriceId) throws PackagePriceNotFoundException {
+    public void deletePackagePrice(Integer packagePriceId) throws PackagePriceException {
         PackagePrice packagePrice = packagePriceService.getPackagePriceById(packagePriceId);
         if (packagePrice != null){
             packagePriceService.deletePackagePrice(packagePrice);

@@ -6,6 +6,7 @@ import it.polimi.db2.telco.exceptions.optionalProduct.OptionalProductNotFoundExc
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.util.List;
 
 public class OptionalProductService {
     @PersistenceContext(unitName = "telco-persistence-provider")
@@ -21,7 +22,7 @@ public class OptionalProductService {
         return optionalProduct;
     }
 
-    public OptionalProduct getOptionalProductsByName(String name) throws OptionalProductNotFoundException {
+    public OptionalProduct getOptionalProductByName(String name) throws OptionalProductNotFoundException {
         TypedQuery<OptionalProduct> query = em.createQuery("SELECT o FROM OptionalProduct o WHERE o.name = :name", OptionalProduct.class);
         query.setParameter("name", name);
         OptionalProduct optionalProduct = query.getSingleResult();
@@ -29,6 +30,15 @@ public class OptionalProductService {
             throw new OptionalProductNotFoundException();
         }
         return optionalProduct;
+    }
+
+    public List<OptionalProduct> getAllOptionalProducts() throws OptionalProductNotFoundException {
+        TypedQuery<OptionalProduct> query = em.createQuery("SELECT o FROM OptionalProduct o", OptionalProduct.class);
+        List<OptionalProduct> optionalProducts = query.getResultList();
+        if (optionalProducts == null) {
+            throw new OptionalProductNotFoundException();
+        }
+        return optionalProducts;
     }
 
     public Integer createOptionalProduct(OptionalProduct optionalProduct) {

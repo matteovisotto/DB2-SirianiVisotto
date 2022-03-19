@@ -5,6 +5,7 @@ import it.polimi.db2.telco.exceptions.order.OrderAlreadyPayedException;
 import it.polimi.db2.telco.exceptions.order.OrderException;
 import it.polimi.db2.telco.exceptions.order.OrderNotFoundException;
 import it.polimi.db2.telco.exceptions.payment.PaymentException;
+import it.polimi.db2.telco.exceptions.payment.PaymentNotFoundException;
 import it.polimi.db2.telco.exceptions.user.UserException;
 import it.polimi.db2.telco.exceptions.user.UserNotFoundException;
 import it.polimi.db2.telco.services.OrderService;
@@ -24,8 +25,13 @@ public class PaymentController {
 
     public PaymentController(){}
 
-    public PaymentHistory getPaymentHistoryById(Integer paymentHistoryId) throws PaymentException {
-        return paymentService.getPaymentById(paymentHistoryId);
+    public PaymentHistory getPaymentById(Integer paymentHistoryId, User user) throws PaymentException {
+        PaymentHistory payment = paymentService.getPaymentById(paymentHistoryId);
+        if (payment.getUser().getId().equals(user.getId())) {
+            return payment;
+        } else {
+            throw new PaymentNotFoundException();
+        }
     }
 
     public List<PaymentHistory> getPaymentOfHistoryOfUser(Integer userId) throws PaymentException, UserException {
@@ -41,6 +47,15 @@ public class PaymentController {
         Order order = orderService.getOrderById(orderId);
         if (order != null) {
             return paymentService.getPaymentHistoryOfOrder(orderId);
+        } else {
+            throw new OrderNotFoundException();
+        }
+    }
+
+    public List<PaymentHistory> getPaymentOfHistoryOfMyOrder(Integer orderId, Integer userId) throws PaymentException, OrderException {
+        Order order = orderService.getOrderById(orderId);
+        if (order != null && userId.equals(order.getUser().getId())) {
+            return paymentService.getPaymentHistoryOfMyOrder(orderId, userId);
         } else {
             throw new OrderNotFoundException();
         }

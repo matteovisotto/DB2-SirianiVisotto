@@ -14,7 +14,7 @@ public class FailedPaymentService {
 
     public FailedPaymentService(){}
 
-    public FailedPayment getFailedPaymentById(Integer failedPaymentId) throws PaymentNotFoundException {
+    public FailedPayment getFailedPaymentByUserId(Integer failedPaymentId) throws PaymentNotFoundException {
         FailedPayment failedPayment = em.find(FailedPayment.class, failedPaymentId);
         if(failedPayment == null){
             throw new PaymentNotFoundException();
@@ -33,7 +33,7 @@ public class FailedPaymentService {
     }
 
     public List<FailedPayment> getAllFailedPaymentsPerUser() throws PaymentNotFoundException {
-        TypedQuery<FailedPayment> query = em.createQuery("SELECT a FROM FailedPayment a GROUP BY a.id", FailedPayment.class);
+        TypedQuery<FailedPayment> query = em.createQuery("SELECT a FROM FailedPayment a", FailedPayment.class);
         List<FailedPayment> failedPayments = query.getResultList();
         if (failedPayments.size() == 0) {
             throw new PaymentNotFoundException();

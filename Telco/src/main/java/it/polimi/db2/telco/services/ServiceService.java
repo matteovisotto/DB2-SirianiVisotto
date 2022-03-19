@@ -1,11 +1,14 @@
 package it.polimi.db2.telco.services;
 
 import it.polimi.db2.telco.entities.Service;
+import it.polimi.db2.telco.entities.ServicePackage;
 import it.polimi.db2.telco.exceptions.service.ServiceNotFoundException;
+import it.polimi.db2.telco.exceptions.servicePackage.ServicePackageNotFoundException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.util.List;
 
 public class ServiceService {
     @PersistenceContext(unitName = "telco-persistence-provider")
@@ -29,6 +32,15 @@ public class ServiceService {
             throw new ServiceNotFoundException();
         }
         return service;
+    }
+
+    public List<Service> getAllServices() throws ServiceNotFoundException {
+        TypedQuery<Service> query = em.createQuery("SELECT s FROM Service s", Service.class);
+        List<Service> services = query.getResultList();
+        if(services.size() == 0){
+            throw new ServicePackageNotFoundException();
+        }
+        return services;
     }
 
     public Integer createService(Service service) {

@@ -22,6 +22,14 @@ public class OrderService {
         return order;
     }
 
+    public Order getMyOrderByOrderId(Integer orderId, Integer userId) throws OrderNotFoundException {
+        Order order = em.find(Order.class, orderId);
+        if(order == null || !order.getUser().getId().equals(userId)){
+            throw new OrderNotFoundException();
+        }
+        return order;
+    }
+
     public List<Order> getOrdersOfUser(Integer userId) throws OrderNotFoundException {
         TypedQuery<Order> query = em.createQuery("SELECT o FROM Order o WHERE o.user.id = :user", Order.class);
         query.setParameter("user", userId);

@@ -1,7 +1,7 @@
 package it.polimi.db2.telco.controllers;
 
 import it.polimi.db2.telco.entities.TotalPurchasePackage;
-import it.polimi.db2.telco.exceptions.materialized.MaterializedException;
+import it.polimi.db2.telco.exceptions.report.ReportException;
 import it.polimi.db2.telco.services.TotalPurchasePackageService;
 
 import javax.inject.Inject;
@@ -13,7 +13,7 @@ public class TotalPurchasePackageController {
 
     public TotalPurchasePackageController(){}
 
-    public List<TotalPurchasePackage> getAllTotalPurchasePackages() throws MaterializedException {
+    public List<TotalPurchasePackage> getAllTotalPurchasePackages() throws ReportException {
         return totalPurchasePackageService.getAllTotalPurchasePackages();
     }
 }

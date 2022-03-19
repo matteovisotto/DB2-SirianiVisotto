@@ -1,12 +1,15 @@
 package it.polimi.db2.telco.controllers;
 
 import it.polimi.db2.telco.entities.Service;
+import it.polimi.db2.telco.entities.ServicePackage;
 import it.polimi.db2.telco.exceptions.service.ServiceAlreadyExistingException;
 import it.polimi.db2.telco.exceptions.service.ServiceException;
 import it.polimi.db2.telco.exceptions.service.ServiceNotFoundException;
+import it.polimi.db2.telco.exceptions.servicePackage.ServicePackageException;
 import it.polimi.db2.telco.services.ServiceService;
 
 import javax.inject.Inject;
+import java.util.List;
 
 public class ServiceController {
     @Inject
@@ -20,6 +23,10 @@ public class ServiceController {
 
     public Service getServiceByName(String name) throws ServiceException {
         return serviceService.getServiceByName(name);
+    }
+
+    public List<Service> getAllServices() throws ServiceException {
+        return serviceService.getAllServices();
     }
 
     public Integer createService(Service service) throws ServiceException {

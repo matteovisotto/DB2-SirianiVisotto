@@ -28,6 +28,10 @@ public class AdministratorController {
         return administratorService.getAdministratorById(administratorId);
     }
 
+    public Administrator getAdministratorByEmail(String email) throws AdministratorException {
+        return administratorService.getAdministratorByEmail(email);
+    }
+
     public List<Administrator> getAdministratorsByRole(String role) throws AdministratorException {
         return administratorService.getAdministratorsByRole(role);
     }

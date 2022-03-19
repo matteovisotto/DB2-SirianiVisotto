@@ -6,6 +6,7 @@ import it.polimi.db2.telco.exceptions.suspendedOrder.SuspendedOrderNotFoundExcep
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -26,6 +27,16 @@ public class SuspendedOrderService {
             throw new SuspendedOrderNotFoundException();
         }
         return suspendedOrder;
+    }
+
+    public List<SuspendedOrder> getMySuspendedOrders(Integer userId) throws SuspendedOrderNotFoundException {
+        Query query = em.createNativeQuery("SELECT s FROM SuspendedOrder s WHERE s.userId = ?", SuspendedOrder.class);
+        query.setParameter(1, userId);
+        List<SuspendedOrder> suspendedOrders = (List<SuspendedOrder>) query.getResultList();
+        if (suspendedOrders.size() == 0) {
+            throw new SuspendedOrderNotFoundException();
+        }
+        return suspendedOrders;
     }
 
     public List<SuspendedOrder> getAllSuspendedOrders() throws SuspendedOrderNotFoundException {

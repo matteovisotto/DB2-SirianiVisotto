@@ -1,7 +1,7 @@
 package it.polimi.db2.telco.services;
 
 import it.polimi.db2.telco.entities.AveragePurchaseOptionalPackage;
-import it.polimi.db2.telco.exceptions.materialized.AveragePurchaseOptionalPackageNotFoundException;
+import it.polimi.db2.telco.exceptions.report.AveragePurchaseOptionalPackageNotFoundException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

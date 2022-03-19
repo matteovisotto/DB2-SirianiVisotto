@@ -1,7 +1,7 @@
 package it.polimi.db2.telco.services;
 
 import it.polimi.db2.telco.entities.TotalPurchasePackage;
-import it.polimi.db2.telco.exceptions.materialized.TotalPurchasePackageNotFoundException;
+import it.polimi.db2.telco.exceptions.report.TotalPurchasePackageNotFoundException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

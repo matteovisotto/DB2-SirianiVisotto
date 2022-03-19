@@ -26,7 +26,7 @@ public class ActivationController {
     public ActivationController() {
     }
 
-    public Activation getPaymentHistoryById(Integer activationId) throws ActivationException {
+    public Activation getActivationByOrderId(Integer activationId) throws ActivationException {
         return activationService.getActivationById(activationId);
     }
 

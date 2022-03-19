@@ -42,6 +42,17 @@ public class PaymentService {
         return paymentHistories;
     }
 
+    public List<PaymentHistory> getPaymentHistoryOfMyOrder(Integer orderId, Integer userId) throws PaymentNotFoundException {
+        TypedQuery<PaymentHistory> query = em.createQuery("SELECT p FROM PaymentHistory p WHERE p.order.id = :orderId AND p.user.id = :userId", PaymentHistory.class);
+        query.setParameter("orderId", orderId);
+        query.setParameter("userId", userId);
+        List<PaymentHistory> paymentHistories = query.getResultList();
+        if (paymentHistories.size() == 0) {
+            throw new PaymentNotFoundException();
+        }
+        return paymentHistories;
+    }
+
     public Integer makePayment(PaymentHistory paymentHistory) {
         em.persist(paymentHistory);
         em.flush();

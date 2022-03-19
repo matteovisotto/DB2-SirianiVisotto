@@ -7,6 +7,7 @@ import it.polimi.db2.telco.exceptions.optionalProduct.OptionalProductNotFoundExc
 import it.polimi.db2.telco.services.OptionalProductService;
 
 import javax.inject.Inject;
+import java.util.List;
 
 public class OptionalProductController {
     @Inject
@@ -19,12 +20,16 @@ public class OptionalProductController {
     }
 
     public OptionalProduct getOptionalProductByName(String name) throws OptionalProductException {
-        return optionalProductService.getOptionalProductsByName(name);
+        return optionalProductService.getOptionalProductByName(name);
     }
 
-    public Integer createOptionalProduct(OptionalProduct optionalProduct) throws OptionalProductAlreadyExistingException {
+    public List<OptionalProduct> getAllOptionalProducts() throws OptionalProductException {
+        return optionalProductService.getAllOptionalProducts();
+    }
+
+    public Integer createOptionalProduct(OptionalProduct optionalProduct) throws OptionalProductException {
         Integer optionalProductId;
-        if (optionalProductService.getOptionalProductsByName(optionalProduct.getName()) == null) {
+        if (optionalProductService.getOptionalProductByName(optionalProduct.getName()) == null) {
             optionalProductId = optionalProductService.createOptionalProduct(optionalProduct);
         } else {
             throw new OptionalProductAlreadyExistingException();
@@ -32,7 +37,7 @@ public class OptionalProductController {
         return optionalProductId;
     }
 
-    public Integer updateOptionalProduct(OptionalProduct optionalProduct) throws OptionalProductNotFoundException {
+    public Integer updateOptionalProduct(OptionalProduct optionalProduct) throws OptionalProductException {
         Integer optionalProductId;
         if (optionalProductService.getOptionalProductById(optionalProduct.getId()) != null) {
             optionalProductId = optionalProductService.updateOptionalProduct(optionalProduct);
@@ -42,7 +47,7 @@ public class OptionalProductController {
         return optionalProductId;
     }
 
-    public void deleteOptionalProduct(Integer optionalProductId) throws OptionalProductNotFoundException {
+    public void deleteOptionalProduct(Integer optionalProductId) throws OptionalProductException {
         OptionalProduct optionalProduct = optionalProductService.getOptionalProductById(optionalProductId);
         if (optionalProduct != null) {
             optionalProductService.deleteOptionalProduct(optionalProduct);

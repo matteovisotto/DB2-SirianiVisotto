@@ -1,7 +1,7 @@
 package it.polimi.db2.telco.controllers;
 
 import it.polimi.db2.telco.entities.AveragePurchaseOptionalPackage;
-import it.polimi.db2.telco.exceptions.materialized.MaterializedException;
+import it.polimi.db2.telco.exceptions.report.ReportException;
 import it.polimi.db2.telco.services.AveragePurchaseOptionalPackageService;
 
 import javax.inject.Inject;
@@ -13,7 +13,7 @@ public class AveragePurchaseOptionalPackageController {
 
     public AveragePurchaseOptionalPackageController(){}
 
-    public List<AveragePurchaseOptionalPackage> getAllAveragePurchaseOptionalPackage() throws MaterializedException {
+    public List<AveragePurchaseOptionalPackage> getAllAveragePurchaseOptionalPackage() throws ReportException {
         return averagePurchaseOptionalPackageService.getAllAveragePurchaseOptionalPackages();
     }
 }

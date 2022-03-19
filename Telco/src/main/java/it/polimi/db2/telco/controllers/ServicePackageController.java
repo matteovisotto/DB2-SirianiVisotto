@@ -7,6 +7,7 @@ import it.polimi.db2.telco.exceptions.servicePackage.ServicePackageNotFoundExcep
 import it.polimi.db2.telco.services.ServicePackageService;
 
 import javax.inject.Inject;
+import java.util.List;
 
 public class ServicePackageController {
     @Inject
@@ -20,6 +21,10 @@ public class ServicePackageController {
 
     public ServicePackage getServicePackageByName(String name) throws ServicePackageException {
         return servicePackageService.getServicePackageByName(name);
+    }
+
+    public List<ServicePackage> getAllServicePackages() throws ServicePackageException {
+        return servicePackageService.getAllServicePackages();
     }
 
     public Integer createServicePackage(ServicePackage servicePackage) throws ServicePackageException {

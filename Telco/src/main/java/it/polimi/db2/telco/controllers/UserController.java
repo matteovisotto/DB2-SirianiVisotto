@@ -32,6 +32,14 @@ public class UserController {
         return userService.getUserById(userId);
     }
 
+    public User getUserByEmail(String mail) throws UserException {
+        return userService.getUserByEmail(mail);
+    }
+
+    public User getUserByUsername(String username) throws UserException {
+        return userService.getUserByUsername(username);
+    }
+
     public Integer createUser(User user) throws UserException {
         Integer userId;
         if (userService.getUserByEmail(user.getEmail()) == null) {

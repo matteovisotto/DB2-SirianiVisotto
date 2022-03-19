@@ -1,7 +1,6 @@
 package it.polimi.db2.telco.controllers;
 
 import it.polimi.db2.telco.entities.SuspendedOrder;
-import it.polimi.db2.telco.entities.TotalPurchaseOptional;
 import it.polimi.db2.telco.exceptions.suspendedOrder.SuspendedOrderException;
 import it.polimi.db2.telco.services.SuspendedOrderService;
 
@@ -16,6 +15,10 @@ public class SuspendedOrderController {
 
     public SuspendedOrder getSuspendedOrderByOrderIdAndUserId(Integer orderId, Integer userId) throws SuspendedOrderException {
         return suspendedOrderService.getSuspendedOrderByOrderIdAndUserId(orderId, userId);
+    }
+
+    public List<SuspendedOrder> getMySuspendedOrders(Integer userId) throws SuspendedOrderException {
+        return suspendedOrderService.getMySuspendedOrders(userId);
     }
 
     public List<SuspendedOrder> getAllSuspendedOrders() throws SuspendedOrderException {

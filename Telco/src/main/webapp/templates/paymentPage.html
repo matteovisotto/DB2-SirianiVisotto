@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>TelCo.</title>
+
+    <link rel="stylesheet" href="../css/bootstrap.css" data-th-href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" href="../css/style.css" data-th-href="@{/css/style.css}">
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+<div class="wrapper">
+
+
+    <!-- Page Content  -->
+    <div id="content">
+
+        <nav class="navbar navbar-expand-lg navbar-light dream-navbar shadow-sm">
+            <div class="container-fluid">
+                <a class="btn btn-toolbar text-white">
+                    <h3><i class="fas fa-phone"></i> Co.</h3>
+                </a>
+                    <div data-th-if="${user != null}">
+                    <a class="dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false"><img src="assets/placeholder_user.png" class="rounded-circle profile-img" /></a>
+                    <ul class="dropdown-menu dropdown-menu-end profile-dropdown" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="profile.html" data-th-href="@{/profile}"><i class="fas fa-user"></i> Profile</a></li>
+                        <li class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#" data-th-href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul></div>
+
+                <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal" data-th-if="${user == null}">Login - Register</button>
+
+            </div>
+        </nav>
+        <div class="page">
+            <div class="row">
+                <div class="col-md-3 col-sm-12"></div>
+                <div class="col-md-6 col-sm-12">
+                    <h3>PAYMENT</h3>
+                    <div class="card mt-3">
+                        <div class="card-body">
+
+                        <form action="" method="post">
+                            <div class="row">
+                                <div class="col-12 mb-3">
+                                    <h6 class="text-primary">Select payment method</h6>
+                                    <div class="form-check mt-3">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Credit_or_Debit_Card_Flat_Icon_Vector.svg/1024px-Credit_or_Debit_Card_Flat_Icon_Vector.svg.png" class="img-fluid" style="height: 50px;"/>
+                                            Credit/Debit Card
+                                        </label>
+                                    </div>
+                                    <div class="form-check mt-3">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            <div class="hstack gap-2">
+                                                <img src="https://loghi-famosi.com/wp-content/uploads/2020/04/PayPal-Simbolo.png" class="img-fluid" style="height: 35px;"/>
+                                                Paypal
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="form-check mt-3">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked>
+                                        <label class="form-check-label" for="flexRadioDefault3">
+                                            <div class="hstack gap-2">
+                                                <img src="https://sharingconsulting.com/wp-content/uploads/2014/03/apple-pay-logo.jpg" class="img-fluid" style="height: 40px;"/>
+                                                Apple Pay
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <input type="submit" class="btn btn-success float-end" value="PAY NOW"/>
+                                </div>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                <div class="col-md-3 col-sm-12">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script   src="https://code.jquery.com/jquery-3.6.0.min.js"   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="   crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="../js/bootstrap.min.js" data-th-src="@{/js/bootstrap.min.js}"></script>
+    <!-- jQuery Custom Scroller CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h3><i class="fas fa-phone"></i> Co.</h3>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab" aria-controls="login" aria-selected="true">Login</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register" type="button" role="tab" aria-controls="register" aria-selected="false">Register</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                        <h5>Login</h5>
+                        <form method="post" data-th-action="@{/login}">
+                            <div class="input-group mb-3 mt-3">
+                                <span class="input-group-text" id="j_username"><i class="fas fa-user"></i> </span>
+                                <input type="text" class="form-control" placeholder="Username or email" aria-label="Username" aria-describedby="j_username" name="j_username">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="j_password"><i class="fas fa-lock"></i></span>
+                                <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="j_password" name="j_password">
+                            </div>
+                            <input type="submit" class="btn btn-primary float-end" value="Login"/>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+                        <h5>Register</h5>
+                        <form method="post" data-th-action="@{/register}">
+
+                            <input type="submit" class="btn btn-primary float-end" value="Register"/>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-danger">
+            <div class="modal-header border-0">
+                <h3 class="text-white">Error</h3>
+            </div>
+            <div class="modal-body">
+                <p class="text-white" id="errorContent"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function (){
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        if(urlSearchParams.has('evn') && urlSearchParams.get('evn') === "error"){
+           var e_type = urlSearchParams.get('err');
+           var msg = "Generic error";
+           if(e_type === "bad_credential"){
+               msg = "Invalid username or password";
+           }
+           $('#errorContent').text(msg);
+           $('#errorModal').modal('show');
+        }
+    });
+</script>
+
+</body>
+
+</html>

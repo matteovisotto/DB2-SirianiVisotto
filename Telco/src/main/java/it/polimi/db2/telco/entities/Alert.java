@@ -1,7 +1,7 @@
 package it.polimi.db2.telco.entities;
 
 import javax.persistence.*;
-import java.time.Instant;
+import java.util.*;
 
 @Entity
 @Table(name = "alerts")
@@ -25,13 +25,13 @@ public class Alert {
     private Double amount;
 
     @Column(name = "date_time", nullable = false)
-    private Instant dateTime;
+    private Date dateTime;
 
-    public Instant getDateTime() {
+    public Date getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(Instant dateTime) {
+    public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
 

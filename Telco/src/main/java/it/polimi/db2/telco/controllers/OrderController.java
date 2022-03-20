@@ -10,7 +10,9 @@ import it.polimi.db2.telco.services.OrderService;
 import it.polimi.db2.telco.services.UserService;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OrderController {
     @Inject
@@ -35,6 +37,13 @@ public class OrderController {
         } else {
             throw new UserNotFoundException();
         }
+    }
+
+    public List<Order> getRejectedUserOrder(Integer userId) throws UserException {
+        List<Order> rejected = new ArrayList<>();
+        List<Order> userOrders = getOrdersOfUser(userId);
+        rejected = userOrders.stream().filter(o -> o.getOrderStatus().equals(3)).collect(Collectors.toList());
+        return rejected;
     }
 
     public Integer createOrder(Order order) {

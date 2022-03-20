@@ -2,6 +2,7 @@ package it.polimi.db2.telco.api;
 
 import com.google.gson.Gson;
 import it.polimi.db2.telco.controllers.OptionalProductController;
+import it.polimi.db2.telco.controllers.ServicePackageController;
 import it.polimi.db2.telco.entities.Alert;
 import it.polimi.db2.telco.entities.OptionalProduct;
 import it.polimi.db2.telco.exceptions.alert.AlertException;
@@ -19,8 +20,11 @@ import java.util.List;
 @Path("/optional")
 public class OptionalProductResource {
     @Inject
-    private OptionalProductController optionalProductController;
-    private final Gson gson = new Gson();
+    OptionalProductController optionalProductController;
+    Gson gson = new Gson();
+
+    @Inject
+    ServicePackageController servicePackageController;
 
     @Context
     HttpServletRequest request;
@@ -39,6 +43,18 @@ public class OptionalProductResource {
     }
 
     @GET
+    @Path("/package/{id: [0-9]+}")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
+    public Response getOptionalProductByPackageId(@PathParam("id") Integer id) {
+        try {
+            List<OptionalProduct> optionalProducts = servicePackageController.getServicePackageById(id).getOptionalProducts();
+            return Response.ok().entity(gson.toJson(optionalProducts)).build();
+        } catch (OptionalProductException e) {
+            return Response.status(204).entity("{}").build();
+        }
+    }
+
+    @GET
     @Path("/{name}")
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @RolesAllowed({"administrator"})
@@ -51,7 +67,7 @@ public class OptionalProductResource {
         }
     }
 
-    //getOptionalProductByPackage
+
 
     @GET
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")

@@ -23,7 +23,7 @@ public class ServicePackageController {
         return servicePackageService.getServicePackageByName(name);
     }
 
-    public List<ServicePackage> getAllServicePackages() throws ServicePackageException {
+    public List<ServicePackage> getAllServicePackages() {
         return servicePackageService.getAllServicePackages();
     }
 

@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.time.Instant;
+import java.util.*;
 
 @Entity
 @Table(name = "failed_payment")
@@ -14,7 +14,7 @@ public class FailedPayment {
     private Integer id;
 
     @Column(name = "last_failure")
-    private Instant lastFailure;
+    private Date lastFailure;
 
     @Column(name = "n_failures", nullable = false)
     private Integer nFailures;
@@ -27,11 +27,11 @@ public class FailedPayment {
         this.nFailures = nFailures;
     }
 
-    public Instant getLastFailure() {
+    public Date getLastFailure() {
         return lastFailure;
     }
 
-    public void setLastFailure(Instant lastFailure) {
+    public void setLastFailure(Date lastFailure) {
         this.lastFailure = lastFailure;
     }
 

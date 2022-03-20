@@ -32,12 +32,9 @@ public class ServicePackageService {
         return servicePackages.get(0);
     }
 
-    public List<ServicePackage> getAllServicePackages() throws ServicePackageNotFoundException {
+    public List<ServicePackage> getAllServicePackages() {
         TypedQuery<ServicePackage> query = em.createQuery("SELECT s FROM ServicePackage s", ServicePackage.class);
         List<ServicePackage> servicePackages = query.getResultList();
-        if(servicePackages.size() == 0){
-            throw new ServicePackageNotFoundException();
-        }
         return servicePackages;
     }
 

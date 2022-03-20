@@ -1,12 +1,9 @@
 package it.polimi.db2.telco.entities;
 
 import javax.persistence.*;
-import java.time.Instant;
+import java.util.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+
 
 @Entity
 @Table(name = "orders")
@@ -37,7 +34,7 @@ public class Order {
     private Double price;
 
     @Column(name = "createdAt", nullable = false)
-    private Instant createdAt;
+    private Date createdAt;
 
     @ManyToMany
     @JoinTable(name = "optional_product_order",
@@ -64,11 +61,11 @@ public class Order {
         this.optionalProducts = optionalProducts;
     }
 
-    public Instant getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Instant createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 

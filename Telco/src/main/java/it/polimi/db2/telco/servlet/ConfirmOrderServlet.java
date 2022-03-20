@@ -19,14 +19,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/home")
-public class HomeServlet extends HttpServlet {
+@WebServlet("/order/confirm")
+public class ConfirmOrderServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private TemplateEngine templateEngine;
-    @Inject
-    ServicePackageController servicePackageController;
-    @Inject
-    OrderController orderController;
+
 
     @Override
     public void init() throws ServletException {
@@ -39,14 +36,13 @@ public class HomeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String path = "templates/index";
+        String path = "templates/buyService";
         ServletContext servletContext = getServletContext();
         final WebContext ctx = new WebContext(req, resp, servletContext, req.getLocale());
         if(req.getSession().getAttribute("user")!=null){
             ctx.setVariable("user", req.getSession().getAttribute("user"));
-            ctx.setVariable("rOrders", orderController.getRejectedUserOrder(((User) req.getSession().getAttribute("user")).getId()));
         }
-        ctx.setVariable("packages", servicePackageController.getAllServicePackages());
+
         templateEngine.process(path, ctx, resp.getWriter());
     }
 

@@ -30,13 +30,10 @@ public class OrderService {
         return order;
     }
 
-    public List<Order> getOrdersOfUser(Integer userId) throws OrderNotFoundException {
+    public List<Order> getOrdersOfUser(Integer userId) {
         TypedQuery<Order> query = em.createQuery("SELECT o FROM Order o WHERE o.user.id = :user", Order.class);
         query.setParameter("user", userId);
         List<Order> orders = query.getResultList();
-        if (orders.size() == 0){
-            throw new OrderNotFoundException();
-        }
         return orders;
     }
 

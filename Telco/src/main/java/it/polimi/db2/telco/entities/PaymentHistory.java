@@ -1,7 +1,7 @@
 package it.polimi.db2.telco.entities;
 
 import javax.persistence.*;
-import java.time.Instant;
+import java.util.*;
 
 @Entity
 @Table(name = "payment_history")
@@ -20,7 +20,7 @@ public class PaymentHistory {
     private Order order;
 
     @Column(name = "date_time", nullable = false)
-    private Instant dateTime;
+    private Date dateTime;
 
     @Column(name = "payment_status", nullable = false)
     private Integer paymentStatus;
@@ -33,11 +33,11 @@ public class PaymentHistory {
         this.paymentStatus = paymentStatus;
     }
 
-    public Instant getDateTime() {
+    public Date getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(Instant dateTime) {
+    public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
 

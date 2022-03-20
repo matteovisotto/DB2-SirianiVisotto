@@ -47,285 +47,67 @@
                     <h3>OUR PACKAGES</h3>
                     <div class="row mt-3">
                         <!-- Start package -->
-                        <div class="col-md-4 col-sm-12 mb-3">
+                        <div class="col-md-6 col-sm-12 mb-3" data-th-each="p: ${packages}">
                             <div class="card shadow border-primary border-2">
                                 <div class="card-header bg-primary text-white">
-                                    <h4 class="float-end">30 €/m</h4>
-                                    <h4 class="sidebar-header">Package name</h4>
+                                    <h4 class="sidebar-header" data-th-text="${p.name}">Package name</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-12 mb-3">
-                                            This is the beautiful example package that our company offers to all the client that develop this website
-                                        </div>
                                         <div class="col-md-6 col-sm-12">
                                             <h6 class="text-primary">Included services</h6>
-                                            <ul>
-                                                <li>200 min</li>
-                                                <li>200 sms</li>
-                                                <li>4 Gb</li>
+                                            <ul data-th-each="s: ${p.services}">
+                                                <li data-th-if="${s.min != null}"><span data-th-text="${s.min}">200</span> min<br/>(<span data-th-text="${s.extraMin}">0.25</span> &euro;/min extra)</li>
+                                                <li data-th-if="${s.sms != null}"><span data-th-text="${s.sms}">200</span> sms<br/>(<span data-th-text="${s.extraSms}">0.25</span> &euro;/sms extra)</li>
+                                                <li data-th-if="${s.internet != null}"><span data-th-text="${s.internet}">200</span> Gb<br/>(<span data-th-text="${s.extraInternet}">0.25</span> &euro;/Kb extra)</li>
                                             </ul>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                             <h6 class="text-primary">Optional product</h6>
                                             <ul>
-                                                <li>Netflix</li>
-                                                <li>Disney+</li>
-                                                <li>Infinity TV</li>
+                                                <li data-th-each="o: ${p.optionalProducts}"><span data-th-text="${o.name}"></span>: <span data-th-text="${o.price}"></span> &euro;/month</li>
                                             </ul>
+                                        </div>
+                                        <div class="col-12">
+                                            <h6 class="text-primary">Price options</h6>
+                                            <ul>
+                                                <li data-th-each="m: ${p.packagePrices}"><span data-th-text="${m.validityPeriod}">12</span> month subscription:  <span data-th-text="${m.price}">x</span> &euro;/month</li>
+                                            </ul>
+
                                         </div>
                                     </div>
 
                                 </div>
                                 <div class="card-footer bg-white">
-                                    <button class="btn btn-outline-primary float-end">Buy Now</button>
+                                    <a class="btn btn-outline-primary float-end" data-th-href="@{/order/create?pId={id}(id=${p.id})}">Buy Now</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-12 mb-3">
-                            <div class="card shadow border-primary border-2">
-                                <div class="card-header bg-primary text-white">
-                                    <h4 class="float-end">30 €/m</h4>
-                                    <h4 class="sidebar-header">Package name</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-12 mb-3">
-                                            This is the beautiful example package that our company offers to all the client that develop this website
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <h6 class="text-primary">Included services</h6>
-                                            <ul>
-                                                <li>200 min</li>
-                                                <li>200 sms</li>
-                                                <li>4 Gb</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <h6 class="text-primary">Optional product</h6>
-                                            <ul>
-                                                <li>Netflix</li>
-                                                <li>Disney+</li>
-                                                <li>Infinity TV</li>
-                                            </ul>
-                                        </div>
-                                    </div>
 
-                                </div>
-                                <div class="card-footer bg-white">
-                                    <button class="btn btn-outline-primary float-end">Buy Now</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-12 mb-3">
-                            <div class="card shadow border-primary border-2">
-                                <div class="card-header bg-primary text-white">
-                                    <h4 class="float-end">30 €/m</h4>
-                                    <h4 class="sidebar-header">Package name</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-12 mb-3">
-                                            This is the beautiful example package that our company offers to all the client that develop this website
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <h6 class="text-primary">Included services</h6>
-                                            <ul>
-                                                <li>200 min</li>
-                                                <li>200 sms</li>
-                                                <li>4 Gb</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <h6 class="text-primary">Optional product</h6>
-                                            <ul>
-                                                <li>Netflix</li>
-                                                <li>Disney+</li>
-                                                <li>Infinity TV</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="card-footer bg-white">
-                                    <button class="btn btn-outline-primary float-end">Buy Now</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-12 mb-3">
-                            <div class="card shadow border-primary border-2">
-                                <div class="card-header bg-primary text-white">
-                                    <h4 class="float-end">30 €/m</h4>
-                                    <h4 class="sidebar-header">Package name</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-12 mb-3">
-                                            This is the beautiful example package that our company offers to all the client that develop this website
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <h6 class="text-primary">Included services</h6>
-                                            <ul>
-                                                <li>200 min</li>
-                                                <li>200 sms</li>
-                                                <li>4 Gb</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <h6 class="text-primary">Optional product</h6>
-                                            <ul>
-                                                <li>Netflix</li>
-                                                <li>Disney+</li>
-                                                <li>Infinity TV</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="card-footer bg-white">
-                                    <button class="btn btn-outline-primary float-end">Buy Now</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-12 mb-3">
-                            <div class="card shadow border-primary border-2">
-                                <div class="card-header bg-primary text-white">
-                                    <h4 class="float-end">30 €/m</h4>
-                                    <h4 class="sidebar-header">Package name</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-12 mb-3">
-                                            This is the beautiful example package that our company offers to all the client that develop this website
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <h6 class="text-primary">Included services</h6>
-                                            <ul>
-                                                <li>200 min</li>
-                                                <li>200 sms</li>
-                                                <li>4 Gb</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <h6 class="text-primary">Optional product</h6>
-                                            <ul>
-                                                <li>Netflix</li>
-                                                <li>Disney+</li>
-                                                <li>Infinity TV</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="card-footer bg-white">
-                                    <button class="btn btn-outline-primary float-end">Buy Now</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-12 mb-3">
-                            <div class="card shadow border-primary border-2">
-                                <div class="card-header bg-primary text-white">
-                                    <h4 class="float-end">30 €/m</h4>
-                                    <h4 class="sidebar-header">Package name</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-12 mb-3">
-                                            This is the beautiful example package that our company offers to all the client that develop this website
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <h6 class="text-primary">Included services</h6>
-                                            <ul>
-                                                <li>200 min</li>
-                                                <li>200 sms</li>
-                                                <li>4 Gb</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <h6 class="text-primary">Optional product</h6>
-                                            <ul>
-                                                <li>Netflix</li>
-                                                <li>Disney+</li>
-                                                <li>Infinity TV</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="card-footer bg-white">
-                                    <button class="btn btn-outline-primary float-end">Buy Now</button>
-                                </div>
-                            </div>
-                        </div>
                         <!-- End package -->
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-12">
+                <div class="col-md-3 col-sm-12" data-th-if="${user != null}">
                     <h3>REJECTED ORDERS</h3>
-                    <blockquote>Hey, Name Surname<br/>it seems that some of your orders have been rejected, click on the icon to retry payment</blockquote>
+                    <div class="alert alert-success" data-th-if="${rOrders.size() == 0}">You don't have rejectet orders!</div>
+                    <blockquote data-th-if="${rOrders.size() != 0}">Hey, <span data-th-text="${user.name}"></span> <span data-th-text="${user.surname}"></span><br/>it seems that some of your orders have been rejected, click on the icon to retry payment</blockquote>
                     <div class="vstack gap-2">
                         <!-- Start rejected -->
-                        <div class="card shadow">
+                        <div class="card shadow" data-th-each="r: ${rOrders}">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-10">
-                                        <strong>Order #01242</strong>
-                                        <p>Service package</p>
-                                        <small>xx/xx/xxxx</small>
+                                        <strong>Order #<span data-th-text="${r.id}">01242</span></strong>
+                                        <p data-th-text="${r._package.name}">Service package</p>
+                                        <small data-th-text="${r.createdAt}">xx/xx/xxxx</small>
                                     </div>
                                     <div class="col-2">
-                                        <a href="" class="btn btn-outline-success"><i class="fa fa-wallet"></i> </a>
+                                        <a href="" data-th-href="@{/order/confirm?orderId={id}(id=${r.id})}" class="btn btn-outline-success"><i class="fa fa-wallet"></i> </a>
                                     </div>
                                 </div>
 
                             </div>
                         </div>
-                        <div class="card shadow">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-10">
-                                        <strong>Order #01242</strong>
-                                        <p>Service package</p>
-                                        <small>xx/xx/xxxx</small>
-                                    </div>
-                                    <div class="col-2">
-                                        <a href="" class="btn btn-outline-success"><i class="fa fa-wallet"></i> </a>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="card shadow">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-10">
-                                        <strong>Order #01242</strong>
-                                        <p>Service package</p>
-                                        <small>xx/xx/xxxx</small>
-                                    </div>
-                                    <div class="col-2">
-                                        <a href="" class="btn btn-outline-success"><i class="fa fa-wallet"></i> </a>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="card shadow">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-10">
-                                        <strong>Order #01242</strong>
-                                        <p>Service package</p>
-                                        <small>xx/xx/xxxx</small>
-                                    </div>
-                                    <div class="col-2">
-                                        <a href="" class="btn btn-outline-success"><i class="fa fa-wallet"></i> </a>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
                         <!-- End rejected -->
                     </div>
                 </div>
@@ -369,13 +151,18 @@
                                 <span class="input-group-text" id="j_password"><i class="fas fa-lock"></i></span>
                                 <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="j_password" name="j_password">
                             </div>
+                            <div data-th-with="currentUrl=(${#httpServletRequest.requestURI + '?' + #strings.defaultString(#httpServletRequest.queryString, '')})">
+                                <input type="hidden" name="returnTo" data-th-value="${currentUrl}">
+                            </div>
                             <input type="submit" class="btn btn-primary float-end" value="Login"/>
                         </form>
                     </div>
                     <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
                         <h5>Register</h5>
                         <form method="post" data-th-action="@{/register}">
-
+                            <div data-th-with="currentUrl=(${#httpServletRequest.requestURI + '?' + #strings.defaultString(#httpServletRequest.queryString, '')})">
+                                <input type="hidden" name="returnTo" data-th-value="${currentUrl}">
+                            </div>
                             <input type="submit" class="btn btn-primary float-end" value="Register"/>
                         </form>
                     </div>

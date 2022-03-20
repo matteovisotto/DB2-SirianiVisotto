@@ -49,53 +49,49 @@
                     <div class="card mt-3">
                         <div class="card-body">
 
-                        <form action="" method="post">
+                        <form action="" method="POST" data-th-action="@{/order/create}">
                             <div class="row">
-                                <div class="col-12 mb-3">
+                                <div class="col-12 mb-3" id="packageContainer">
                                     <h6 class="text-primary">Package</h6>
-                                    <select class="form-select">
-                                        <option>Package</option>
-                                        <option>Package</option>
-                                        <option>Package</option>
-                                        <option>Package</option>
-                                        <option>Package</option>
+                                    <select class="form-select" name="package">
+                                        <option data-th-each="p: ${packages}" data-th-value="${p.id}"><span data-th-text="${p.name}"></span></option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 col-sm-12 mb-3">
                                     <h6 class="text-primary">Validity period</h6>
-                                    <select class="form-select">
-                                        <option>12 month</option>
-                                        <option>24 month</option>
-                                        <option>36 month</option>
+                                    <select class="form-select" name="validityPeriod">
+                                        <option value="12">12 month</option>
+                                        <option value="24">24 month</option>
+                                        <option value="36">36 month</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 col-sm-12 mb-3">
                                     <h6 class="text-primary">Start date</h6>
-                                    <input type="date" class="form-control" />
+                                    <input type="date" class="form-control" name="startDate"/>
                                 </div>
                                 <div class="col-12 mb-3">
                                     <h6 class="text-primary">Optional products</h6>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" name="optionalProduct" value="1" id="opt1">
+                                        <label class="form-check-label" for="opt1">
                                             Optional
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" name="optionalProduct" value="2" id="opt2">
+                                        <label class="form-check-label" for="opt2">
                                             Optional
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" name="optionalProduct" value="3" id="opt3">
+                                        <label class="form-check-label" for="opt3">
                                             Optional
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" name="optionalProduct" value="4" id="opt4">
+                                        <label class="form-check-label" for="opt4">
                                             Optional
                                         </label>
                                     </div>
@@ -150,13 +146,18 @@
                                 <span class="input-group-text" id="j_password"><i class="fas fa-lock"></i></span>
                                 <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="j_password" name="j_password">
                             </div>
+                            <div data-th-with="currentUrl=(${#httpServletRequest.requestURI + '?' + #strings.defaultString(#httpServletRequest.queryString, '')})">
+                                <input type="hidden" name="returnTo" data-th-value="${currentUrl}">
+                            </div>
                             <input type="submit" class="btn btn-primary float-end" value="Login"/>
                         </form>
                     </div>
                     <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
                         <h5>Register</h5>
                         <form method="post" data-th-action="@{/register}">
-
+                            <div data-th-with="currentUrl=(${#httpServletRequest.requestURI + '?' + #strings.defaultString(#httpServletRequest.queryString, '')})">
+                                <input type="hidden" name="returnTo" data-th-value="${currentUrl}">
+                            </div>
                             <input type="submit" class="btn btn-primary float-end" value="Register"/>
                         </form>
                     </div>
@@ -183,14 +184,10 @@
 <script>
     $(function (){
         const urlSearchParams = new URLSearchParams(window.location.search);
-        if(urlSearchParams.has('evn') && urlSearchParams.get('evn') === "error"){
-           var e_type = urlSearchParams.get('err');
-           var msg = "Generic error";
-           if(e_type === "bad_credential"){
-               msg = "Invalid username or password";
-           }
-           $('#errorContent').text(msg);
-           $('#errorModal').modal('show');
+        if(urlSearchParams.has('pId')){
+           var pId = urlSearchParams.get('pId');
+           console.log(pId);
+            $('#packageContainer option[value="'+pId+'"]').prop("selected", true);
         }
     });
 </script>

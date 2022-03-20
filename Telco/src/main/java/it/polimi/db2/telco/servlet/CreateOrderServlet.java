@@ -18,15 +18,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-@WebServlet("/home")
-public class HomeServlet extends HttpServlet {
+@WebServlet("/order/create")
+public class CreateOrderServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private TemplateEngine templateEngine;
     @Inject
     ServicePackageController servicePackageController;
-    @Inject
-    OrderController orderController;
+
 
     @Override
     public void init() throws ServletException {
@@ -39,12 +43,11 @@ public class HomeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String path = "templates/index";
+        String path = "templates/buyService";
         ServletContext servletContext = getServletContext();
         final WebContext ctx = new WebContext(req, resp, servletContext, req.getLocale());
         if(req.getSession().getAttribute("user")!=null){
             ctx.setVariable("user", req.getSession().getAttribute("user"));
-            ctx.setVariable("rOrders", orderController.getRejectedUserOrder(((User) req.getSession().getAttribute("user")).getId()));
         }
         ctx.setVariable("packages", servicePackageController.getAllServicePackages());
         templateEngine.process(path, ctx, resp.getWriter());
@@ -52,6 +55,21 @@ public class HomeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+        Integer packageId = Integer.parseInt(req.getParameter("package"));
+        Integer validityPeriod = Integer.parseInt(req.getParameter("validityPeriod"));
+        Date startDate = new Date();
+        try {
+            startDate = new SimpleDateFormat("yyyy-MM-dd").parse((String) req.getParameter("startDate"));
+        } catch (ParseException e) {}
+
+        String[] optionalIdsStr = req.getParameterValues("optionalProduct");
+        List<Integer> optionalsIds = new ArrayList<>();
+        for (int i = 0; i < optionalIdsStr.length; i++) {
+            optionalsIds.add(Integer.parseInt(optionalIdsStr[i]));
+        }
+        System.out.println(packageId);
+        System.out.println(validityPeriod);
+        System.out.println(startDate);
+        optionalsIds.forEach(System.out::println);
     }
 }

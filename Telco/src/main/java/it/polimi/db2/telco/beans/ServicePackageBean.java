@@ -11,10 +11,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
+
 public class ServicePackageBean {
+    class Price{
+        Integer validityPeriod;
+        Double price;
+
+        public Price(Integer validityPeriod, Double price) {
+            this.validityPeriod = validityPeriod;
+            this.price = price;
+        }
+    }
     Integer id;
     String name;
-    HashMap<Integer,Double> packagePrice = new HashMap<>();
+    List<Price> packagePrice =new  ArrayList<>();
     List<OptionalProductBean> optionalProducts = new ArrayList<>();
     List<ServiceBean> services = new ArrayList<>();
 
@@ -24,7 +35,7 @@ public class ServicePackageBean {
         this.services = entity.getServices().stream().map(ServiceBean::new).collect(Collectors.toList());
         this.optionalProducts = entity.getOptionalProducts().stream().map(OptionalProductBean::new).collect(Collectors.toList());
         entity.getPackagePrices().forEach(p -> {
-            this.packagePrice.put(p.getValidityPeriod(), p.getPrice());
+            this.packagePrice.add(new Price(p.getValidityPeriod(), p.getPrice()));
         });
     }
 
@@ -44,11 +55,11 @@ public class ServicePackageBean {
         this.name = name;
     }
 
-    public HashMap<Integer, Double> getPackagePrice() {
+    public List<Price> getPackagePrice() {
         return packagePrice;
     }
 
-    public void setPackagePrice(HashMap<Integer, Double> packagePrice) {
+    public void setPackagePrice(List<Price> packagePrice) {
         this.packagePrice = packagePrice;
     }
 

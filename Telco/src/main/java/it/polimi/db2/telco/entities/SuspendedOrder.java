@@ -8,7 +8,7 @@ import javax.persistence.Table;
 @Table(name = "suspended_orders")
 public class SuspendedOrder {
     @EmbeddedId
-    private SuspendedOrderId id;
+    SuspendedOrderId id;
 
     public SuspendedOrderId getId() {
         return id;

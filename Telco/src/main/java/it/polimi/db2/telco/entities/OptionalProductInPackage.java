@@ -6,17 +6,17 @@ import javax.persistence.*;
 @Table(name = "optional_product_in_package")
 public class OptionalProductInPackage {
     @EmbeddedId
-    private OptionalProductInPackageId id;
+    OptionalProductInPackageId id;
 
     @MapsId("packageId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "package_id", nullable = false)
-    private ServicePackage _package;
+    ServicePackage _package;
 
     @MapsId("optionalProductId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "optional_product_id", nullable = false)
-    private OptionalProduct optionalProduct;
+    OptionalProduct optionalProduct;
 
     public OptionalProduct getOptionalProduct() {
         return optionalProduct;

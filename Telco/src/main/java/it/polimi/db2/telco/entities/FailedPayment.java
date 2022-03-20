@@ -11,13 +11,13 @@ import java.util.*;
 public class FailedPayment {
     @Id
     @Column(name = "user_id", nullable = false)
-    private Integer id;
+    Integer id;
 
     @Column(name = "last_failure")
-    private Date lastFailure;
+    Date lastFailure;
 
     @Column(name = "n_failures", nullable = false)
-    private Integer nFailures;
+    Integer nFailures;
 
     public Integer getNFailures() {
         return nFailures;

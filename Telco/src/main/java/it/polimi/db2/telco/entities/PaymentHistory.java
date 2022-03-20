@@ -9,21 +9,21 @@ public class PaymentHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user;
+    User user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "order_id", nullable = false)
-    private Order order;
+    Order order;
 
     @Column(name = "date_time", nullable = false)
-    private Date dateTime;
+    Date dateTime;
 
     @Column(name = "payment_status", nullable = false)
-    private Integer paymentStatus;
+    Integer paymentStatus;
 
     public Integer getPaymentStatus() {
         return paymentStatus;

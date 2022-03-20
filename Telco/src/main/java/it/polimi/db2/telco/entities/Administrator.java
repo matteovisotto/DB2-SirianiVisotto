@@ -8,22 +8,22 @@ public class Administrator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    Integer id;
 
     @Column(name = "name", nullable = false)
-    private String name;
+    String name;
 
     @Column(name = "surname", nullable = false)
-    private String surname;
+    String surname;
 
     @Column(name = "email", nullable = false)
-    private String email;
+    String email;
 
     @Column(name = "password", nullable = false)
-    private String password;
+    String password;
 
     @Column(name = "role", nullable = false)
-    private Integer role;
+    Integer role;
 
     public Integer getRole() {
         return role;

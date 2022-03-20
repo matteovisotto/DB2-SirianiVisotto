@@ -10,13 +10,13 @@ import javax.persistence.Table;
 public class TotalPurchasePackage {
     @Id
     @Column(name = "package_id", nullable = false)
-    private Integer id;
+    Integer id;
 
     @Column(name = "package_name", nullable = false)
-    private String packageName;
+    String packageName;
 
     @Column(name = "tot_purchase", nullable = false)
-    private Integer totPurchase;
+    Integer totPurchase;
 
     public Integer getTotPurchase() {
         return totPurchase;

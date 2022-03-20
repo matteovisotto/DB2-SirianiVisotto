@@ -10,13 +10,13 @@ import javax.persistence.Table;
 public class AveragePurchaseOptionalPackage {
     @Id
     @Column(name = "package_id", nullable = false)
-    private Integer id;
+    Integer id;
 
     @Column(name = "package_name", nullable = false)
-    private String packageName;
+    String packageName;
 
     @Column(name = "avg_optional", nullable = false)
-    private Double avgOptional;
+    Double avgOptional;
 
     public Double getAvgOptional() {
         return avgOptional;

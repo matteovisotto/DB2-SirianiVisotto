@@ -10,19 +10,19 @@ import javax.persistence.Table;
 public class InsolventUser {
     @Id
     @Column(name = "id", nullable = false)
-    private Integer id;
+    Integer id;
 
     @Column(name = "name", nullable = false, length = 225)
-    private String name;
+    String name;
 
     @Column(name = "surname", nullable = false, length = 225)
-    private String surname;
+    String surname;
 
     @Column(name = "username", nullable = false, length = 225)
-    private String username;
+    String username;
 
     @Column(name = "email", nullable = false, length = 225)
-    private String email;
+    String email;
 
     public String getEmail() {
         return email;

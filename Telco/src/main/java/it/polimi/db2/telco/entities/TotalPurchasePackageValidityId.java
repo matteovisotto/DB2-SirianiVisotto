@@ -8,13 +8,13 @@ import java.util.Objects;
 
 @Embeddable
 public class TotalPurchasePackageValidityId implements Serializable {
-    private static final long serialVersionUID = -8770311835360405013L;
+    static final long serialVersionUID = -8770311835360405013L;
 
     @Column(name = "package_id", nullable = false)
-    private Integer packageId;
+    Integer packageId;
 
     @Column(name = "validity_period", nullable = false)
-    private Integer validityPeriod;
+    Integer validityPeriod;
 
     public Integer getValidityPeriod() {
         return validityPeriod;

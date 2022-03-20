@@ -12,31 +12,31 @@ public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    Integer id;
 
     @Column(name = "name", nullable = false)
-    private String name;
+    String name;
 
     @Column(name = "min")
-    private Integer min;
+    Integer min;
 
     @Column(name = "sms")
-    private Integer sms;
+    Integer sms;
 
     @Column(name = "internet")
-    private Integer internet;
+    Integer internet;
 
     @Column(name = "extra_min")
-    private Double extraMin;
+    Double extraMin;
 
     @Column(name = "extra_sms")
-    private Double extraSms;
+    Double extraSms;
 
     @Column(name = "extra_internet")
-    private Double extraInternet;
+    Double extraInternet;
 
     @ManyToMany(mappedBy = "services")
-    private List<ServicePackage> servicePackages = new ArrayList<>();
+    List<ServicePackage> servicePackages = new ArrayList<>();
 
     public List<ServicePackage> getServicePackages() {
         return servicePackages;

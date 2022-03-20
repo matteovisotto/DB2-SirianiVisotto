@@ -12,34 +12,34 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    Integer id;
 
     @Column(name = "name", nullable = false, length = 225)
-    private String name;
+    String name;
 
     @Column(name = "surname", nullable = false, length = 225)
-    private String surname;
+    String surname;
 
     @Column(name = "username", nullable = false, length = 225)
-    private String username;
+    String username;
 
     @Column(name = "email", nullable = false, length = 225)
-    private String email;
+    String email;
 
     @Column(name = "password", nullable = false, length = 225)
-    private String password;
+    String password;
 
     @Column(name = "insolvent", nullable = false)
-    private Integer insolvent;
+    Integer insolvent;
 
     @OneToMany(mappedBy = "user")
-    private List<PaymentHistory> paymentHistories = new ArrayList<>();
+    List<PaymentHistory> paymentHistories = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    private List<Alert> alerts = new ArrayList<>();
+    List<Alert> alerts = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    private List<Order> orders = new ArrayList<>();
+    List<Order> orders = new ArrayList<>();
 
     public List<Order> getOrders() {
         return orders;

@@ -11,39 +11,39 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user;
+    User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "package_id")
-    private ServicePackage _package;
+    ServicePackage _package;
 
     @Column(name = "validity_period", nullable = false)
-    private Integer validityPeriod;
+    Integer validityPeriod;
 
     @Column(name = "order_status", nullable = false)
-    private Integer orderStatus;
+    Integer orderStatus;
 
     @Column(name = "start_date", nullable = false)
-    private LocalDate startDate;
+    LocalDate startDate;
 
     @Column(name = "price", nullable = false)
-    private Double price;
+    Double price;
 
     @Column(name = "createdAt", nullable = false)
-    private Date createdAt;
+    Date createdAt;
 
     @ManyToMany
     @JoinTable(name = "optional_product_order",
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "optional_id"))
-    private List<OptionalProduct> optionalProducts = new ArrayList<>();
+    List<OptionalProduct> optionalProducts = new ArrayList<>();
 
     @OneToMany(mappedBy = "order")
-    private List<PaymentHistory> paymentHistories = new ArrayList<>();
+    List<PaymentHistory> paymentHistories = new ArrayList<>();
 
     public List<PaymentHistory> getPaymentHistories() {
         return paymentHistories;

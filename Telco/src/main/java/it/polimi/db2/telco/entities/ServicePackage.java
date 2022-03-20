@@ -12,25 +12,25 @@ public class ServicePackage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+     Integer id;
 
     @Column(name = "name", nullable = false)
-    private String name;
+     String name;
 
     @OneToMany(mappedBy = "_package")
-    private List<PackagePrice> packagePrices = new ArrayList<>();
+     List<PackagePrice> packagePrices = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "optional_product_in_package",
             joinColumns = @JoinColumn(name = "package_id"),
             inverseJoinColumns = @JoinColumn(name = "optional_product_id"))
-    private List<OptionalProduct> optionalProducts = new ArrayList<>();
+     List<OptionalProduct> optionalProducts = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "service_in_package",
             joinColumns = @JoinColumn(name = "package_id"),
             inverseJoinColumns = @JoinColumn(name = "service_id"))
-    private List<Service> services = new ArrayList<>();
+     List<Service> services = new ArrayList<>();
 
     public List<Service> getServices() {
         return services;

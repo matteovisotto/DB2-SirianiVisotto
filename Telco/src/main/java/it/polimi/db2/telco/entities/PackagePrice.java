@@ -8,17 +8,17 @@ public class PackagePrice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "package_id")
-    private ServicePackage _package;
+    ServicePackage _package;
 
     @Column(name = "validity_period", nullable = false)
-    private Integer validityPeriod;
+    Integer validityPeriod;
 
     @Column(name = "price")
-    private Double price;
+    Double price;
 
     public Double getPrice() {
         return price;

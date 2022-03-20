@@ -12,19 +12,19 @@ public class OptionalProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    Integer id;
 
     @Column(name = "name", nullable = false)
-    private String name;
+    String name;
 
     @Column(name = "price", nullable = false)
-    private Double price;
+    Double price;
 
     @Column(name = "description")
-    private String description;
+    String description;
 
     @ManyToMany(mappedBy = "optionalProducts")
-    private List<ServicePackage> servicePackages = new ArrayList<>();
+    List<ServicePackage> servicePackages = new ArrayList<>();
 
     public List<ServicePackage> getServicePackages() {
         return servicePackages;

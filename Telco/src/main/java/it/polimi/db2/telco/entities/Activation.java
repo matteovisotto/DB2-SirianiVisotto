@@ -8,24 +8,24 @@ import java.time.LocalDate;
 public class Activation {
     @Id
     @Column(name = "order_id", nullable = false)
-    private Integer id;
+    Integer id;
 
     @MapsId
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "order_id", nullable = false)
-    private Order orders;
+    Order orders;
 
     @Column(name = "user_id", nullable = false)
-    private Integer userId;
+    Integer userId;
 
     @Column(name = "package_id", nullable = false)
-    private Integer packageId;
+    Integer packageId;
 
     @Column(name = "start_date", nullable = false)
-    private LocalDate startDate;
+    LocalDate startDate;
 
     @Column(name = "end_date", nullable = false)
-    private LocalDate endDate;
+    LocalDate endDate;
 
     public LocalDate getEndDate() {
         return endDate;

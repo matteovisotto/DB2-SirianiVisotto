@@ -9,13 +9,13 @@ import javax.persistence.Table;
 @Table(name = "total_purchase_package_validity")
 public class TotalPurchasePackageValidity {
     @EmbeddedId
-    private TotalPurchasePackageValidityId id;
+    TotalPurchasePackageValidityId id;
 
     @Column(name = "package_name", nullable = false)
-    private String packageName;
+    String packageName;
 
     @Column(name = "tot_purchase", nullable = false)
-    private Integer totPurchase;
+    Integer totPurchase;
 
     public Integer getTotPurchase() {
         return totPurchase;

@@ -8,11 +8,11 @@ import java.util.Objects;
 
 @Embeddable
 public class ServiceInPackageId implements Serializable {
-    private static final long serialVersionUID = -245922949353686055L;
+    static final long serialVersionUID = -245922949353686055L;
     @Column(name = "package_id", nullable = false)
-    private Integer packageId;
+    Integer packageId;
     @Column(name = "service_id", nullable = false)
-    private Integer serviceId;
+    Integer serviceId;
 
     public Integer getServiceId() {
         return serviceId;

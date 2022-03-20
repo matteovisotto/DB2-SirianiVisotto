@@ -8,13 +8,13 @@ import java.util.Objects;
 
 @Embeddable
 public class OptionalProductInPackageId implements Serializable {
-    private static final long serialVersionUID = 5411829317774186134L;
+    static final long serialVersionUID = 5411829317774186134L;
 
     @Column(name = "package_id", nullable = false)
-    private Integer packageId;
+    Integer packageId;
 
     @Column(name = "optional_product_id", nullable = false)
-    private Integer optionalProductId;
+    Integer optionalProductId;
 
     public Integer getOptionalProductId() {
         return optionalProductId;

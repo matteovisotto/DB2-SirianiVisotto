@@ -9,23 +9,23 @@ public class Alert {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user;
+    User user;
 
     @Column(name = "username", nullable = false)
-    private String username;
+    String username;
 
     @Column(name = "email", nullable = false)
-    private String email;
+    String email;
 
     @Column(name = "amount", nullable = false)
-    private Double amount;
+    Double amount;
 
     @Column(name = "date_time", nullable = false)
-    private Date dateTime;
+    Date dateTime;
 
     public Date getDateTime() {
         return dateTime;

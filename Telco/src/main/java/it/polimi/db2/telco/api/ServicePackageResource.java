@@ -1,6 +1,7 @@
 package it.polimi.db2.telco.api;
 
 import com.google.gson.Gson;
+import it.polimi.db2.telco.beans.ServicePackageBean;
 import it.polimi.db2.telco.controllers.ServicePackageController;
 import it.polimi.db2.telco.entities.ServicePackage;
 import it.polimi.db2.telco.exceptions.alert.AlertException;
@@ -14,6 +15,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Path("/servicePackage")
 public class ServicePackageResource {
@@ -30,7 +32,7 @@ public class ServicePackageResource {
     @RolesAllowed({"user", "administrator"})
     public Response getServicePackageById(@PathParam("id") Integer id) {
         try {
-            ServicePackage servicePackage = servicePackageController.getServicePackageById(id);
+            ServicePackageBean servicePackage = new ServicePackageBean(servicePackageController.getServicePackageById(id));
             return Response.ok().entity(gson.toJson(servicePackage)).build();
         } catch (ServicePackageException e) {
             return Response.status(204).entity("{}").build();
@@ -43,7 +45,7 @@ public class ServicePackageResource {
     @RolesAllowed({"user", "administrator"})
     public Response getServicePackageByName(@PathParam("name") String name) {
         try {
-            ServicePackage servicePackage = servicePackageController.getServicePackageByName(name);
+            ServicePackageBean servicePackage = new ServicePackageBean(servicePackageController.getServicePackageByName(name));
             return Response.ok().entity(gson.toJson(servicePackage)).build();
         } catch (ServicePackageException e) {
             return Response.status(204).entity("{}").build();
@@ -54,7 +56,10 @@ public class ServicePackageResource {
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     public Response getAllServicePackages() {
         try {
-            List<ServicePackage> servicePackages = servicePackageController.getAllServicePackages();
+            List<ServicePackageBean> servicePackages = servicePackageController.getAllServicePackages()
+                    .stream()
+                    .map(ServicePackageBean::new)
+                    .collect(Collectors.toList());
             return Response.ok().entity(gson.toJson(servicePackages)).build();
         } catch (AlertException e) {
             return Response.status(204).entity("{}").build();

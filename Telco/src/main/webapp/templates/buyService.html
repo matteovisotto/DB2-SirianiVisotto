@@ -71,29 +71,8 @@
                                 </div>
                                 <div class="col-12 mb-3">
                                     <h6 class="text-primary">Optional products</h6>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="optionalProduct" value="1" id="opt1">
-                                        <label class="form-check-label" for="opt1">
-                                            Optional
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="optionalProduct" value="2" id="opt2">
-                                        <label class="form-check-label" for="opt2">
-                                            Optional
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="optionalProduct" value="3" id="opt3">
-                                        <label class="form-check-label" for="opt3">
-                                            Optional
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="optionalProduct" value="4" id="opt4">
-                                        <label class="form-check-label" for="opt4">
-                                            Optional
-                                        </label>
+                                    <div id="optionalContainer">
+
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -183,13 +162,33 @@
 
 <script>
     $(function (){
+        var optionalContainer = $('#optionalContainer');
         const urlSearchParams = new URLSearchParams(window.location.search);
         if(urlSearchParams.has('pId')){
            var pId = urlSearchParams.get('pId');
-           console.log(pId);
             $('#packageContainer option[value="'+pId+'"]').prop("selected", true);
+            getOptionals(pId);
         }
+
+        function getOptionals(pId){
+            optionalContainer.html("");
+            $.get("../api/optional/package/"+pId, function(data, status){
+                var json = data;
+                json.forEach(j => {
+                   createOptionalCheckbox(j);
+                });
+            });
+        }
+
+        function createOptionalCheckbox(o){
+            var content = '<div class="form-check"><input type="checkbox" name="optionalProduct" class="form-check-input" value="'+o.id+'" id="opt'+o.id+'"/>'
+            + '<label class="form-check-label" htmlFor="opt'+o.id+'">'+o.name+'</label></div>';
+            optionalContainer.html(optionalContainer.html()+content);
+        }
+
     });
+
+
 </script>
 
 </body>

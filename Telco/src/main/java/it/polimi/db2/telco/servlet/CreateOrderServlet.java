@@ -1,7 +1,9 @@
 package it.polimi.db2.telco.servlet;
 
+import it.polimi.db2.telco.beans.PendingOrderBean;
 import it.polimi.db2.telco.controllers.OrderController;
 import it.polimi.db2.telco.controllers.ServicePackageController;
+import it.polimi.db2.telco.entities.Order;
 import it.polimi.db2.telco.entities.User;
 import it.polimi.db2.telco.services.OrderService;
 import org.thymeleaf.TemplateEngine;
@@ -67,9 +69,9 @@ public class CreateOrderServlet extends HttpServlet {
         for (int i = 0; i < optionalIdsStr.length; i++) {
             optionalsIds.add(Integer.parseInt(optionalIdsStr[i]));
         }
-        System.out.println(packageId);
-        System.out.println(validityPeriod);
-        System.out.println(startDate);
-        optionalsIds.forEach(System.out::println);
+
+        PendingOrderBean pendingOrderBean = new PendingOrderBean(0, packageId, validityPeriod, startDate, optionalsIds);
+        req.getSession().setAttribute("pendingOrder", pendingOrderBean);
+        resp.sendRedirect(getServletContext()+"/order/confirm");
     }
 }

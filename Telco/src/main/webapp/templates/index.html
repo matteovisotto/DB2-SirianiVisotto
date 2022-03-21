@@ -163,6 +163,30 @@
                             <div data-th-with="currentUrl=(${#httpServletRequest.requestURI + '?' + #strings.defaultString(#httpServletRequest.queryString, '')})">
                                 <input type="hidden" name="returnTo" data-th-value="${currentUrl}">
                             </div>
+                            <div class="input-group mb-3 mt-3">
+                                <span class="input-group-text" id="r_name"><i class="fas fa-user"></i> </span>
+                                <input type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="r_name" name="r_name">
+                            </div>
+                            <div class="input-group mb-3 mt-3">
+                                <span class="input-group-text" id="r_surname"><i class="fas fa-user"></i> </span>
+                                <input type="text" class="form-control" placeholder="Surname" aria-label="Surname" aria-describedby="r_surname" name="r_surname">
+                            </div>
+                            <div class="input-group mb-3 mt-3">
+                                <span class="input-group-text" id="r_username"><i class="fas fa-user"></i> </span>
+                                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="r_username" name="r_username">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="r_email"><i class="fas fa-at"></i> </span>
+                                <input type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="r_email" name="r_email">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="r_password"><i class="fas fa-lock"></i></span>
+                                <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="r_password" name="r_password">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="r_password_c"><i class="fas fa-lock"></i></span>
+                                <input type="password" class="form-control" placeholder="Confirm password" aria-label="Confirm password" aria-describedby="r_password_c" name="r_password_c">
+                            </div>
                             <input type="submit" class="btn btn-primary float-end" value="Register"/>
                         </form>
                     </div>

@@ -47,7 +47,11 @@ public class LoginServlet extends HttpServlet {
         }
 
         req.getSession().setAttribute("user", user);
-        resp.sendRedirect(getServletContext().getContextPath()+"/");
+        String redirectTo = getServletContext().getContextPath()+"/";
+        if(req.getParameter("returnTo") != null){
+            redirectTo = req.getParameter("returnTo");
+        }
+        resp.sendRedirect(redirectTo);
     }
 
 }

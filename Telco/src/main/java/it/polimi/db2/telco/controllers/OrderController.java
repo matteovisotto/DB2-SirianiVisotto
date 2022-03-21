@@ -42,7 +42,7 @@ public class OrderController {
     public List<Order> getRejectedUserOrder(Integer userId) throws UserException {
         List<Order> rejected = new ArrayList<>();
         List<Order> userOrders = getOrdersOfUser(userId);
-        rejected = userOrders.stream().filter(o -> o.getOrderStatus().equals(3)).collect(Collectors.toList());
+        rejected = userOrders.stream().filter(o -> o.getOrderStatus().equals(2)).collect(Collectors.toList());
         return rejected;
     }
 

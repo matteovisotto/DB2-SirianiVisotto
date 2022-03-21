@@ -3,13 +3,14 @@ package it.polimi.db2.telco.services;
 import it.polimi.db2.telco.entities.Administrator;
 import it.polimi.db2.telco.exceptions.administrator.AdministratorNotFoundException;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Transactional
+@Stateless
 public class AdministratorService {
     @PersistenceContext(unitName = "telco-persistence-provider")
     private EntityManager em;

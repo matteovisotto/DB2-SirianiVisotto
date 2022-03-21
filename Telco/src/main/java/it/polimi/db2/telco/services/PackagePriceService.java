@@ -6,8 +6,10 @@ import it.polimi.db2.telco.exceptions.packagePrice.PackagePriceNotFoundException
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Transactional
 public class PackagePriceService {
     @PersistenceContext(unitName = "telco-persistence-provider")
     private EntityManager em;

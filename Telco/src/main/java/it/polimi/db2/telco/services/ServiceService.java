@@ -5,11 +5,14 @@ import it.polimi.db2.telco.entities.ServicePackage;
 import it.polimi.db2.telco.exceptions.service.ServiceNotFoundException;
 import it.polimi.db2.telco.exceptions.servicePackage.ServicePackageNotFoundException;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Stateless
 public class ServiceService {
     @PersistenceContext(unitName = "telco-persistence-provider")
     private EntityManager em;

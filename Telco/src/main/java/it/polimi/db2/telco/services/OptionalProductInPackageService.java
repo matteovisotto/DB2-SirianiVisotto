@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+
 public class OptionalProductInPackageService {
     @PersistenceContext(unitName = "telco-persistence-provider")
     private EntityManager em;

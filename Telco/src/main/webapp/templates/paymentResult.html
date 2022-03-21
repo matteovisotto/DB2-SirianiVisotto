@@ -45,46 +45,12 @@
             <div class="row">
                 <div class="col-md-3 col-sm-12"></div>
                 <div class="col-md-6 col-sm-12">
-                    <h3>PAYMENT</h3>
+                    <h3>PAYMENT RESULT</h3>
                     <div class="card mt-3">
                         <div class="card-body">
-
-                        <form action="" method="post" data-th-action="@{/order/pay}">
-                            <input type="hidden" name="orderId" data-th-value="${order.getId()}" />
-                            <div class="row">
-                                <div class="col-12 mb-3">
-                                    <h6 class="text-primary">Select payment method</h6>
-                                    <div class="form-check mt-3">
-                                        <input class="form-check-input" type="radio" name="pMethod" value="card" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Credit_or_Debit_Card_Flat_Icon_Vector.svg/1024px-Credit_or_Debit_Card_Flat_Icon_Vector.svg.png" class="img-fluid" style="height: 50px;"/>
-                                            Credit/Debit Card
-                                        </label>
-                                    </div>
-                                    <div class="form-check mt-3">
-                                        <input class="form-check-input" type="radio" name="pMethod" value="paypal" id="flexRadioDefault2" checked>
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                            <div class="hstack gap-2">
-                                                <img src="https://loghi-famosi.com/wp-content/uploads/2020/04/PayPal-Simbolo.png" class="img-fluid" style="height: 35px;"/>
-                                                Paypal
-                                            </div>
-                                        </label>
-                                    </div>
-                                    <div class="form-check mt-3">
-                                        <input class="form-check-input" type="radio" name="pMethod" value="apple" id="flexRadioDefault3" checked>
-                                        <label class="form-check-label" for="flexRadioDefault3">
-                                            <div class="hstack gap-2">
-                                                <img src="https://sharingconsulting.com/wp-content/uploads/2014/03/apple-pay-logo.jpg" class="img-fluid" style="height: 40px;"/>
-                                                Apple Pay
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <input type="submit" class="btn btn-success float-end" value="PAY NOW"/>
-                                </div>
-                            </div>
-                        </form>
+                            <div class="alert alert-success" data-th-if="${success == 1}"> Payment completed and order submitted for activation</div>
+                            <div class="alert alert-danger" data-th-if="${success == 0}"> An error occurred during payment process</div>
+                            <div><a class="btn btn-primary float-end" href="" data-th-href="@{/}">Go Home</a></div>
                         </div>
                     </div>
                 <div class="col-md-3 col-sm-12">

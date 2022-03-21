@@ -89,7 +89,7 @@
                 </div>
                 <div class="col-md-3 col-sm-12" data-th-if="${user != null}">
                     <h3>REJECTED ORDERS</h3>
-                    <div class="alert alert-success" data-th-if="${rOrders.size() == 0}">You don't have rejectet orders!</div>
+                    <div class="alert alert-success" data-th-if="${rOrders.size() == 0}">You don't have rejected orders!</div>
                     <blockquote data-th-if="${rOrders.size() != 0}">Hey, <span data-th-text="${user.name}"></span> <span data-th-text="${user.surname}"></span><br/>it seems that some of your orders have been rejected, click on the icon to retry payment</blockquote>
                     <div class="vstack gap-2">
                         <!-- Start rejected -->

@@ -50,28 +50,24 @@
                         <div class="card-body">
                             <h5 class="text-primary">Order summary</h5>
                             <hr style="background-color: #fff; border-top: 5px dotted #0046BA;"/>
-                            <p class="text-black"><strong>Selected package: </strong> Name of the package</p>
+                            <p class="text-black"><strong>Selected package: </strong> <span data-th-text="${pendingOrder.get_package().getName()}"></span></p>
                             <p class="text-black"><strong>Included services: </strong> <ul>
-                            <li>200 min</li>
-                            <li>200 sms</li>
-                            <li>2 Gb</li>
+                            <li data-th-each="s: ${pendingOrder.get_package().getServices()}"><span data-th-text="${s.getName()}"></span></li>
                         </ul></p>
 
                             <p class="text-black"><strong>Optional product: </strong> <ul>
-                            <li>Optional 1</li>
-                            <li>Optional 2</li>
-                            <li>Optional 3</li>
+                            <li data-th-each="o: ${pendingOrder.getOptionalProducts()}"><span data-th-text="${o.getName()}"></span></li>
                         </ul></p>
-                            <p class="text-black"><strong>Start date: </strong> xx/xx/xxxx</p>
-                            <p class="text-black"><strong>Validity period: </strong> 36 months</p>
+                            <p class="text-black"><strong>Start date: </strong> <span data-th-text="${pendingOrder.getStartDate()}"></span></p>
+                            <p class="text-black"><strong>Validity period: </strong> <span data-th-text="${pendingOrder.getValidityPeriod()}"></span> months</p>
                             <hr style="background-color: #fff; border-top: 5px dotted #0046BA;"/>
-                            <p class="text-black"><strong>Total: </strong> <span class="float-end">200€</span></p>
+                            <p class="text-black"><strong>Total: </strong> <span class="float-end"><span data-th-text="${pendingOrder.getPrice()}"></span> &euro;</span></p>
                         </div>
                     </div>
-                    <div class="mt-3">
-                        <form method="post" action="">
-                            <input type="hidden" name="inSession" value="true"/>
-                            <input type="hidden" name="orderId" value="0" />
+                    <div class="mt-3" data-th-if="${user != null}">
+                        <form method="POST" action="" data-th-action="@{/order/confirm}">
+                            <input type="hidden" name="inSession" value="true" data-th-value="${inSession}"/>
+                            <input type="hidden" name="orderId" data-th-value="${pendingOrder.getId()}" />
                             <input type="submit" class="btn btn-success float-end" value="BUY NOW"/>
                         </form>
 

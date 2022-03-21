@@ -1,13 +1,18 @@
 package it.polimi.db2.telco.services;
 
+import it.polimi.db2.telco.entities.OptionalProductOrder;
+import it.polimi.db2.telco.entities.OptionalProductOrderId;
 import it.polimi.db2.telco.entities.Order;
 import it.polimi.db2.telco.exceptions.order.OrderNotFoundException;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Transactional
 public class OrderService {
     @PersistenceContext(unitName = "telco-persistence-provider")
     private EntityManager em;
@@ -38,9 +43,14 @@ public class OrderService {
     }
 
     public Integer createOrder(Order order) {
-        em.persist(order);
-        em.flush();
-        return order.getId();
+        try {
+            order.setId(null);
+            em.persist(order);
+            em.flush();
+            return order.getId();
+        } catch(Exception ignored){
+              return null;
+        }
     }
 
     public Integer updateOrder(Order order) {

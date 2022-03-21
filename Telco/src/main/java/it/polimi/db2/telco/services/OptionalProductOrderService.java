@@ -6,7 +6,9 @@ import it.polimi.db2.telco.exceptions.optionalProductOrder.OptionalProductOrderN
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 
+@Transactional
 public class OptionalProductOrderService {
     @PersistenceContext(unitName = "telco-persistence-provider")
     private EntityManager em;

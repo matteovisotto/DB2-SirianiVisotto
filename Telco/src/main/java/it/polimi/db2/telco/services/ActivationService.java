@@ -6,8 +6,10 @@ import it.polimi.db2.telco.exceptions.activation.ActivationNotFoundException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Transactional
 public class ActivationService {
     @PersistenceContext(unitName = "telco-persistence-provider")
     private EntityManager em;

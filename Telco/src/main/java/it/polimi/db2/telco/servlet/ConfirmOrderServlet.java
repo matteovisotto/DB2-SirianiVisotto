@@ -21,7 +21,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
@@ -107,7 +109,7 @@ public class ConfirmOrderServlet extends HttpServlet {
             Order order = pendingToOrder((PendingOrderBean) req.getSession().getAttribute("pendingOrder"));
             order.setUser(user);
             order.setOrderStatus(0);
-
+            orderId = orderController.createOrder(order);
 
         } else {
             //The order is already in the db
@@ -124,7 +126,7 @@ public class ConfirmOrderServlet extends HttpServlet {
             //Just control if the user can proceed, no further actions required
         }
 
-        resp.sendRedirect(getServletContext() + "/order/pay?orderId="+orderId);
+        resp.sendRedirect(getServletContext().getContextPath() + "/order/pay?orderId="+orderId);
     }
 
     private Order pendingToOrder(PendingOrderBean pendingOrderBean) {
@@ -139,8 +141,11 @@ public class ConfirmOrderServlet extends HttpServlet {
                 }
             });
         });
+        order.setStartDate(pendingOrderBean.getStartDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         order.setOptionalProducts(optionalProductList);
+        order.setValidityPeriod(pendingOrderBean.getValidityPeriod());
         order.setPrice(calculatePrice(order));
+
 
         return order;
     }

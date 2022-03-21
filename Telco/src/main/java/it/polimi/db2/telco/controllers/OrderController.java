@@ -46,9 +46,12 @@ public class OrderController {
         return rejected;
     }
 
-    public Integer createOrder(Order order) {
-        Integer orderId;
-        return orderService.createOrder(order);
+    public Integer createOrder(Order order) throws OrderException{
+        Integer orderId = orderService.createOrder(order);
+        if(orderId == null){
+            throw new OrderException("Unable to save the order");
+        }
+        return orderId;
     }
 
     public Integer updateOrder(Order order) throws OrderException {

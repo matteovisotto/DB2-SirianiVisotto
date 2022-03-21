@@ -72,6 +72,6 @@ public class CreateOrderServlet extends HttpServlet {
 
         PendingOrderBean pendingOrderBean = new PendingOrderBean(0, packageId, validityPeriod, startDate, optionalsIds);
         req.getSession().setAttribute("pendingOrder", pendingOrderBean);
-        resp.sendRedirect(getServletContext()+"/order/confirm");
+        resp.sendRedirect(getServletContext().getContextPath() + "/order/confirm");
     }
 }

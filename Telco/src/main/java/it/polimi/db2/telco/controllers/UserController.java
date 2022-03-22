@@ -40,18 +40,26 @@ public class UserController {
         return userService.getUserByUsername(username);
     }
 
+    public void checkIfUsernameIsAlreadyUsed(String username) throws UserUsernameAlreadyExistingException {
+        userService.checkUsername(username);
+    }
+
+    public void checkIfEmailIsAlreadyUsed(String email) throws UserEmailAlreadyExistingException {
+        userService.checkEmail(email);
+    }
+
     public Integer createUser(User user) throws UserException {
         Integer userId;
-        if (userService.getUserByEmail(user.getEmail()) == null) {
+        userId = userService.createUser(user);
+        /*if (userService.getUserByEmail(user.getEmail()) == null) {
             if (userService.getUserByUsername(user.getUsername()) == null) {
-                //Hash the password
                 userId = userService.createUser(user);
             } else {
                 throw new UserUsernameAlreadyExistingException();
             }
         } else {
             throw new UserEmailAlreadyExistingException();
-        }
+        }*/
         return userId;
     }
 
@@ -59,7 +67,6 @@ public class UserController {
         Integer userId;
         if (userService.getUserByEmail(user.getEmail()) != null) {
             if (userService.getUserByEmail(user.getEmail()).getUsername().equals(user.getUsername())) {
-                //Hash the password
                 userId = userService.updateUser(user);
             } else {
                 throw new UserNotCorrespondentException();

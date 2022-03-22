@@ -26,16 +26,17 @@
 
         <nav class="navbar navbar-expand-lg navbar-light dream-navbar shadow-sm">
             <div class="container-fluid">
-                <a class="btn btn-toolbar text-white">
+                <a class="btn btn-toolbar text-white" href="index.html" data-th-href="@{/}">
                     <h3><i class="fas fa-phone"></i> Co.</h3>
                 </a>
                     <div data-th-if="${user != null}">
-                    <a class="dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false"><img src="assets/placeholder_user.png" data-th-src="@{/assets/placeholder_user.png}" class="rounded-circle profile-img" /></a>
+                    <a class="dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false"><img src="../assets/placeholder_user.png" data-th-src="@{/assets/placeholder_user.png}" class="rounded-circle profile-img" /></a>
                     <ul class="dropdown-menu dropdown-menu-end profile-dropdown" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="profile.html" data-th-href="@{/profile}"><i class="fas fa-user"></i> Profile</a></li>
                         <li class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#" data-th-href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-                    </ul></div>
+                    </ul>
+                    </div>
 
                 <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal" data-th-if="${user == null}">Login - Register</button>
 
@@ -43,7 +44,9 @@
         </nav>
         <div class="page">
             <div class="row">
-                <div class="col-md-3 col-sm-12"></div>
+                <div class="col-md-3 col-sm-12">
+
+                </div>
                 <div class="col-md-6 col-sm-12">
                     <h3>BUY A SERVICE</h3>
                     <div class="card mt-3">
@@ -82,6 +85,7 @@
                         </form>
                         </div>
                     </div>
+                </div>
                 <div class="col-md-3 col-sm-12">
 
                 </div>

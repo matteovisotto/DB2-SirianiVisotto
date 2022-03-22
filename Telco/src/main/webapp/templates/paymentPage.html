@@ -26,11 +26,11 @@
 
         <nav class="navbar navbar-expand-lg navbar-light dream-navbar shadow-sm">
             <div class="container-fluid">
-                <a class="btn btn-toolbar text-white">
+                <a class="btn btn-toolbar text-white" href="index.html" data-th-href="@{/}">
                     <h3><i class="fas fa-phone"></i> Co.</h3>
                 </a>
                     <div data-th-if="${user != null}">
-                    <a class="dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false"><img src="assets/placeholder_user.png" data-th-src="@{/assets/placeholder_user.png}" class="rounded-circle profile-img" /></a>
+                    <a class="dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false"><img src="../assets/placeholder_user.png" data-th-src="@{/assets/placeholder_user.png}" class="rounded-circle profile-img" /></a>
                     <ul class="dropdown-menu dropdown-menu-end profile-dropdown" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="profile.html" data-th-href="@{/profile}"><i class="fas fa-user"></i> Profile</a></li>
                         <li class="dropdown-divider"></li>
@@ -43,7 +43,9 @@
         </nav>
         <div class="page">
             <div class="row">
-                <div class="col-md-3 col-sm-12"></div>
+                <div class="col-md-3 col-sm-12">
+
+                </div>
                 <div class="col-md-6 col-sm-12">
                     <h3>PAYMENT</h3>
                     <div class="card mt-3">
@@ -87,6 +89,7 @@
                         </form>
                         </div>
                     </div>
+                </div>
                 <div class="col-md-3 col-sm-12">
 
                 </div>
@@ -197,6 +200,14 @@
            var msg = "Generic error";
            if(e_type === "bad_credential"){
                msg = "Invalid username or password";
+           }  else if (e_type === "at_exception") {
+               msg = "The username can't contains the character \"@\".";
+           } else if (e_type === "not_equal_password") {
+               msg = "The passwords inserted don't match.";
+           } else if (e_type === "username_existing") {
+               msg = "The username you have used already exists.";
+           } else if (e_type === "email_existing") {
+               msg = "The email you have used already exists.";
            }
            $('#errorContent').text(msg);
            $('#errorModal').modal('show');

@@ -22,9 +22,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @WebServlet("/order/create")
 public class CreateOrderServlet extends HttpServlet {
@@ -65,11 +63,13 @@ public class CreateOrderServlet extends HttpServlet {
         } catch (ParseException e) {}
 
         String[] optionalIdsStr = req.getParameterValues("optionalProduct");
+        if (optionalIdsStr == null) {
+            optionalIdsStr = new String[]{};
+        }
         List<Integer> optionalsIds = new ArrayList<>();
         for (int i = 0; i < optionalIdsStr.length; i++) {
             optionalsIds.add(Integer.parseInt(optionalIdsStr[i]));
         }
-
         PendingOrderBean pendingOrderBean = new PendingOrderBean(0, packageId, validityPeriod, startDate, optionalsIds);
         req.getSession().setAttribute("pendingOrder", pendingOrderBean);
         resp.sendRedirect(getServletContext().getContextPath() + "/order/confirm");

@@ -4,7 +4,6 @@ import it.polimi.db2.telco.entities.PackagePrice;
 import it.polimi.db2.telco.entities.ServicePackage;
 import it.polimi.db2.telco.exceptions.servicePackage.ServicePackageNotFoundException;
 
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -37,7 +36,7 @@ public class ServicePackageService {
         return servicePackages.get(0);
     }
 
-    public boolean isServicePackageNameAlreadyUser(String name)  {
+    public boolean isServicePackageNameAlreadyExist(String name)  {
         TypedQuery<ServicePackage> query = em.createQuery("SELECT s FROM ServicePackage s WHERE s.name = :name", ServicePackage.class);
         query.setParameter("name", name);
         List<ServicePackage> servicePackages = query.getResultList();

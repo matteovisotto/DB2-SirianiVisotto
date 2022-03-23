@@ -29,7 +29,7 @@ public class ServicePackageController {
 
     public Integer createServicePackage(ServicePackage servicePackage) throws ServicePackageException {
         Integer servicePackageId;
-        if(!servicePackageService.isServicePackageNameAlreadyUser(servicePackage.getName())) {
+        if(!servicePackageService.isServicePackageNameAlreadyExist(servicePackage.getName())) {
             servicePackageId = servicePackageService.createServicePackage(servicePackage);
         } else {
             throw new ServicePackageAlreadyExistingException();

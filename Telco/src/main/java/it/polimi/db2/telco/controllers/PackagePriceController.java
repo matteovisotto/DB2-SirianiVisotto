@@ -38,7 +38,7 @@ public class PackagePriceController {
 
     public Integer createPackagePrice(PackagePrice packagePrice) throws PackagePriceException {
         Integer packagePriceId;
-        if (packagePriceService.isPackagePriceAlreadyExisting(packagePrice.getValidityPeriod(), packagePrice.get_package().getId()) && (packagePrice.getValidityPeriod() == 12 || packagePrice.getValidityPeriod() == 24 || packagePrice.getValidityPeriod() == 36)){
+        if (!packagePriceService.isPackagePriceAlreadyExisting(packagePrice.getValidityPeriod(), packagePrice.get_package().getId()) && (packagePrice.getValidityPeriod() == 12 || packagePrice.getValidityPeriod() == 24 || packagePrice.getValidityPeriod() == 36)){
             packagePriceId = packagePriceService.createPackagePrice(packagePrice);
         } else {
             throw new PackagePriceAlreadyExistingException();
@@ -48,7 +48,7 @@ public class PackagePriceController {
 
     public Integer updatePackagePrice(PackagePrice packagePrice) throws PackagePriceException {
         Integer packagePriceId;
-        if (packagePriceService.isPackagePriceAlreadyExisting(packagePrice.getValidityPeriod(), packagePrice.get_package().getId())){
+        if (!packagePriceService.isPackagePriceAlreadyExisting(packagePrice.getValidityPeriod(), packagePrice.get_package().getId())){
             packagePriceId = packagePriceService.updatePackagePrice(packagePrice);
         } else {
             throw new PackagePriceNotFoundException();

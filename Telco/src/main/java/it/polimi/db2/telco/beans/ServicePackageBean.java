@@ -25,7 +25,7 @@ public class ServicePackageBean {
     }
     Integer id;
     String name;
-    List<Price> packagePrice =new  ArrayList<>();
+    List<Price> packagePrice = new  ArrayList<>();
     List<OptionalProductBean> optionalProducts = new ArrayList<>();
     List<ServiceBean> services = new ArrayList<>();
 

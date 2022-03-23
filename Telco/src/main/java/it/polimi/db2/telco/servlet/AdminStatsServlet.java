@@ -1,7 +1,6 @@
 package it.polimi.db2.telco.servlet;
 
-import it.polimi.db2.telco.controllers.OrderController;
-import it.polimi.db2.telco.controllers.ServicePackageController;
+import it.polimi.db2.telco.controllers.*;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templatemode.TemplateMode;
@@ -21,9 +20,15 @@ public class AdminStatsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private TemplateEngine templateEngine;
     @Inject
-    ServicePackageController servicePackageController;
+    AveragePurchaseOptionalPackageController averagePurchaseOptionalPackageController;
     @Inject
-    OrderController orderController;
+    TotalPurchaseOptionalController totalPurchaseOptionalController;
+    @Inject
+    TotalPurchasePackageController totalPurchasePackageController;
+    @Inject
+    TotalPurchasePackageOptionalController totalPurchasePackageOptionalController;
+    @Inject
+    TotalPurchasePackageValidityController totalPurchasePackageValidityController;
 
     @Override
     public void init() throws ServletException {
@@ -39,9 +44,12 @@ public class AdminStatsServlet extends HttpServlet {
         String path = "templates/adminStats";
         ServletContext servletContext = getServletContext();
         final WebContext ctx = new WebContext(req, resp, servletContext, req.getLocale());
-        if(req.getSession().getAttribute("user")!=null){
-            ctx.setVariable("user", req.getSession().getAttribute("user"));
-        }
+        ctx.setVariable("user", req.getSession().getAttribute("administrator"));
+        ctx.setVariable("averagePurchaseOptionalPackage", averagePurchaseOptionalPackageController.getAllAveragePurchaseOptionalPackage());
+        ctx.setVariable("totalPurchaseOptional", totalPurchaseOptionalController.getAllTotalPurchaseOptionals());
+        ctx.setVariable("totalPurchasePackage", totalPurchasePackageController.getAllTotalPurchasePackages());
+        ctx.setVariable("totalPurchasePackageOptional", totalPurchasePackageOptionalController.getAllTotalPurchasePackageOptionals());
+        ctx.setVariable("totalPurchasePackageValidity", totalPurchasePackageValidityController.getAllTotalPurchasePackageValidity());
         templateEngine.process(path, ctx, resp.getWriter());
     }
 

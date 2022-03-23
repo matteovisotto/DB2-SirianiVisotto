@@ -48,7 +48,6 @@ public class AdminHomeServlet extends HttpServlet {
         ServletContext servletContext = getServletContext();
         final WebContext ctx = new WebContext(req, resp, servletContext, req.getLocale());
 
-
         ctx.setVariable("user", req.getSession().getAttribute("administrator"));
         ctx.setVariable("servicePackage", servicePackageController.getAllServicePackages());
         ctx.setVariable("service", serviceController.getAllServices());

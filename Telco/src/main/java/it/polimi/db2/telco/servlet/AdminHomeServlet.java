@@ -1,8 +1,10 @@
 package it.polimi.db2.telco.servlet;
 
+import it.polimi.db2.telco.controllers.OptionalProductController;
 import it.polimi.db2.telco.controllers.OrderController;
+import it.polimi.db2.telco.controllers.ServiceController;
 import it.polimi.db2.telco.controllers.ServicePackageController;
-import it.polimi.db2.telco.entities.User;
+import it.polimi.db2.telco.entities.*;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templatemode.TemplateMode;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/admin/dashboard")
 public class AdminHomeServlet extends HttpServlet {
@@ -24,7 +27,9 @@ public class AdminHomeServlet extends HttpServlet {
     @Inject
     ServicePackageController servicePackageController;
     @Inject
-    OrderController orderController;
+    OptionalProductController optionalProductController;
+    @Inject
+    ServiceController serviceController;
 
     @Override
     public void init() throws ServletException {
@@ -40,8 +45,14 @@ public class AdminHomeServlet extends HttpServlet {
         String path = "templates/adminDashboard";
         ServletContext servletContext = getServletContext();
         final WebContext ctx = new WebContext(req, resp, servletContext, req.getLocale());
+        List<ServicePackage> servicePackages = servicePackageController.getAllServicePackages();
+        List<OptionalProduct> optionalProducts = optionalProductController.getAllOptionalProducts();
+        List<Service> services = serviceController.getAllServices();
         if(req.getSession().getAttribute("user")!=null){
             ctx.setVariable("user", req.getSession().getAttribute("user"));
+            ctx.setVariable("servicePackage", req.getSession().getAttribute("servicePackage"));
+            ctx.setVariable("service", req.getSession().getAttribute("service"));
+            ctx.setVariable("optionalProduct", req.getSession().getAttribute("optionalProduct"));
         }
         templateEngine.process(path, ctx, resp.getWriter());
     }

@@ -1,5 +1,6 @@
 package it.polimi.db2.telco.services;
 
+import it.polimi.db2.telco.entities.OptionalProduct;
 import it.polimi.db2.telco.entities.Service;
 import it.polimi.db2.telco.entities.ServicePackage;
 import it.polimi.db2.telco.exceptions.service.ServiceNotFoundException;
@@ -35,6 +36,12 @@ public class ServiceService {
             throw new ServiceNotFoundException();
         }
         return service;
+    }
+
+    public boolean isServiceAlreadyExisting(String name) {
+        TypedQuery<Service> query = em.createQuery("SELECT s FROM Service s WHERE s.name = :name", Service.class);
+        query.setParameter("name", name);
+        return query.getResultList().size() == 1;
     }
 
     public List<Service> getAllServices() throws ServiceNotFoundException {

@@ -35,6 +35,13 @@ public class PackagePriceService {
         return packagePrice.getPrice();
     }
 
+    public boolean isPackagePriceAlreadyExisting(Integer validityPeriod, Integer packageId) throws PackagePriceNotFoundException {
+        TypedQuery<PackagePrice> query = em.createQuery("SELECT p FROM PackagePrice p WHERE p.validityPeriod = :validityPeriod AND p._package = :packageId", PackagePrice.class);
+        query.setParameter("validityPeriod", validityPeriod);
+        query.setParameter("packageId", packageId);
+        return query.getResultList().size() == 1;
+    }
+
     public List<PackagePrice> getPackagePricesOfPackage(Integer packageId) throws PackagePriceNotFoundException {
         TypedQuery<PackagePrice> query = em.createQuery("SELECT p FROM PackagePrice p WHERE p._package.id = :packageId", PackagePrice.class);
         query.setParameter("packageId", packageId);

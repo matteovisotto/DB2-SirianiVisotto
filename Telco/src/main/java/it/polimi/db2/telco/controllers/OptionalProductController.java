@@ -29,7 +29,7 @@ public class OptionalProductController {
 
     public Integer createOptionalProduct(OptionalProduct optionalProduct) throws OptionalProductException {
         Integer optionalProductId;
-        if (optionalProductService.getOptionalProductByName(optionalProduct.getName()) == null) {
+        if (!optionalProductService.isOptionalProductAlreadyExisting(optionalProduct.getName())) {
             optionalProductId = optionalProductService.createOptionalProduct(optionalProduct);
         } else {
             throw new OptionalProductAlreadyExistingException();

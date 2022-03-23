@@ -31,7 +31,7 @@ public class ServiceController {
 
     public Integer createService(Service service) throws ServiceException {
         Integer serviceId;
-        if (serviceService.getServiceByName(service.getName()) == null) {
+        if (serviceService.isServiceAlreadyExisting(service.getName())) {
             serviceId = serviceService.createService(service);
         } else {
             throw new ServiceAlreadyExistingException();

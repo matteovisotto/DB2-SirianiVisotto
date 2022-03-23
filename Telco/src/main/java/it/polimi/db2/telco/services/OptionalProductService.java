@@ -1,6 +1,7 @@
 package it.polimi.db2.telco.services;
 
 import it.polimi.db2.telco.entities.OptionalProduct;
+import it.polimi.db2.telco.entities.User;
 import it.polimi.db2.telco.exceptions.optionalProduct.OptionalProductNotFoundException;
 
 import javax.persistence.EntityManager;
@@ -32,6 +33,12 @@ public class OptionalProductService {
             throw new OptionalProductNotFoundException();
         }
         return optionalProduct;
+    }
+
+    public boolean isOptionalProductAlreadyExisting(String name) {
+        TypedQuery<OptionalProduct> query = em.createQuery("SELECT o FROM OptionalProduct o WHERE o.name = :name", OptionalProduct.class);
+        query.setParameter("name", name);
+        return query.getResultList().size() == 1;
     }
 
     public List<OptionalProduct> getAllOptionalProducts() throws OptionalProductNotFoundException {

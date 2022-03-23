@@ -1,5 +1,6 @@
 package it.polimi.db2.telco.services;
 
+import it.polimi.db2.telco.entities.PackagePrice;
 import it.polimi.db2.telco.entities.ServicePackage;
 import it.polimi.db2.telco.exceptions.servicePackage.ServicePackageNotFoundException;
 
@@ -8,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
@@ -35,6 +37,13 @@ public class ServicePackageService {
         return servicePackages.get(0);
     }
 
+    public boolean isServicePackageNameAlreadyUser(String name)  {
+        TypedQuery<ServicePackage> query = em.createQuery("SELECT s FROM ServicePackage s WHERE s.name = :name", ServicePackage.class);
+        query.setParameter("name", name);
+        List<ServicePackage> servicePackages = query.getResultList();
+        return servicePackages.size() > 0;
+    }
+
     public List<ServicePackage> getAllServicePackages() {
         TypedQuery<ServicePackage> query = em.createQuery("SELECT s FROM ServicePackage s", ServicePackage.class);
         List<ServicePackage> servicePackages = query.getResultList();
@@ -42,9 +51,17 @@ public class ServicePackageService {
     }
 
     public Integer createServicePackage(ServicePackage servicePackage) {
+        List<PackagePrice> packagePrices = servicePackage.getPackagePrices();
+        servicePackage.setPackagePrices(new ArrayList<>());
         em.persist(servicePackage);
         em.flush();
-        return servicePackage.getId();
+        Integer servicePackageId = servicePackage.getId();
+        packagePrices.forEach(p -> {
+            p.set_package(servicePackage);
+            em.persist(p);
+            em.flush();
+        });
+        return servicePackageId;
     }
 
     public Integer updateServicePackage(ServicePackage servicePackage) {

@@ -17,7 +17,7 @@ public class ServicePackage {
     @Column(name = "name", nullable = false)
      String name;
 
-    @OneToMany(mappedBy = "_package")
+    @OneToMany(mappedBy = "_package", cascade = CascadeType.ALL)
      List<PackagePrice> packagePrices = new ArrayList<>();
 
     @ManyToMany

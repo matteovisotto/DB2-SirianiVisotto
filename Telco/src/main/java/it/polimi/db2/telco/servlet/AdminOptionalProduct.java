@@ -38,5 +38,6 @@ public class AdminOptionalProduct extends HttpServlet {
         } catch (OptionalProductException e) {
             throw new OptionalProductException();
         }
+        resp.sendRedirect(getServletContext().getContextPath() + "/admin");
     }
 }

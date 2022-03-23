@@ -47,26 +47,16 @@ public class UserService {
         return users.get(0);
     }
 
-    public void checkUsername(String username) throws UserUsernameAlreadyExistingException, NoResultException {
-        try{
+    public boolean checkUsername(String username) {
             TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class);
             query.setParameter("username", username);
-            User user = query.getSingleResult();
-            if(user != null){
-                throw new UserUsernameAlreadyExistingException();
-            }
-        } catch(NoResultException ignored) {}
+           return query.getResultList().size() == 1;
     }
 
-    public void checkEmail(String email) throws UserEmailAlreadyExistingException, NoResultException {
-        try {
-            TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.email = :email", User.class);
-            query.setParameter("email", email);
-            User user = query.getSingleResult();
-            if(user != null){
-                throw new UserEmailAlreadyExistingException();
-            }
-        } catch(NoResultException ignored) {}
+    public boolean checkEmail(String email) {
+        TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.email = :email", User.class);
+        query.setParameter("email", email);
+        return query.getResultList().size() == 1;
     }
 
     public Integer createUser(User user) {

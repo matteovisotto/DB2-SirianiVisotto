@@ -40,12 +40,12 @@ public class UserController {
         return userService.getUserByUsername(username);
     }
 
-    public void checkIfUsernameIsAlreadyUsed(String username) throws UserUsernameAlreadyExistingException {
-        userService.checkUsername(username);
+    public boolean checkIfUsernameIsAlreadyUsed(String username) {
+        return userService.checkUsername(username);
     }
 
-    public void checkIfEmailIsAlreadyUsed(String email) throws UserEmailAlreadyExistingException {
-        userService.checkEmail(email);
+    public boolean checkIfEmailIsAlreadyUsed(String email){
+        return userService.checkEmail(email);
     }
 
     public Integer createUser(User user) throws UserException {

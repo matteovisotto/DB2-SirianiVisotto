@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Locale;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
@@ -61,31 +62,29 @@ public class RegisterServlet extends HttpServlet {
             resp.sendRedirect(getServletContext().getContextPath()+"/?evn=error&err=at_exception");
             return;
         }
-        try {
-            userController.checkIfUsernameIsAlreadyUsed(username);
-            userController.checkIfEmailIsAlreadyUsed(username);
-        } catch (UserUsernameAlreadyExistingException e) {
+        if(userController.checkIfUsernameIsAlreadyUsed(username)) {
             resp.sendRedirect(getServletContext().getContextPath()+"/?evn=error&err=username_existing");
             return;
-        } catch (UserEmailAlreadyExistingException e) {
+        }
+
+        if(userController.checkIfEmailIsAlreadyUsed(email)){
             resp.sendRedirect(getServletContext().getContextPath()+"/?evn=error&err=email_existing");
             return;
         }
+
 
         String sha256hex = DigestUtils.sha256Hex(password);
 
         User userToRegister = new User();
         userToRegister.setUsername(username);
-        userToRegister.setEmail(email);
+        userToRegister.setEmail(email.toLowerCase(Locale.ROOT));
         userToRegister.setName(name);
         userToRegister.setPassword(sha256hex);
         userToRegister.setSurname(surname);
         userToRegister.setInsolvent(0);
         userController.createUser(userToRegister);
 
-        userToRegister = userController.loginUserByEmail(username, sha256hex);
 
-        req.getSession().setAttribute("user", userToRegister);
         String redirectTo = getServletContext().getContextPath()+"/";
         if(req.getParameter("returnTo") != null){
             redirectTo = req.getParameter("returnTo");

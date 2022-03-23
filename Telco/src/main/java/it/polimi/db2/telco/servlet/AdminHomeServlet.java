@@ -46,33 +46,13 @@ public class AdminHomeServlet extends HttpServlet {
         String path = "templates/adminDashboard";
         ServletContext servletContext = getServletContext();
         final WebContext ctx = new WebContext(req, resp, servletContext, req.getLocale());
-        List<ServicePackage> servicePackages = servicePackageController.getAllServicePackages();
-        List<OptionalProduct> optionalProducts = optionalProductController.getAllOptionalProducts();
-        List<Service> services = serviceController.getAllServices();
+
 
         ctx.setVariable("user", req.getSession().getAttribute("administrator"));
-        ctx.setVariable("servicePackage", req.getSession().getAttribute("servicePackage"));
-        ctx.setVariable("service", req.getSession().getAttribute("service"));
-        ctx.setVariable("optionalProduct", req.getSession().getAttribute("optionalProduct"));
+        ctx.setVariable("servicePackage", servicePackageController.getAllServicePackages());
+        ctx.setVariable("service", serviceController.getAllServices());
+        ctx.setVariable("optionalProduct", optionalProductController.getAllOptionalProducts());
 
-        ServicePackage servicePackage = new ServicePackage();
-        Service service = new Service();
-        service.setId(1);
-        List<Service> services1 = new ArrayList<>();
-        services1.add(service);
-        servicePackage.setServices(services1);
-        PackagePrice p1 = new PackagePrice();
-        p1.setValidityPeriod(12);
-        p1.setPrice(12.5);
-        PackagePrice p2 = new PackagePrice();
-        p2.setValidityPeriod(24);
-        p2.setPrice(24.5);
-        List<PackagePrice> packagePrices = new ArrayList<>();
-        packagePrices.add(p1);
-        packagePrices.add(p2);
-        servicePackage.setPackagePrices(packagePrices);
-        servicePackage.setName("Proviamo");
-        servicePackageController.createServicePackage(servicePackage);
         templateEngine.process(path, ctx, resp.getWriter());
     }
 

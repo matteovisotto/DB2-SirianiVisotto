@@ -90,9 +90,37 @@
                             <div class="row mt-3">
                                 <div class="col-md-6 col-sm-12">
                                     <h6 class="text-primary">AVAILABLE</h6>
+                                    <table class="table table-striped">
+                                        <thead><th>Optional product</th><th>&euro;/month</th></thead>
+                                        <tbody>
+                                        <tr data-th-each="o: ${optionalProduct}"><td data-th-text="${o.getName()}"></td><td><span data-th-text="${o.getPrice()}"></span> &euro;</td></tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <h6 class="text-primary">ADD NEW</h6>
+                                    <form method="POST" action="" data-th-action="@{/admin/optional/post}">
+                                        <div class="row mt-3">
+                                            <div class="col-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="o_name"><i class="fas fa-user"></i> </span>
+                                                    <input type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="o_name" name="o_name">
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="o_price"><i class="fas fa-euro-sign"></i></span>
+                                                    <input type="text" class="form-control" placeholder="Price" aria-label="Price" aria-describedby="o_price" name="o_price">
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <input type="submit" class="btn btn-success mt-3 float-end" value="Add"/>
+                                            </div>
+
+                                        </div>
+
+
+                                    </form>
                                 </div>
                             </div>
                         </div>

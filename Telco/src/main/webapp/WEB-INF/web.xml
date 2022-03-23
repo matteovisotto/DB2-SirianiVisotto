@@ -24,5 +24,6 @@
         <filter-name>AdminFilter</filter-name>
         <url-pattern>/admin/dashboard</url-pattern>
         <url-pattern>/admin/stats</url-pattern>
+        <url-pattern>/admin/optional/post</url-pattern>
     </filter-mapping>
 </web-app>

@@ -54,19 +54,23 @@ public class RegisterServlet extends HttpServlet {
         String email = req.getParameter("r_email");
         String password = req.getParameter("r_password");
         String passwordCheck = req.getParameter("r_password_c");
-        if (name == null || name.equals("")){
+        String temp = name.replaceAll("\\s+","");
+        if (temp.equals("")){
             resp.sendRedirect(getServletContext().getContextPath()+"/?evn=error&err=invalid_name");
             return;
         }
-        if (surname == null || surname.equals("")){
+        temp = surname.replaceAll("\\s+","");
+        if (temp.equals("")){
             resp.sendRedirect(getServletContext().getContextPath()+"/?evn=error&err=invalid_surname");
             return;
         }
-        if (username == null || username.equals("")){
+        temp = username.replaceAll("\\s+","");
+        if (temp.equals("")){
             resp.sendRedirect(getServletContext().getContextPath()+"/?evn=error&err=invalid_username");
             return;
         }
-        if (password == null || password.equals("")) {
+        temp = password.replaceAll("\\s+","");
+        if (temp.equals("")) {
             resp.sendRedirect(getServletContext().getContextPath()+"/?evn=error&err=invalid_password");
             return;
         }

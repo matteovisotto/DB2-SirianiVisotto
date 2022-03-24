@@ -52,9 +52,9 @@ public class AdminsServicePackageServlet extends HttpServlet {
             optionalsIds.add(Integer.parseInt(optionalIdsStr[i]));
         }
         //servicePackage.setOptionalProducts(optionalIdsStr);
-        Double twelveMonth = Double.parseDouble(req.getParameter("p_twelve"));
-        Double twentyFourMonth = Double.parseDouble(req.getParameter("p_twenty_four"));
-        Double thirtySixMonth = Double.parseDouble(req.getParameter("p_thirty_six"));
+        Double twelveMonth = Double.parseDouble(req.getParameter("p_p_12"));
+        Double twentyFourMonth = Double.parseDouble(req.getParameter("p_p_24"));
+        Double thirtySixMonth = Double.parseDouble(req.getParameter("p_p_36"));
         PackagePrice twelve = new PackagePrice();
         twelve.setPrice(twelveMonth);
         twelve.setValidityPeriod(12);

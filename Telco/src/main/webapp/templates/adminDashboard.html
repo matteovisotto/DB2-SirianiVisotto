@@ -67,7 +67,61 @@
                           <h5 class="mt-3">PACKAGES</h5>
                             <div class="row mt-3">
                                 <div class="col-md-6 col-sm-12">
+                                    <h6 class="text-primary">AVAILABLE</h6>
+                                    <table class="table table-striped">
+                                        <thead><th>Package</th><th>Services</th><th>Optional Product</th><th>Prices</th></thead>
+                                        <tbody>
+                                        <tr data-th-each="p: ${servicePackage}"><td data-th-text="${p.getName()}"></td><td><ul><li data-th-each="service: ${p.getServices()}"><span data-th-text="${service.getName()}"></span></li></ul></td><td><ul><li data-th-each="opt: ${p.getOptionalProducts()}"><span data-th-text="${opt.getName()}"></span></li></ul></td><td><ul><li data-th-each="pr: ${p.getPackagePrices()}"><span data-th-text="${pr.getValidityPeriod()}"></span> month = <span data-th-text="${pr.getPrice()}"></span> &euro;/month</li></ul></td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
                                     <h6 class="text-primary">ADD NEW</h6>
+                                    <form method="POST" action="" data-th-action="@{/admin/package/post}">
+                                        <div class="row mt-3">
+                                            <div class="col-12 mb-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="p_name"><i class="fas fa-user"></i> </span>
+                                                    <input type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="p_name" name="p_name">
+                                                </div>
+                                            </div>
+                                            <div class="col-6 mb-3">
+                                                <h6 class="text-primary">Included Services</h6>
+                                                <div class="form-check" data-th-each="s: ${service}">
+                                                    <input class="form-check-input" type="checkbox" name="p_services" data-th-value="${s.getId()}" data-th-id="'service'+${s.getId()}">
+                                                    <label class="form-check-label" data-th-for="'service'+${s.getId()}" data-th-text="${s.getName()}"></label>
+                                                </div>
+                                            </div>
+                                            <div class="col-6 mb-3">
+                                                <h6 class="text-primary">Optional products</h6>
+                                                <div class="form-check" data-th-each="o: ${optionalProduct}">
+                                                    <input class="form-check-input" type="checkbox" name="p_optionals" data-th-value="${o.getId()}" data-th-id="'optional'+${o.getId()}">
+                                                    <label class="form-check-label" data-th-for="'optional'+${o.getId()}" data-th-text="${o.getName()}"></label>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 mb-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="p_p_12"><i class="fas fa-euro-sign"></i></span>
+                                                    <input type="text" class="form-control" placeholder="12 Month price" aria-label="Price for 12" aria-describedby="p_p_12" name="p_p_12">
+                                                </div>
+                                            </div>
+                                            <div class="col-4 mb-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="p_p_24"><i class="fas fa-euro-sign"></i></span>
+                                                    <input type="text" class="form-control" placeholder="24 Month price" aria-label="Price for 24" aria-describedby="p_p_24" name="p_p_24">
+                                                </div>
+                                            </div>
+                                            <div class="col-4 mb-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="p_p_36"><i class="fas fa-euro-sign"></i></span>
+                                                    <input type="text" class="form-control" placeholder="36 Month price" aria-label="Price for 36" aria-describedby="p_p_36" name="p_p_36">
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <input type="submit" class="btn btn-success float-end" value="Add">
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

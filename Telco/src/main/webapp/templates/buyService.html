@@ -30,10 +30,8 @@
                     <h3><i class="fas fa-phone"></i> Co.</h3>
                 </a>
                     <div data-th-if="${user != null}">
-                    <a class="dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false"><img src="assets/placeholder_user.png" data-th-src="@{/assets/placeholder_user.png}" class="rounded-circle profile-img" /></a>
+                        <a class="dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false"><div class="hstack gap-3"><strong data-th-text="|${user.getName()} ${user.getSurname()}|">Username</strong> <img src="assets/placeholder_user.png" data-th-src="@{/assets/placeholder_user.png}" class="rounded-circle profile-img" /></div></a>
                     <ul class="dropdown-menu dropdown-menu-end profile-dropdown" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="profile.html" data-th-href="@{/profile}"><i class="fas fa-user"></i> Profile</a></li>
-                        <li class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#" data-th-href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                     </ul>
                     </div>
@@ -56,7 +54,7 @@
                             <div class="row">
                                 <div class="col-12 mb-3" id="packageContainer">
                                     <h6 class="text-primary">Package</h6>
-                                    <select class="form-select" name="package">
+                                    <select class="form-select" id="packageSelector" name="package">
                                         <option data-th-each="p: ${packages}" data-th-value="${p.id}"><span data-th-text="${p.name}"></span></option>
                                     </select>
                                 </div>
@@ -198,6 +196,11 @@
             getOptionals(pId);
         }
 
+        $("#packageSelector").on('change', function (e) {
+           var id = $(e.target).val();
+           getOptionals(id);
+        });
+
         function getOptionals(pId){
             optionalContainer.html("");
             $.get("../api/optional/package/"+pId, function(data, status){
@@ -218,6 +221,8 @@
 
 
 </script>
+
+<script src="../js/errors.js" data-th-src="@{/js/errors.js}"></script>
 
 </body>
 

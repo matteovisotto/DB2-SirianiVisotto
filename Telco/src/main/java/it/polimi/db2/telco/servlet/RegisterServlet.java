@@ -54,6 +54,22 @@ public class RegisterServlet extends HttpServlet {
         String email = req.getParameter("r_email");
         String password = req.getParameter("r_password");
         String passwordCheck = req.getParameter("r_password_c");
+        if (name == null || name.equals("")){
+            resp.sendRedirect(getServletContext().getContextPath()+"/?evn=error&err=invalid_name");
+            return;
+        }
+        if (surname == null || surname.equals("")){
+            resp.sendRedirect(getServletContext().getContextPath()+"/?evn=error&err=invalid_surname");
+            return;
+        }
+        if (username == null || username.equals("")){
+            resp.sendRedirect(getServletContext().getContextPath()+"/?evn=error&err=invalid_username");
+            return;
+        }
+        if (password == null || password.equals("")) {
+            resp.sendRedirect(getServletContext().getContextPath()+"/?evn=error&err=invalid_password");
+            return;
+        }
         if(!password.equals(passwordCheck)){
             resp.sendRedirect(getServletContext().getContextPath()+"/?evn=error&err=not_equal_password");
             return;
@@ -72,7 +88,6 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
 
-
         String sha256hex = DigestUtils.sha256Hex(password);
 
         User userToRegister = new User();
@@ -83,7 +98,6 @@ public class RegisterServlet extends HttpServlet {
         userToRegister.setSurname(surname);
         userToRegister.setInsolvent(0);
         userController.createUser(userToRegister);
-
 
         String redirectTo = getServletContext().getContextPath()+"/";
         if(req.getParameter("returnTo") != null){

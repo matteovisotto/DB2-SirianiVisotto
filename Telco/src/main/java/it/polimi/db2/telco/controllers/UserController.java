@@ -51,15 +51,6 @@ public class UserController {
     public Integer createUser(User user) throws UserException {
         Integer userId;
         userId = userService.createUser(user);
-        /*if (userService.getUserByEmail(user.getEmail()) == null) {
-            if (userService.getUserByUsername(user.getUsername()) == null) {
-                userId = userService.createUser(user);
-            } else {
-                throw new UserUsernameAlreadyExistingException();
-            }
-        } else {
-            throw new UserEmailAlreadyExistingException();
-        }*/
         return userId;
     }
 

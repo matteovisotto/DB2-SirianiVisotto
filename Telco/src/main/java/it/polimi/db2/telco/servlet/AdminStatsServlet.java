@@ -1,6 +1,8 @@
 package it.polimi.db2.telco.servlet;
 
 import it.polimi.db2.telco.controllers.*;
+import it.polimi.db2.telco.entities.OptionalProduct;
+import it.polimi.db2.telco.entities.TotalPurchaseOptional;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templatemode.TemplateMode;
@@ -14,6 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
 @WebServlet("/admin/stats")
 public class AdminStatsServlet extends HttpServlet {
@@ -58,7 +62,10 @@ public class AdminStatsServlet extends HttpServlet {
         ctx.setVariable("totalPurchasePackageValidity", totalPurchasePackageValidityController.getAllTotalPurchasePackageValidity());
         ctx.setVariable("alerts", alertController.getAllAlerts());
         ctx.setVariable("insolventUsers", insolventUserController.getAllInsolventUsers());
-        ctx.setVariable("suspendedOrders", suspendedOrderController.getAllSuspendedOrders());
+        ctx.setVariable("suspendedOrders", suspendedOrderController.getAllSuspendedOrders().stream().map(o -> suspendedOrderController.toBean(o)).collect(Collectors.toList()));
+        TotalPurchaseOptional best = totalPurchaseOptionalController.getAllTotalPurchaseOptionals().stream().max(Comparator.comparing(TotalPurchaseOptional::getTotPurchase)).get();
+        ctx.setVariable("bestOptional", best);
+
         templateEngine.process(path, ctx, resp.getWriter());
     }
 

@@ -97,6 +97,8 @@
                                                     <tr data-th-each="t: ${totalPurchaseOptional}"><td data-th-text="${t.getId()}"></td><td data-th-text="${t.getOptionalName()}"></td><td data-th-text="${t.getTotPurchase()}"></td></tr>
                                                     </tbody>
                                                 </table>
+                                                <br/>
+                                                <strong>Best seller: </strong><span data-th-text="${bestOptional.getOptionalName()}"></span> with <span data-th-text="${bestOptional.getTotPurchase()}"></span> sales
                                             </div>
                                         </div>
                                     </div>
@@ -161,9 +163,9 @@
                                             <div class="col-12">
                                                 <h6 class="text-primary">DATA</h6>
                                                 <table class="table table-striped">
-                                                    <thead><th>Order ID</th><th>User ID</th></thead>
+                                                    <thead><th>Order ID</th><th>User ID</th><th>Username</th></thead>
                                                     <tbody>
-                                                    <tr data-th-each="s: ${suspendedOrders}"><td data-th-text="${s.getId().getOrderId()}"></td><td data-th-text="${s.getId().getUserId()}"></td></tr>
+                                                    <tr data-th-each="s: ${suspendedOrders}"><td data-th-text="${s.getOrder().getId()}"></td><td data-th-text="${s.getUser().getId()}"></td><td data-th-text="${s.getUser().getUsername()}"></td></tr>
                                                     </tbody>
                                                 </table>
                                             </div>

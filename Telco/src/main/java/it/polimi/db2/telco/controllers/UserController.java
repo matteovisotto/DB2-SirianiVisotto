@@ -14,7 +14,7 @@ public class UserController {
 
     public User loginUserByEmail(String email, String password) throws UserException {
         User user = userService.getUserByEmail(email);
-        if(!user.getPassword().equals(password)){
+        if(user == null || !user.getPassword().equals(password)){
             throw new UserCredentialException();
         }
         return user;
@@ -22,7 +22,7 @@ public class UserController {
 
     public User loginUserByUsername(String username, String password) throws UserException {
         User user = userService.getUserByUsername(username);
-        if(!user.getPassword().equals(password)){
+        if(user == null || !user.getPassword().equals(password)){
             throw new UserCredentialException();
         }
         return user;

@@ -36,7 +36,7 @@ public class AlertController {
         return alertService.getAlertsOfUser(userId);
     }
 
-    public List<Alert> getAllAlerts() throws AlertException {
+    public List<Alert> getAllAlerts() {
         return alertService.getAllAlerts();
     }
 }

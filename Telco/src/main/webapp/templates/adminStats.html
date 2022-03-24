@@ -161,8 +161,9 @@
                                             <div class="col-12">
                                                 <h6 class="text-primary">DATA</h6>
                                                 <table class="table table-striped">
-                                                    <thead></thead>
+                                                    <thead><th>Order ID</th><th>User ID</th></thead>
                                                     <tbody>
+                                                    <tr data-th-each="s: ${suspendedOrders}"><td data-th-text="${s.getId().getOrderId()}"></td><td data-th-text="${s.getId().getUserId()}"></td></tr>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -174,8 +175,9 @@
                                             <div class="col-12">
                                                 <h6 class="text-primary">DATA</h6>
                                                 <table class="table table-striped">
-                                                    <thead></thead>
+                                                    <thead><th>Name</th><th>Surname</th><th>Username</th><th>Email</th></thead>
                                                     <tbody>
+                                                    <tr data-th-each="i: ${insolventUsers}"><td data-th-text="${i.getName()}"></td><td data-th-text="${i.getSurname()}"></td><td data-th-text="${i.getUsername()}"></td><td data-th-text="${i.getEmail()}"></td></tr>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -187,8 +189,9 @@
                                             <div class="col-12">
                                                 <h6 class="text-primary">DATA</h6>
                                                 <table class="table table-striped">
-                                                    <thead></thead>
+                                                    <thead><th>Username</th><th>Email</th><th>Amount</th><th>Timestamp of the alert</th></thead>
                                                     <tbody>
+                                                    <tr data-th-each="a: ${alerts}"><td data-th-text="${a.getUsername()}"></td><td data-th-text="${a.getEmail()}"></td><td data-th-text="${a.getAmount()}"></td><td data-th-text="${a.getDateTime()}"></td></tr>
                                                     </tbody>
                                                 </table>
                                             </div>

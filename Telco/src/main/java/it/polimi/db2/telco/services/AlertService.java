@@ -34,12 +34,8 @@ public class AlertService {
         return alerts;
     }
 
-    public List<Alert> getAllAlerts() throws AlertNotFoundException {
+    public List<Alert> getAllAlerts() {
         TypedQuery<Alert> query = em.createQuery("SELECT a FROM Alert a", Alert.class);
-        List<Alert> alerts = query.getResultList();
-        if (alerts.size() == 0) {
-            throw new AlertNotFoundException();
-        }
-        return alerts;
+        return query.getResultList();
     }
 }

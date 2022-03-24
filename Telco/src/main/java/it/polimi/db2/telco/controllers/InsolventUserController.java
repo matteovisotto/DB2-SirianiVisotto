@@ -25,7 +25,7 @@ public class InsolventUserController {
         return insolventUserService.getInsolventUserByUsername(username);
     }
 
-    public List<InsolventUser> getAllInsolventUsers() throws UserException {
+    public List<InsolventUser> getAllInsolventUsers() {
         return insolventUserService.getAllInsolventUsers();
     }
 }

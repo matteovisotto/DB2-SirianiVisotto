@@ -41,12 +41,8 @@ public class SuspendedOrderService {
         return suspendedOrders;
     }
 
-    public List<SuspendedOrder> getAllSuspendedOrders() throws SuspendedOrderNotFoundException {
+    public List<SuspendedOrder> getAllSuspendedOrders() {
         TypedQuery<SuspendedOrder> query = em.createQuery("SELECT s FROM SuspendedOrder s", SuspendedOrder.class);
-        List<SuspendedOrder> suspendedOrders = query.getResultList();
-        if (suspendedOrders.size() == 0) {
-            throw new SuspendedOrderNotFoundException();
-        }
-        return suspendedOrders;
+        return query.getResultList();
     }
 }

@@ -21,7 +21,7 @@ public class SuspendedOrderController {
         return suspendedOrderService.getMySuspendedOrders(userId);
     }
 
-    public List<SuspendedOrder> getAllSuspendedOrders() throws SuspendedOrderException {
+    public List<SuspendedOrder> getAllSuspendedOrders() {
         return suspendedOrderService.getAllSuspendedOrders();
     }
 }

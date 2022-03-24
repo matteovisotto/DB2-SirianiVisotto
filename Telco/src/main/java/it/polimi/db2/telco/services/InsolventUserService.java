@@ -44,12 +44,8 @@ public class InsolventUserService {
         return insolventUsers.get(0);
     }
 
-    public List<InsolventUser> getAllInsolventUsers() throws UserNotFoundException {
+    public List<InsolventUser> getAllInsolventUsers() {
         TypedQuery<InsolventUser> query = em.createQuery("SELECT i FROM InsolventUser i", InsolventUser.class);
-        List<InsolventUser> insolventUsers = query.getResultList();
-        if (insolventUsers.size() == 0) {
-            throw new UserNotFoundException();
-        }
-        return insolventUsers;
+        return query.getResultList();
     }
 }

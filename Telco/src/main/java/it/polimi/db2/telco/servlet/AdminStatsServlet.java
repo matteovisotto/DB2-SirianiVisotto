@@ -29,6 +29,12 @@ public class AdminStatsServlet extends HttpServlet {
     TotalPurchasePackageOptionalController totalPurchasePackageOptionalController;
     @Inject
     TotalPurchasePackageValidityController totalPurchasePackageValidityController;
+    @Inject
+    AlertController alertController;
+    @Inject
+    InsolventUserController insolventUserController;
+    @Inject
+    SuspendedOrderController suspendedOrderController;
 
     @Override
     public void init() throws ServletException {
@@ -50,6 +56,9 @@ public class AdminStatsServlet extends HttpServlet {
         ctx.setVariable("totalPurchasePackage", totalPurchasePackageController.getAllTotalPurchasePackages());
         ctx.setVariable("totalPurchasePackageOptional", totalPurchasePackageOptionalController.getAllTotalPurchasePackageOptionals());
         ctx.setVariable("totalPurchasePackageValidity", totalPurchasePackageValidityController.getAllTotalPurchasePackageValidity());
+        ctx.setVariable("alerts", alertController.getAllAlerts());
+        ctx.setVariable("insolventUsers", insolventUserController.getAllInsolventUsers());
+        ctx.setVariable("suspendedOrders", suspendedOrderController.getAllSuspendedOrders());
         templateEngine.process(path, ctx, resp.getWriter());
     }
 

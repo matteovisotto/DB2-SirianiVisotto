@@ -30,9 +30,11 @@ public class AdminOptionalProductServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("o_name");
         Double price = Double.parseDouble(req.getParameter("o_price"));
+        String description = req.getParameter("o_description");
         OptionalProduct optionalProduct = new OptionalProduct();
         optionalProduct.setName(name);
         optionalProduct.setPrice(price);
+        optionalProduct.setDescription(description);
         try {
             optionalProductController.createOptionalProduct(optionalProduct);
         } catch (OptionalProductException e) {

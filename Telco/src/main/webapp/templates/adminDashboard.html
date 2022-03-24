@@ -215,9 +215,9 @@
                                 <div class="col-md-6 col-sm-12">
                                     <h6 class="text-primary">AVAILABLE</h6>
                                     <table class="table table-striped">
-                                        <thead><th>Optional product</th><th>&euro;/month</th></thead>
+                                        <thead><th>Optional product</th><th>Description</th><th>&euro;/month</th></thead>
                                         <tbody>
-                                        <tr data-th-each="o: ${optionalProduct}"><td data-th-text="${o.getName()}"></td><td><span data-th-text="${o.getPrice()}"></span> &euro;</td></tr>
+                                        <tr data-th-each="o: ${optionalProduct}"><td data-th-text="${o.getName()}"></td><td data-th-text="${o.getDescription()}"></td><td><span data-th-text="${o.getPrice()}"></span> &euro;</td></tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -235,6 +235,12 @@
                                                 <div class="input-group">
                                                     <span class="input-group-text" id="o_price"><i class="fas fa-euro-sign"></i></span>
                                                     <input type="text" class="form-control" placeholder="Price" aria-label="Price" aria-describedby="o_price" name="o_price">
+                                                </div>
+                                            </div>
+                                            <div class="col-8 mt-2">
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="o_description"><i class="fa-solid fa-font"></i></span>
+                                                    <!--input type="text"--><textarea class="form-control" placeholder="Description" aria-label="Description" aria-describedby="o_description" name="o_description"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-12">

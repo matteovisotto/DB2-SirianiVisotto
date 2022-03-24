@@ -163,9 +163,9 @@
                                             <div class="col-12">
                                                 <h6 class="text-primary">DATA</h6>
                                                 <table class="table table-striped">
-                                                    <thead><th>Order ID</th><th>User ID</th><th>Username</th></thead>
+                                                    <thead><th>Order ID</th><th>Price</th><th>Payments attempts</th><th>Start date of the order</th><th>Order created at</th><th>User ID</th><th>Username</th></thead>
                                                     <tbody>
-                                                    <tr data-th-each="s: ${suspendedOrders}"><td data-th-text="${s.getOrder().getId()}"></td><td data-th-text="${s.getUser().getId()}"></td><td data-th-text="${s.getUser().getUsername()}"></td></tr>
+                                                    <tr data-th-each="s: ${suspendedOrders}"><td data-th-text="${s.getOrder().getId()}"></td><td data-th-text="${s.getOrder().getPrice()}"></td><td data-th-text="${s.getOrder().getPaymentHistories().size()}"></td><td data-th-text="${s.getOrder().getStartDate()}"></td><td data-th-text="${s.getOrder().getCreatedAt()}"></td><td data-th-text="${s.getUser().getId()}"></td><td data-th-text="${s.getUser().getUsername()}"></td></tr>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -199,7 +199,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>

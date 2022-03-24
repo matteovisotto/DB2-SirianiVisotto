@@ -53,93 +53,155 @@
                 <div class="col-12">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="averagePurchaseOptionalPackage-tab" data-bs-toggle="tab" data-bs-target="#averagePurchaseOptionalPackage" type="button" role="tab" aria-controls="averagePurchaseOptionalPackage" aria-selected="true">Average purchase optional package</button>
+                            <button class="nav-link active" id="purchase-tab" data-bs-toggle="tab" data-bs-target="#purchase" type="button" role="tab" aria-controls="purchase" aria-selected="true">Purchase &amp; Products</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="totalPurchaseOptional-tab" data-bs-toggle="tab" data-bs-target="#totalPurchaseOptional" type="button" role="tab" aria-controls="totalPurchaseOptional" aria-selected="false">Total purchase optional</button>
+                            <button class="nav-link" id="user-tab" data-bs-toggle="tab" data-bs-target="#user" type="button" role="tab" aria-controls="user" aria-selected="false">User &amp; Orders</button>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="totalPurchasePackage-tab" data-bs-toggle="tab" data-bs-target="#totalPurchasePackage" type="button" role="tab" aria-controls="totalPurchasePackage" aria-selected="false">Total purchase package</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="totalPurchasePackageOptional-tab" data-bs-toggle="tab" data-bs-target="#totalPurchasePackageOptional" type="button" role="tab" aria-controls="totalPurchasePackageOptional" aria-selected="false">Total purchase package optional</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="totalPurchasePackageValidity-tab" data-bs-toggle="tab" data-bs-target="#totalPurchasePackageValidity" type="button" role="tab" aria-controls="totalPurchasePackageValidity" aria-selected="false">Total purchase package validity</button>
-                        </li>
+
                     </ul>
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="averagePurchaseOptionalPackage" role="tabpanel" aria-labelledby="averagePurchaseOptionalPackage-tab">
-                            <h5 class="mt-3">Average purchase optional package</h5>
-                            <div class="row mt-3">
-                                <div class="col-md-6 col-sm-12">
-                                    <h6 class="text-primary">DATA</h6>
-                                    <table class="table table-striped">
-                                        <thead><th>Package ID</th><th>Package name</th><th>Average optional</th></thead>
-                                        <tbody>
-                                        <tr data-th-each="a: ${averagePurchaseOptionalPackage}"><td data-th-text="${a.getId()}"></td><td data-th-text="${a.getPackageName()}"></td><td data-th-text="${a.getAvgOptional()}"></td></tr>
-                                        </tbody>
-                                    </table>
+                    <div class="tab-content" id="tab-content">
+                        <div class="tab-pane fade show active" id="purchase" role="tabpanel" aria-labelledby="purchase-tab">
+                            <h5 class="mt-3">PURCHASE STATS</h5>
+                            <div class="d-flex align-items-start">
+                                <div class="nav flex-column nav-pills me-5" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                    <button class="nav-link active" id="v-pills-averagePurchaseOptionalPackage-tab" data-bs-toggle="pill" data-bs-target="#averagePurchaseOptionalPackage" type="button" role="tab" aria-controls="v-pills-averagePurchaseOptionalPackage" aria-selected="true">Average purchase package</button>
+                                    <button class="nav-link" id="v-pills-totalPurchaseOptional-tab" data-bs-toggle="pill" data-bs-target="#totalPurchaseOptional" type="button" role="tab" aria-controls="v-pills-totalPurchaseOptional" aria-selected="false">Total optional purchase</button>
+                                    <button class="nav-link" id="v-pills-totalPurchasePackage-tab" data-bs-toggle="pill" data-bs-target="#totalPurchasePackage" type="button" role="tab" aria-controls="v-pills-totalPurchasePackage" aria-selected="false">Total package purchase</button>
+                                    <button class="nav-link" id="v-pills-totalPurchasePackageOptional-tab" data-bs-toggle="pill" data-bs-target="#totalPurchasePackageOptional" type="button" role="tab" aria-controls="v-pills-totalPurchasePackageOptional" aria-selected="false">Total package purchase with optional</button>
+                                    <button class="nav-link" id="v-pills-totalPurchasePackageValidity-tab" data-bs-toggle="pill" data-bs-target="#totalPurchasePackageValidity" type="button" role="tab" aria-controls="v-pills-totalPurchasePackageValidity" aria-selected="false">Total package purchase per validity period</button>
+                                </div>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="averagePurchaseOptionalPackage" role="tabpanel" aria-labelledby="averagePurchaseOptionalPackage-tab">
+                                        <h5 class="mt-3">Average purchase optional package</h5>
+                                        <div class="row mt-3">
+                                            <div class="col-12">
+                                                <h6 class="text-primary">DATA</h6>
+                                                <table class="table table-striped">
+                                                    <thead><th>Package ID</th><th>Package name</th><th>Average optional</th></thead>
+                                                    <tbody>
+                                                    <tr data-th-each="a: ${averagePurchaseOptionalPackage}"><td data-th-text="${a.getId()}"></td><td data-th-text="${a.getPackageName()}"></td><td data-th-text="${a.getAvgOptional()}"></td></tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="totalPurchaseOptional" role="tabpanel" aria-labelledby="totalPurchaseOptional-tab">
+                                        <h5 class="mt-3">Total purchase optional</h5>
+                                        <div class="row mt-3">
+                                            <div class="col-12">
+                                                <h6 class="text-primary">DATA</h6>
+                                                <table class="table table-striped">
+                                                    <thead><th>Optional ID</th><th>Optional name</th><th>Total purchase</th></thead>
+                                                    <tbody>
+                                                    <tr data-th-each="t: ${totalPurchaseOptional}"><td data-th-text="${t.getId()}"></td><td data-th-text="${t.getOptionalName()}"></td><td data-th-text="${t.getTotPurchase()}"></td></tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="totalPurchasePackage" role="tabpanel" aria-labelledby="totalPurchasePackage-tab">
+                                        <h5 class="mt-3">Total purchase package</h5>
+                                        <div class="row mt-3">
+                                            <div class="col-12">
+                                                <h6 class="text-primary">DATA</h6>
+                                                <table class="table table-striped">
+                                                    <thead><th>Package ID</th><th>Package name</th><th>Total purchase</th></thead>
+                                                    <tbody>
+                                                    <tr data-th-each="t: ${totalPurchasePackage}"><td data-th-text="${t.getId()}"></td><td data-th-text="${t.getPackageName()}"></td><td data-th-text="${t.getTotPurchase()}"></td></tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="totalPurchasePackageOptional" role="tabpanel" aria-labelledby="totalPurchasePackageOptional-tab">
+                                        <h5 class="mt-3">Total purchase package optional</h5>
+                                        <div class="row mt-3">
+                                            <div class="col-12">
+                                                <h6 class="text-primary">DATA</h6>
+                                                <table class="table table-striped">
+                                                    <thead><th>Package ID</th><th>Package name</th><th>Has optional product</th><th>Total purchase</th></thead>
+                                                    <tbody>
+                                                    <tr data-th-each="t: ${totalPurchasePackageOptional}"><td data-th-text="${t.getId().getPackageId()}"></td><td data-th-text="${t.getPackageName()}"></td><td data-th-text="${t.getId().getHasOptionalProduct()}"></td><td data-th-text="${t.getTotPurchase()}"></td></tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="totalPurchasePackageValidity" role="tabpanel" aria-labelledby="totalPurchasePackageValidity-tab">
+                                        <h5 class="mt-3">Total purchase package validity</h5>
+                                        <div class="row mt-3">
+                                            <div class="col-12">
+                                                <h6 class="text-primary">DATA</h6>
+                                                <table class="table table-striped">
+                                                    <thead><th>Package ID</th><th>Package name</th><th>Validity period</th><th>Total purchase</th></thead>
+                                                    <tbody>
+                                                    <tr data-th-each="t: ${totalPurchasePackageValidity}"><td data-th-text="${t.getId().getPackageId()}"></td><td data-th-text="${t.getPackageName()}"></td><td data-th-text="${t.getId().getValidityPeriod()}"></td><td data-th-text="${t.getTotPurchase()}"></td></tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="totalPurchaseOptional" role="tabpanel" aria-labelledby="totalPurchaseOptional-tab">
-                            <h5 class="mt-3">Total purchase optional</h5>
-                            <div class="row mt-3">
-                                <div class="col-md-6 col-sm-12">
-                                    <h6 class="text-primary">DATA</h6>
-                                    <table class="table table-striped">
-                                        <thead><th>Optional ID</th><th>Optional name</th><th>Total purchase</th></thead>
-                                        <tbody>
-                                        <tr data-th-each="t: ${totalPurchaseOptional}"><td data-th-text="${t.getId()}"></td><td data-th-text="${t.getOptionalName()}"></td><td data-th-text="${t.getTotPurchase()}"></td></tr>
-                                        </tbody>
-                                    </table>
+                        <div class="tab-pane fade" id="user" role="tabpanel" aria-labelledby="package-tab">
+                            <h5 class="mt-3">USER STATS</h5>
+                            <div class="d-flex align-items-start">
+                                <div class="nav flex-column nav-pills me-5" id="v-pills-tab2" role="tablist" aria-orientation="vertical">
+                                    <button class="nav-link active" id="v-pills-suspendedOrders-tab" data-bs-toggle="pill" data-bs-target="#suspendedOrders" type="button" role="tab" aria-controls="v-pills-suspendedOrders" aria-selected="true">Suspended orders</button>
+                                    <button class="nav-link" id="v-pills-insolventUsers-tab" data-bs-toggle="pill" data-bs-target="#insolventUsers" type="button" role="tab" aria-controls="v-pills-insolventUsers" aria-selected="false">Insolvent users</button>
+                                    <button class="nav-link" id="v-pills-alerts-tab" data-bs-toggle="pill" data-bs-target="#alerts" type="button" role="tab" aria-controls="v-pills-alerts" aria-selected="false">Alerts</button>
+
                                 </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="totalPurchasePackage" role="tabpanel" aria-labelledby="totalPurchasePackage-tab">
-                            <h5 class="mt-3">Total purchase package</h5>
-                            <div class="row mt-3">
-                                <div class="col-md-6 col-sm-12">
-                                    <h6 class="text-primary">DATA</h6>
-                                    <table class="table table-striped">
-                                        <thead><th>Package ID</th><th>Package name</th><th>Total purchase</th></thead>
-                                        <tbody>
-                                        <tr data-th-each="t: ${totalPurchasePackage}"><td data-th-text="${t.getId()}"></td><td data-th-text="${t.getPackageName()}"></td><td data-th-text="${t.getTotPurchase()}"></td></tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="totalPurchasePackageOptional" role="tabpanel" aria-labelledby="totalPurchasePackageOptional-tab">
-                            <h5 class="mt-3">Total purchase package optional</h5>
-                            <div class="row mt-3">
-                                <div class="col-md-6 col-sm-12">
-                                    <h6 class="text-primary">DATA</h6>
-                                    <table class="table table-striped">
-                                        <thead><th>Package ID</th><th>Package name</th><th>Has optional product</th><th>Total purchase</th></thead>
-                                        <tbody>
-                                        <tr data-th-each="t: ${totalPurchasePackageOptional}"><td data-th-text="${t.getId().getPackageId()}"></td><td data-th-text="${t.getPackageName()}"></td><td data-th-text="${t.getId().getHasOptionalProduct()}"></td><td data-th-text="${t.getTotPurchase()}"></td></tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="totalPurchasePackageValidity" role="tabpanel" aria-labelledby="totalPurchasePackageValidity-tab">
-                            <h5 class="mt-3">Total purchase package validity</h5>
-                            <div class="row mt-3">
-                                <div class="col-md-6 col-sm-12">
-                                    <h6 class="text-primary">DATA</h6>
-                                    <table class="table table-striped">
-                                        <thead><th>Package ID</th><th>Package name</th><th>Validity period</th><th>Total purchase</th></thead>
-                                        <tbody>
-                                        <tr data-th-each="t: ${totalPurchasePackageValidity}"><td data-th-text="${t.getId().getPackageId()}"></td><td data-th-text="${t.getPackageName()}"></td><td data-th-text="${t.getId().getValidityPeriod()}"></td><td data-th-text="${t.getTotPurchase()}"></td></tr>
-                                        </tbody>
-                                    </table>
+                                <div class="tab-content" id="myTabContent2">
+                                    <div class="tab-pane fade show active" id="suspendedOrders" role="tabpanel" aria-labelledby="suspendedOrders-tab">
+                                        <h5 class="mt-3">Suspended orders</h5>
+                                        <div class="row mt-3">
+                                            <div class="col-12">
+                                                <h6 class="text-primary">DATA</h6>
+                                                <table class="table table-striped">
+                                                    <thead></thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="insolventUsers" role="tabpanel" aria-labelledby="insolventUsers-tab">
+                                        <h5 class="mt-3">Insolvent users</h5>
+                                        <div class="row mt-3">
+                                            <div class="col-12">
+                                                <h6 class="text-primary">DATA</h6>
+                                                <table class="table table-striped">
+                                                    <thead></thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="alerts" role="tabpanel" aria-labelledby="alerts-tab">
+                                        <h5 class="mt-3">Alerts</h5>
+                                        <div class="row mt-3">
+                                            <div class="col-12">
+                                                <h6 class="text-primary">DATA</h6>
+                                                <table class="table table-striped">
+                                                    <thead></thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
+
                 </div>
             </div>
         </div>

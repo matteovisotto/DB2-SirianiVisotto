@@ -42,7 +42,7 @@
                         </li>
                     </ul>
                 </div>
-                    <a class="dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false"><img src="assets/placeholder_user.png" data-th-src="@{/assets/placeholder_user.png}" class="rounded-circle profile-img" /></a>
+                    <a class="dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false"><div class="hstack gap-3"><strong data-th-text="|${user.getName()} ${user.getSurname()}|">Username</strong> <img src="assets/placeholder_user.png" data-th-src="@{/assets/placeholder_user.png}" class="rounded-circle profile-img" /></div></a>
                     <ul class="dropdown-menu dropdown-menu-end profile-dropdown" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#" data-th-href="@{/admin/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                     </ul>
@@ -87,49 +87,67 @@
                                     <h6 class="text-primary">ADD NEW</h6>
                                     <form method="POST" action="" data-th-action="@{/admin/service/post}">
                                         <div class="row mt-3">
-                                            <div class="col-8">
+                                            <div class="col-12 mb-3">
                                                 <div class="input-group">
                                                     <span class="input-group-text" id="s_name"><i class="fas fa-user"></i> </span>
                                                     <input type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="s_name" name="s_name">
                                                 </div>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-12 mb-3">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="serviceType" id="mobilePhone" value="mobilePhone">
+                                                    <label class="form-check-label" for="mobilePhone">Mobile phone</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="serviceType" id="fixedPhone" value="fixedPhone">
+                                                    <label class="form-check-label" for="fixedPhone">Fixed phone</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="serviceType" id="fixedInternet" value="fixedInternet">
+                                                    <label class="form-check-label" for="fixedInternet">Fixed internet</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="serviceType" id="mobileInternet" value="mobileInternet">
+                                                    <label class="form-check-label" for="mobileInternet">Mobile internet</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 mb-3 minute-div" >
                                                 <div class="input-group">
                                                     <span class="input-group-text" id="s_min"><i class="fas fa-euro-sign"></i></span>
                                                     <input type="text" class="form-control" placeholder="Minutes" aria-label="Minutes" aria-describedby="s_min" name="s_min">
                                                 </div>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-4 mb-3 sms-div">
                                                 <div class="input-group">
                                                     <span class="input-group-text" id="s_sms"><i class="fas fa-euro-sign"></i></span>
                                                     <input type="text" class="form-control" placeholder="Sms" aria-label="Sms" aria-describedby="s_sms" name="s_sms">
                                                 </div>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-4 mb-3 internet-div">
                                                 <div class="input-group">
                                                     <span class="input-group-text" id="s_internet"><i class="fas fa-euro-sign"></i></span>
                                                     <input type="text" class="form-control" placeholder="Internet" aria-label="Internet" aria-describedby="s_internet" name="s_internet">
                                                 </div>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-4 mb-3 minute-div">
                                                 <div class="input-group">
                                                     <span class="input-group-text" id="s_min_e"><i class="fas fa-euro-sign"></i></span>
                                                     <input type="text" class="form-control" placeholder="Extra minutes" aria-label="Extra minutes" aria-describedby="s_min_e" name="s_min_e">
                                                 </div>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-4 mb-3 sms-div">
                                                 <div class="input-group">
                                                     <span class="input-group-text" id="s_sms_e"><i class="fas fa-euro-sign"></i></span>
                                                     <input type="text" class="form-control" placeholder="Extra sms" aria-label="Extra sms" aria-describedby="s_sms_e" name="s_sms_e">
                                                 </div>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-4 mb-3 internet-div">
                                                 <div class="input-group">
                                                     <span class="input-group-text" id="s_internet_e"><i class="fas fa-euro-sign"></i></span>
                                                     <input type="text" class="form-control" placeholder="Extra internet" aria-label="Extra internet" aria-describedby="s_internet_e" name="s_internet_e">
                                                 </div>
                                             </div>
-                                            <div class="col-12">
+                                            <div class="col-12 mb-3">
                                                 <input type="submit" class="btn btn-success mt-3 float-end" value="Add"/>
                                             </div>
                                         </div>
@@ -222,6 +240,28 @@
            $('#errorContent').text(msg);
            $('#errorModal').modal('show');
         }
+
+        $('.internet-div').hide();
+        $('.sms-div').hide();
+        $('.minute-div').hide();
+
+        $('input[name="serviceType"]').on('click change', function(e) {
+            var val = $(e.target).val();
+            if(val === 'fixedPhone'){
+                $('.internet-div').hide();
+                $('.sms-div').hide();
+                $('.minute-div').hide();
+            } else if (val === 'mobilePhone') {
+                $('.internet-div').hide();
+                $('.sms-div').show();
+                $('.minute-div').show();
+            } else if (val === 'mobileInternet' || val === 'fixedInternet') {
+                $('.internet-div').show();
+                $('.sms-div').hide();
+                $('.minute-div').hide();
+            }
+        });
+
     });
 </script>
 

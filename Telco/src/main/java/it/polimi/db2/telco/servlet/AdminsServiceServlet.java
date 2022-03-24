@@ -29,12 +29,16 @@ public class AdminsServiceServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("s_name");
-        Integer min = Integer.parseInt(req.getParameter("s_min"));
-        Integer sms = Integer.parseInt(req.getParameter("s_sms"));
-        Integer internet = Integer.parseInt(req.getParameter("s_internet"));
-        Double extraMin = Double.parseDouble(req.getParameter("s_min_e"));
-        Double extraSms = Double.parseDouble(req.getParameter("s_sms_e"));
-        Double extraInternet = Double.parseDouble(req.getParameter("s_internet_e"));
+        Integer min = parseIntOrNull(req.getParameter("s_min"));
+        Integer sms = parseIntOrNull(req.getParameter("s_sms"));
+        Integer internet = parseIntOrNull(req.getParameter("s_internet"));
+        Double extraMin = parseDoubleOrNull(req.getParameter("s_min_e"));
+        Double extraSms = parseDoubleOrNull(req.getParameter("s_sms_e"));
+        Double extraInternet = parseDoubleOrNull(req.getParameter("s_internet_e"));
+        if(req.getParameter("serviceType") != null && req.getParameter("serviceType").equals("fixedPhone")){
+            extraMin = 0.0;
+            min = 50000;
+        }
         Service service = new Service();
         service.setName(name);
         service.setMin(min);
@@ -49,5 +53,27 @@ public class AdminsServiceServlet extends HttpServlet {
             throw new ServiceException();
         }
         resp.sendRedirect(getServletContext().getContextPath() + "/admin");
+    }
+
+    private Double parseDoubleOrNull(String param) {
+        if (param == null  || param.isEmpty()) {
+            return null;
+        }
+        try {
+            return Double.parseDouble(param);
+        } catch (NumberFormatException ignored){
+            return null;
+        }
+    }
+
+    private Integer parseIntOrNull(String param) {
+        if (param == null  || param.isEmpty()) {
+            return null;
+        }
+        try {
+            return Integer.parseInt(param);
+        } catch (NumberFormatException ignored){
+            return null;
+        }
     }
 }

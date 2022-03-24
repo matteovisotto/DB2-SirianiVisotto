@@ -42,7 +42,7 @@
                         </li>
                     </ul>
                 </div>
-                    <a class="dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false"><img src="assets/placeholder_user.png" data-th-src="@{/assets/placeholder_user.png}" class="rounded-circle profile-img" /></a>
+                <a class="dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false"><div class="hstack gap-3"><strong data-th-text="|${user.getName()} ${user.getSurname()}|">Username</strong> <img src="assets/placeholder_user.png" data-th-src="@{/assets/placeholder_user.png}" class="rounded-circle profile-img" /></div></a>
                     <ul class="dropdown-menu dropdown-menu-end profile-dropdown" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#" data-th-href="@{/admin/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                     </ul>

@@ -18,7 +18,7 @@ public class AdministratorController {
 
     public Administrator loginAdministrator(String email, String password) throws AdministratorException {
         Administrator administrator = administratorService.getAdministratorByEmail(email);
-        if(!administrator.getPassword().equals(password)){
+        if(administrator == null || !administrator.getPassword().equals(password)){
             throw new AdministratorCredentialException();
         }
         return administrator;

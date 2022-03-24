@@ -25,12 +25,12 @@ public class AdministratorService {
         return administrator;
     }
 
-    public Administrator getAdministratorByEmail(String email) throws AdministratorNotFoundException {
+    public Administrator getAdministratorByEmail(String email) {
         TypedQuery<Administrator> query = em.createQuery("SELECT a FROM Administrator a WHERE a.email = :email", Administrator.class);
         query.setParameter("email", email);
         List<Administrator> administrators = query.getResultList();
         if(administrators.size() != 1){
-            throw new AdministratorNotFoundException();
+            return null;
         }
         return administrators.get(0);
     }

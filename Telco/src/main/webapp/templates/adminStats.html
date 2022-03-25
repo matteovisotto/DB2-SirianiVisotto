@@ -98,7 +98,15 @@
                                                     </tbody>
                                                 </table>
                                                 <br/>
-                                                <strong>Best seller: </strong><span data-th-text="${bestOptional.getOptionalName()}"></span> with <span data-th-text="${bestOptional.getTotPurchase()}"></span> sales
+                                                <div data-th-if="${bestOptional.size() == 1}">
+                                                    <strong>Best seller: </strong><span data-th-text="${bestOptional.get(0).getOptionalName()}"></span> with <span data-th-text="${bestOptional.get(0).getTotPurchase()}"></span> sales.
+                                                </div>
+                                                <div data-th-if="${bestOptional.size() > 1}">
+                                                    <strong>The best sellers are: </strong><span data-th-each="b: ${bestOptional}" data-th-value="${b.getOptionalName()}"></span> with <span data-th-text="${bestOptional.get(0).getTotPurchase()}"></span> sales.
+                                                </div>
+                                                <div data-th-if="${bestOptional.size() == 0}">
+                                                    <strong>There isn't a best seller.</strong>.
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -124,7 +132,7 @@
                                                 <table class="table table-striped">
                                                     <thead><th>Package ID</th><th>Package name</th><th>Has optional product</th><th>Total purchase</th></thead>
                                                     <tbody>
-                                                    <tr data-th-each="t: ${totalPurchasePackageOptional}"><td data-th-text="${t.getId().getPackageId()}"></td><td data-th-text="${t.getPackageName()}"></td><td data-th-text="${t.getId().getHasOptionalProduct()}"></td><td data-th-text="${t.getTotPurchase()}"></td></tr>
+                                                    <tr data-th-each="t: ${totalPurchasePackageOptional}"><td data-th-text="${t.getId().getPackageId()}"></td><td data-th-text="${t.getPackageName()}"></td><td><span data-th-if="${t.getId().getHasOptionalProduct() == 1}">&#10004;</span><span data-th-if="${t.getId().getHasOptionalProduct() == 0}">&#10008;</span></td><td data-th-text="${t.getTotPurchase()}"></td></tr>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -165,7 +173,8 @@
                                                 <table class="table table-striped">
                                                     <thead><th>Order ID</th><th>Price</th><th>Payments attempts</th><th>Start date of the order</th><th>Order created at</th><th>User ID</th><th>Username</th></thead>
                                                     <tbody>
-                                                    <tr data-th-each="s: ${suspendedOrders}"><td data-th-text="${s.getOrder().getId()}"></td><td data-th-text="${s.getOrder().getPrice()}"></td><td data-th-text="${s.getOrder().getPaymentHistories().size()}"></td><td data-th-text="${s.getOrder().getStartDate()}"></td><td data-th-text="${s.getOrder().getCreatedAt()}"></td><td data-th-text="${s.getUser().getId()}"></td><td data-th-text="${s.getUser().getUsername()}"></td></tr>
+                                                    <!--<tr data-th-each="s: ${suspendedOrders}"><td data-th-text="${s.getOrder().getId()}"></td><td data-th-text="${s.getOrder().getPrice()}"></td><td data-th-text="${s.getOrder().getPaymentHistories().size()}"></td><td data-th-text="${s.getOrder().getStartDate()}"></td><td data-th-text="${s.getOrder().getCreatedAt()}"></td><td data-th-text="${s.getUser().getId()}"></td><td data-th-text="${s.getUser().getUsername()}"></td></tr>-->
+                                                    <tr data-th-each="s: ${suspendedOrders}"><td data-th-text="${s.getId()}"></td><td data-th-text="${s.getPrice()}"></td><td data-th-text="${s.getPaymentHistories().size()}"></td><td data-th-text="${s.getStartDate()}"></td><td data-th-text="${s.getCreatedAt()}"></td><td data-th-text="${s.getUser().getId()}"></td><td data-th-text="${s.getUser().getUsername()}"></td></tr>
                                                     </tbody>
                                                 </table>
                                             </div>

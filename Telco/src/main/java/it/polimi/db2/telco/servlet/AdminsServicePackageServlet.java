@@ -44,6 +44,11 @@ public class AdminsServicePackageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("p_name");
+        String temp = name.replaceAll("\\s+","");
+        if (temp.equals("")) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid service package name");
+            return;
+        }
         String[] services = req.getParameterValues("p_services");
         if (services == null || services.length == 0) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "At least one service must be selected");

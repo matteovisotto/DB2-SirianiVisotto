@@ -29,12 +29,28 @@ public class AdminsServiceServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("s_name");
-        Integer min = parseIntOrNull(req.getParameter("s_min"));
-        Integer sms = parseIntOrNull(req.getParameter("s_sms"));
-        Integer internet = parseIntOrNull(req.getParameter("s_internet"));
-        Double extraMin = parseDoubleOrNull(req.getParameter("s_min_e"));
-        Double extraSms = parseDoubleOrNull(req.getParameter("s_sms_e"));
-        Double extraInternet = parseDoubleOrNull(req.getParameter("s_internet_e"));
+        String temp = name.replaceAll("\\s+","");
+        if (temp.equals("")) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid service name");
+            return;
+        }
+        Integer min = 0;
+        Integer sms = 0;
+        Integer internet = 0;
+        Double extraMin = 0.0;
+        Double extraSms = 0.0;
+        Double extraInternet = 0.0;
+        try {
+            min = parseIntOrNull(req.getParameter("s_min"));
+            sms = parseIntOrNull(req.getParameter("s_sms"));
+            internet = parseIntOrNull(req.getParameter("s_internet"));
+            extraMin = parseDoubleOrNull(req.getParameter("s_min_e"));
+            extraSms = parseDoubleOrNull(req.getParameter("s_sms_e"));
+            extraInternet = parseDoubleOrNull(req.getParameter("s_internet_e"));
+        } catch (NumberFormatException e){
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid data format");
+            return;
+        }
         if(req.getParameter("serviceType") != null && req.getParameter("serviceType").equals("fixedPhone")){
             extraMin = 0.0;
             min = 50000;

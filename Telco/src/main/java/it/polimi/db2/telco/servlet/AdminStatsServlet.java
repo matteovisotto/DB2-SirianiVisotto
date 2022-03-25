@@ -16,7 +16,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @WebServlet("/admin/stats")
@@ -54,17 +57,36 @@ public class AdminStatsServlet extends HttpServlet {
         String path = "templates/adminStats";
         ServletContext servletContext = getServletContext();
         final WebContext ctx = new WebContext(req, resp, servletContext, req.getLocale());
+        List<TotalPurchaseOptional> totalPurchaseOptional = totalPurchaseOptionalController.getAllTotalPurchaseOptionals();
+
+        totalPurchaseOptional.sort(Comparator.comparing(TotalPurchaseOptional::getTotPurchase).reversed());
+
         ctx.setVariable("user", req.getSession().getAttribute("administrator"));
         ctx.setVariable("averagePurchaseOptionalPackage", averagePurchaseOptionalPackageController.getAllAveragePurchaseOptionalPackage());
-        ctx.setVariable("totalPurchaseOptional", totalPurchaseOptionalController.getAllTotalPurchaseOptionals());
+        ctx.setVariable("totalPurchaseOptional", totalPurchaseOptional);
         ctx.setVariable("totalPurchasePackage", totalPurchasePackageController.getAllTotalPurchasePackages());
         ctx.setVariable("totalPurchasePackageOptional", totalPurchasePackageOptionalController.getAllTotalPurchasePackageOptionals());
         ctx.setVariable("totalPurchasePackageValidity", totalPurchasePackageValidityController.getAllTotalPurchasePackageValidity());
         ctx.setVariable("alerts", alertController.getAllAlerts());
         ctx.setVariable("insolventUsers", insolventUserController.getAllInsolventUsers());
-        ctx.setVariable("suspendedOrders", suspendedOrderController.getAllSuspendedOrders().stream().map(o -> suspendedOrderController.toBean(o)).collect(Collectors.toList()));
-        TotalPurchaseOptional best = totalPurchaseOptionalController.getAllTotalPurchaseOptionals().stream().max(Comparator.comparing(TotalPurchaseOptional::getTotPurchase)).get();
-        ctx.setVariable("bestOptional", best);
+        //ctx.setVariable("suspendedOrders", suspendedOrderController.getAllSuspendedOrders().stream().map(o -> suspendedOrderController.toBean(o)).collect(Collectors.toList()));
+        ctx.setVariable("suspendedOrders", suspendedOrderController.getAllSuspendedOrders().stream().map(o -> suspendedOrderController.toOrder(o)).collect(Collectors.toList()));
+
+        TotalPurchaseOptional maxPurchase = totalPurchaseOptional.get(0);
+        List<TotalPurchaseOptional> maxPurchases = new ArrayList<>();
+        maxPurchases.add(maxPurchase);
+        for (TotalPurchaseOptional element: totalPurchaseOptional) {
+            if (element.getTotPurchase().equals(maxPurchase.getTotPurchase())){
+                maxPurchases.add(element);
+            } else {
+                break;
+            }
+        }
+        //TotalPurchaseOptional maxPurchase = totalPurchaseOptional.stream().max(Comparator.comparing(TotalPurchaseOptional::getTotPurchase)).get();
+        //List<TotalPurchaseOptional> maxPurchases = totalPurchaseOptional.stream().filter(element -> element.getTotPurchase().equals(maxPurchase.getTotPurchase())).collect(Collectors.toList());
+
+        //TotalPurchaseOptional best = totalPurchaseOptionalController.getAllTotalPurchaseOptionals().stream().max(Comparator.comparing(TotalPurchaseOptional::getTotPurchase)).get();//.get();
+        ctx.setVariable("bestOptional", maxPurchases);
 
         templateEngine.process(path, ctx, resp.getWriter());
     }

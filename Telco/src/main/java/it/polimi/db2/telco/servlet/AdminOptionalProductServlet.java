@@ -29,8 +29,20 @@ public class AdminOptionalProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("o_name");
-        Double price = Double.parseDouble(req.getParameter("o_price"));
+        String temp = name.replaceAll("\\s+","");
+        if (temp.equals("")) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid optional product name");
+            return;
+        }
+        Double price = 0.0;
+        try {
+            price = Double.parseDouble(req.getParameter("o_price"));
+        } catch (NumberFormatException e){
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid data format");
+            return;
+        }
         String description = req.getParameter("o_description");
+
         OptionalProduct optionalProduct = new OptionalProduct();
         optionalProduct.setName(name);
         optionalProduct.setPrice(price);

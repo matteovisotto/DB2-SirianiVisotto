@@ -102,7 +102,7 @@
                                                     <strong>Best seller: </strong><span data-th-text="${bestOptional.get(0).getOptionalName()}"></span> with <span data-th-text="${bestOptional.get(0).getTotPurchase()}"></span> sales.
                                                 </div>
                                                 <div data-th-if="${bestOptional.size() > 1}">
-                                                    <strong>The best sellers are: </strong><span data-th-each="b: ${bestOptional}" data-th-value="${b.getOptionalName()}"></span> with <span data-th-text="${bestOptional.get(0).getTotPurchase()}"></span> sales.
+                                                    <strong>The best sellers are: </strong><span data-th-each="b: ${bestOptional}" data-th-text="${b.getOptionalName()}"></span> with <span data-th-text="${bestOptional.get(0).getTotPurchase()}"></span> sales.
                                                 </div>
                                                 <div data-th-if="${bestOptional.size() == 0}">
                                                     <strong>There isn't a best seller.</strong>.

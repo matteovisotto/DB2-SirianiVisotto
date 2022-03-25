@@ -75,9 +75,9 @@ public class AdminStatsServlet extends HttpServlet {
         TotalPurchaseOptional maxPurchase = totalPurchaseOptional.get(0);
         List<TotalPurchaseOptional> maxPurchases = new ArrayList<>();
         maxPurchases.add(maxPurchase);
-        for (TotalPurchaseOptional element: totalPurchaseOptional) {
-            if (element.getTotPurchase().equals(maxPurchase.getTotPurchase())){
-                maxPurchases.add(element);
+        for (int i = 1; i < totalPurchaseOptional.size(); i++){
+            if (totalPurchaseOptional.get(i).getTotPurchase().equals(maxPurchase.getTotPurchase())){
+                maxPurchases.add(totalPurchaseOptional.get(i));
             } else {
                 break;
             }

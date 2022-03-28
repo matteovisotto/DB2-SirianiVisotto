@@ -69,7 +69,6 @@ public class AdminStatsServlet extends HttpServlet {
         ctx.setVariable("totalPurchasePackageValidity", totalPurchasePackageValidityController.getAllTotalPurchasePackageValidity());
         ctx.setVariable("alerts", alertController.getAllAlerts());
         ctx.setVariable("insolventUsers", insolventUserController.getAllInsolventUsers());
-        //ctx.setVariable("suspendedOrders", suspendedOrderController.getAllSuspendedOrders().stream().map(o -> suspendedOrderController.toBean(o)).collect(Collectors.toList()));
         ctx.setVariable("suspendedOrders", suspendedOrderController.getAllSuspendedOrders().stream().map(o -> suspendedOrderController.toOrder(o)).collect(Collectors.toList()));
 
         TotalPurchaseOptional maxPurchase = totalPurchaseOptional.get(0);
@@ -82,10 +81,6 @@ public class AdminStatsServlet extends HttpServlet {
                 break;
             }
         }
-        //TotalPurchaseOptional maxPurchase = totalPurchaseOptional.stream().max(Comparator.comparing(TotalPurchaseOptional::getTotPurchase)).get();
-        //List<TotalPurchaseOptional> maxPurchases = totalPurchaseOptional.stream().filter(element -> element.getTotPurchase().equals(maxPurchase.getTotPurchase())).collect(Collectors.toList());
-
-        //TotalPurchaseOptional best = totalPurchaseOptionalController.getAllTotalPurchaseOptionals().stream().max(Comparator.comparing(TotalPurchaseOptional::getTotPurchase)).get();//.get();
         ctx.setVariable("bestOptional", maxPurchases);
 
         templateEngine.process(path, ctx, resp.getWriter());

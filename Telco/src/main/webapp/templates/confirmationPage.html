@@ -61,7 +61,7 @@
                             <p class="text-black"><strong>Start date: </strong> <span data-th-text="${pendingOrder.getStartDate()}"></span></p>
                             <p class="text-black"><strong>Validity period: </strong> <span data-th-text="${pendingOrder.getValidityPeriod()}"></span> months</p>
                             <hr style="background-color: #fff; border-top: 5px dotted #0046BA;"/>
-                            <p class="text-black"><strong>Total: </strong> <span class="float-end"><span data-th-text="${pendingOrder.getPrice()}"></span> &euro;</span></p>
+                            <p class="text-black"><strong>Total: </strong> <span class="float-end"><span data-th-text="${#numbers.formatDecimal(pendingOrder.getPrice(), 0, 2)}"></span> &euro;</span></p>
                         </div>
                     </div>
                     <div class="alert alert-warning mt-3" data-th-if="${user == null}">

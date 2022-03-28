@@ -67,7 +67,7 @@ public class ConfirmOrderServlet extends HttpServlet {
                     resp.sendError(HttpServletResponse.SC_UNAUTHORIZED, "You have to be logged with your account in to see your order");
                     return;
                 }
-                if(order.getOrderStatus() != 2){
+                if(order.getOrderStatus() == 1){
                     resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "This order is completed or not confirmed");
                     return;
                 }

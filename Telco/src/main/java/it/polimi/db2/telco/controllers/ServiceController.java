@@ -39,7 +39,7 @@ public class ServiceController {
         return serviceId;
     }
 
-    public Integer updateService(Service service) throws ServiceException {
+    /*public Integer updateService(Service service) throws ServiceException {
         Integer serviceId;
         if (serviceService.getServiceById(service.getId()) != null) {
             serviceId = serviceService.updateService(service);
@@ -56,5 +56,5 @@ public class ServiceController {
         } else {
             throw new ServiceNotFoundException();
         }
-    }
+    }*/
 }

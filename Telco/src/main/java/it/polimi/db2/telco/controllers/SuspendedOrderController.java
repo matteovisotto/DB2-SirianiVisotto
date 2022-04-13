@@ -1,9 +1,7 @@
 package it.polimi.db2.telco.controllers;
 
-import it.polimi.db2.telco.beans.SuspendedOrderBean;
 import it.polimi.db2.telco.entities.Order;
 import it.polimi.db2.telco.entities.SuspendedOrder;
-import it.polimi.db2.telco.exceptions.suspendedOrder.SuspendedOrderException;
 import it.polimi.db2.telco.services.SuspendedOrderService;
 
 import javax.inject.Inject;
@@ -16,18 +14,18 @@ public class SuspendedOrderController {
     @Inject
     OrderController orderController;
 
-    @Inject
-    UserController userController;
+    /*@Inject
+    UserController userController;*/
 
     public SuspendedOrderController(){}
 
-    public SuspendedOrder getSuspendedOrderByOrderIdAndUserId(Integer orderId, Integer userId) throws SuspendedOrderException {
+/*    public SuspendedOrder getSuspendedOrderByOrderIdAndUserId(Integer orderId, Integer userId) throws SuspendedOrderException {
         return suspendedOrderService.getSuspendedOrderByOrderIdAndUserId(orderId, userId);
     }
 
     public List<SuspendedOrder> getMySuspendedOrders(Integer userId) throws SuspendedOrderException {
         return suspendedOrderService.getMySuspendedOrders(userId);
-    }
+    }*/
 
     public List<SuspendedOrder> getAllSuspendedOrders() {
         return suspendedOrderService.getAllSuspendedOrders();

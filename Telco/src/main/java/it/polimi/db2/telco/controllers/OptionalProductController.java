@@ -19,9 +19,9 @@ public class OptionalProductController {
         return optionalProductService.getOptionalProductById(optionalProductId);
     }
 
-    public OptionalProduct getOptionalProductByName(String name) throws OptionalProductException {
+    /*public OptionalProduct getOptionalProductByName(String name) throws OptionalProductException {
         return optionalProductService.getOptionalProductByName(name);
-    }
+    }*/
 
     public List<OptionalProduct> getAllOptionalProducts() throws OptionalProductException {
         return optionalProductService.getAllOptionalProducts();
@@ -37,7 +37,7 @@ public class OptionalProductController {
         return optionalProductId;
     }
 
-    public Integer updateOptionalProduct(OptionalProduct optionalProduct) throws OptionalProductException {
+    /*public Integer updateOptionalProduct(OptionalProduct optionalProduct) throws OptionalProductException {
         Integer optionalProductId;
         if (optionalProductService.getOptionalProductById(optionalProduct.getId()) != null) {
             optionalProductId = optionalProductService.updateOptionalProduct(optionalProduct);
@@ -54,5 +54,5 @@ public class OptionalProductController {
         } else {
             throw new OptionalProductNotFoundException();
         }
-    }
+    }*/
 }

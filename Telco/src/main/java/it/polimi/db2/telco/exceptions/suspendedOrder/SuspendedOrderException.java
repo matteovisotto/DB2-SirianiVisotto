@@ -1,3 +1,4 @@
+/*
 package it.polimi.db2.telco.exceptions.suspendedOrder;
 
 public class SuspendedOrderException extends RuntimeException {
@@ -7,3 +8,4 @@ public class SuspendedOrderException extends RuntimeException {
 
     public SuspendedOrderException(){ super();}
 }
+*/

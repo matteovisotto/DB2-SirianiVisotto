@@ -1,3 +1,4 @@
+/*
 package it.polimi.db2.telco.api;
 
 import com.google.gson.Gson;
@@ -65,3 +66,4 @@ public class SuspendedOrderResource {
         }
     }
 }
+*/

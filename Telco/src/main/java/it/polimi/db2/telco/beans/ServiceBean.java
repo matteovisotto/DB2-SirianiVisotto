@@ -1,3 +1,4 @@
+/*
 package it.polimi.db2.telco.beans;
 
 import it.polimi.db2.telco.entities.Service;
@@ -93,3 +94,4 @@ public class ServiceBean {
         this.extraInternet = extraInternet;
     }
 }
+*/

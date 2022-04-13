@@ -1,3 +1,4 @@
+/*
 package it.polimi.db2.telco.controllers;
 
 import it.polimi.db2.telco.entities.FailedPayment;
@@ -36,3 +37,4 @@ public class FailedPaymentController {
         return failedPaymentService.getAllFailedPaymentsPerUser();
     }
 }
+*/

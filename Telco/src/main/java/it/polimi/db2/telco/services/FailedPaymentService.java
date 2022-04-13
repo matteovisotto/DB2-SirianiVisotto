@@ -1,3 +1,4 @@
+/*
 package it.polimi.db2.telco.services;
 
 import it.polimi.db2.telco.entities.FailedPayment;
@@ -43,3 +44,4 @@ public class FailedPaymentService {
         return failedPayments;
     }
 }
+*/

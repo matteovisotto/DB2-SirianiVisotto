@@ -16,7 +16,7 @@ public class InsolventUserService {
 
     public InsolventUserService(){}
 
-    public InsolventUser getInsolventUserById(Integer insolventUserId) throws UserNotFoundException {
+    /*public InsolventUser getInsolventUserById(Integer insolventUserId) throws UserNotFoundException {
         InsolventUser insolventUser = em.find(InsolventUser.class, insolventUserId);
         if(insolventUser == null){
             throw new UserNotFoundException();
@@ -42,7 +42,7 @@ public class InsolventUserService {
             throw new UserNotFoundException();
         }
         return insolventUsers.get(0);
-    }
+    }*/
 
     public List<InsolventUser> getAllInsolventUsers() {
         TypedQuery<InsolventUser> query = em.createQuery("SELECT i FROM InsolventUser i", InsolventUser.class);

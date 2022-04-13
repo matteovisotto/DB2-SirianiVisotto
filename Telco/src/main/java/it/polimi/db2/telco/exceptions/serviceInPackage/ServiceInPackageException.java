@@ -1,3 +1,4 @@
+/*
 package it.polimi.db2.telco.exceptions.serviceInPackage;
 
 public class ServiceInPackageException extends RuntimeException {
@@ -7,3 +8,4 @@ public class ServiceInPackageException extends RuntimeException {
 
     public ServiceInPackageException(){ super();}
 }
+*/

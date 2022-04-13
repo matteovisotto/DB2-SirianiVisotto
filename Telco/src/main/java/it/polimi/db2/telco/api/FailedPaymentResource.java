@@ -1,3 +1,4 @@
+/*
 package it.polimi.db2.telco.api;
 
 import com.google.gson.Gson;
@@ -78,4 +79,4 @@ public class FailedPaymentResource {
             return Response.status(204).entity("{}").build();
         }
     }
-}
+}*/

@@ -4,8 +4,6 @@ import it.polimi.db2.telco.entities.*;
 import it.polimi.db2.telco.exceptions.order.OrderAlreadyPayedException;
 import it.polimi.db2.telco.exceptions.order.OrderException;
 import it.polimi.db2.telco.exceptions.order.OrderNotFoundException;
-import it.polimi.db2.telco.exceptions.payment.PaymentException;
-import it.polimi.db2.telco.exceptions.payment.PaymentNotFoundException;
 import it.polimi.db2.telco.exceptions.user.UserException;
 import it.polimi.db2.telco.exceptions.user.UserNotFoundException;
 import it.polimi.db2.telco.services.OrderService;
@@ -18,14 +16,14 @@ import java.util.List;
 public class PaymentController {
     @Inject
     PaymentService paymentService;
-    @Inject
+    /*@Inject
     OrderService orderService;
     @Inject
-    UserService userService;
+    UserService userService;*/
 
     public PaymentController(){}
 
-    public PaymentHistory getPaymentById(Integer paymentHistoryId, User user) throws PaymentException {
+    /*public PaymentHistory getPaymentById(Integer paymentHistoryId, User user) throws PaymentException {
         PaymentHistory payment = paymentService.getPaymentById(paymentHistoryId);
         if (payment.getUser().getId().equals(user.getId())) {
             return payment;
@@ -59,7 +57,7 @@ public class PaymentController {
         } else {
             throw new OrderNotFoundException();
         }
-    }
+    }*/
 
     public Integer makeNewPayment(PaymentHistory payment) throws OrderException {
         Integer paymentId;

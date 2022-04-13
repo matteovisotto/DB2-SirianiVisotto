@@ -27,19 +27,18 @@ public class OrderService {
         return order;
     }
 
-    public Order getMyOrderByOrderId(Integer orderId, Integer userId) throws OrderNotFoundException {
+    /*public Order getMyOrderByOrderId(Integer orderId, Integer userId) throws OrderNotFoundException {
         Order order = em.find(Order.class, orderId);
         if(order == null || !order.getUser().getId().equals(userId)){
             throw new OrderNotFoundException();
         }
         return order;
-    }
+    }*/
 
     public List<Order> getOrdersOfUser(Integer userId) {
         TypedQuery<Order> query = em.createQuery("SELECT o FROM Order o WHERE o.user.id = :user", Order.class);
         query.setParameter("user", userId);
-        List<Order> orders = query.getResultList();
-        return orders;
+        return query.getResultList();
     }
 
     public Integer createOrder(Order order) {
@@ -53,7 +52,7 @@ public class OrderService {
         }
     }
 
-    public Integer updateOrder(Order order) {
+    /*public Integer updateOrder(Order order) {
         order = em.merge(order);
         em.flush();
         return order.getId();
@@ -66,5 +65,5 @@ public class OrderService {
         }
         em.remove(order);
         em.flush();
-    }
+    }*/
 }

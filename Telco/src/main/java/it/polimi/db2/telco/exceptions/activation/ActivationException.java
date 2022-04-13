@@ -1,3 +1,4 @@
+/*
 package it.polimi.db2.telco.exceptions.activation;
 
 public class ActivationException extends RuntimeException {
@@ -7,3 +8,4 @@ public class ActivationException extends RuntimeException {
 
     public ActivationException(){ super();}
 }
+*/

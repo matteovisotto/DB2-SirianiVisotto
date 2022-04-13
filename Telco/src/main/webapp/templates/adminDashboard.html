@@ -133,7 +133,7 @@
                                     <table class="table table-striped">
                                         <thead><th>Service</th><th>Minutes</th><th>Sms</th><th>Internet</th><th>Extra Minutes</th><th>Extra Sms</th><th>Extra Internet</th></thead>
                                         <tbody>
-                                        <tr data-th-each="s: ${service}"><td data-th-text="${s.getName()}"></td><td data-th-text="${s.getMin()}"></td><td data-th-text="${s.getSms()}"></td><td data-th-text="${s.getInternet()}"></td></td><td data-th-text="${s.getExtraMin()}"></td><td data-th-text="${s.getExtraSms()}"></td><td data-th-text="${s.getExtraInternet()}"></td></tr>
+                                        <tr data-th-each="s: ${service}"><td data-th-text="${s.getName()}"></td><td data-th-text="${s.getMin()}"></td><td data-th-text="${s.getSms()}"></td><td data-th-text="${s.getInternet()}"></td><td><span data-th-text="${s.getExtraMin()}"></span><span data-th-if="${s.getExtraMin() != null}"> &euro;/min</span></td><td><span data-th-text="${s.getExtraSms()}"></span><span data-th-if="${s.getExtraSms() != null}"> &euro;/sms</span></td><td><span data-th-text="${s.getExtraInternet()}"></span><span data-th-if="${s.getExtraInternet() != null}"> &euro;/Kb</span></td></tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -167,19 +167,19 @@
                                             </div>
                                             <div class="col-4 mb-3 minute-div" >
                                                 <div class="input-group">
-                                                    <span class="input-group-text" id="s_min"><i class="fas fa-euro-sign"></i></span>
+                                                    <span class="input-group-text" id="s_min"><i class="fa-solid fa-phone"></i></span>
                                                     <input type="text" class="form-control" placeholder="Minutes" aria-label="Minutes" aria-describedby="s_min" name="s_min">
                                                 </div>
                                             </div>
                                             <div class="col-4 mb-3 sms-div">
                                                 <div class="input-group">
-                                                    <span class="input-group-text" id="s_sms"><i class="fas fa-euro-sign"></i></span>
+                                                    <span class="input-group-text" id="s_sms"><i class="fa-solid fa-comment-sms"></i></span>
                                                     <input type="text" class="form-control" placeholder="Sms" aria-label="Sms" aria-describedby="s_sms" name="s_sms">
                                                 </div>
                                             </div>
                                             <div class="col-4 mb-3 internet-div">
                                                 <div class="input-group">
-                                                    <span class="input-group-text" id="s_internet"><i class="fas fa-euro-sign"></i></span>
+                                                    <span class="input-group-text" id="s_internet"><i class="fa-solid fa-wifi"></i></span>
                                                     <input type="text" class="form-control" placeholder="Internet" aria-label="Internet" aria-describedby="s_internet" name="s_internet">
                                                 </div>
                                             </div>

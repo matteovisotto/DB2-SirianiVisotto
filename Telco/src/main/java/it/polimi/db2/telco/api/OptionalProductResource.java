@@ -6,7 +6,6 @@ import it.polimi.db2.telco.controllers.OptionalProductController;
 import it.polimi.db2.telco.controllers.ServicePackageController;
 import it.polimi.db2.telco.entities.Alert;
 import it.polimi.db2.telco.entities.OptionalProduct;
-import it.polimi.db2.telco.exceptions.alert.AlertException;
 import it.polimi.db2.telco.exceptions.optionalProduct.OptionalProductException;
 
 import javax.annotation.security.RolesAllowed;
@@ -21,8 +20,8 @@ import java.util.stream.Collectors;
 
 @Path("/optional")
 public class OptionalProductResource {
-    @Inject
-    OptionalProductController optionalProductController;
+    /*@Inject
+    OptionalProductController optionalProductController;*/
     Gson gson = new Gson();
 
     @Inject
@@ -31,7 +30,7 @@ public class OptionalProductResource {
     @Context
     HttpServletRequest request;
 
-    @GET
+    /*@GET
     @Path("/{id: [0-9]+}")
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @RolesAllowed({"administrator"})
@@ -42,7 +41,7 @@ public class OptionalProductResource {
         } catch (OptionalProductException e) {
             return Response.status(204).entity("{}").build();
         }
-    }
+    }*/
 
     @GET
     @Path("/package/{id: [0-9]+}")
@@ -59,7 +58,7 @@ public class OptionalProductResource {
             return Response.status(204).entity("{}").build();
         }
     }
-
+/*
     @GET
     @Path("/{name}")
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
@@ -131,5 +130,5 @@ public class OptionalProductResource {
         } catch (OptionalProductException e) {
             return Response.status(400).entity("{\"success\":0}").build();
         }
-    }
+    }*/
 }

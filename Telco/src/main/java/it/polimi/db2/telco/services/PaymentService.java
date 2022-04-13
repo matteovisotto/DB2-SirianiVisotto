@@ -1,7 +1,6 @@
 package it.polimi.db2.telco.services;
 
 import it.polimi.db2.telco.entities.PaymentHistory;
-import it.polimi.db2.telco.exceptions.payment.PaymentNotFoundException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,7 +15,7 @@ public class PaymentService {
 
     public PaymentService(){}
 
-    public PaymentHistory getPaymentById(Integer paymentHistoryId) throws PaymentNotFoundException {
+    /*public PaymentHistory getPaymentById(Integer paymentHistoryId) throws PaymentNotFoundException {
         PaymentHistory paymentHistory = em.find(PaymentHistory.class, paymentHistoryId);
         if(paymentHistory == null){
             throw new PaymentNotFoundException();
@@ -53,7 +52,7 @@ public class PaymentService {
             throw new PaymentNotFoundException();
         }
         return paymentHistories;
-    }
+    }*/
 
     public Integer makePayment(PaymentHistory paymentHistory) {
         em.persist(paymentHistory);

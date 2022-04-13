@@ -1,3 +1,4 @@
+/*
 package it.polimi.db2.telco.controllers;
 
 import it.polimi.db2.telco.entities.Activation;
@@ -47,4 +48,4 @@ public class ActivationController {
             throw new ServicePackageNotFoundException();
         }
     }
-}
+}*/

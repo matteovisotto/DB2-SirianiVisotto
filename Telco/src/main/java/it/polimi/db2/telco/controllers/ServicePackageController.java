@@ -19,10 +19,10 @@ public class ServicePackageController {
         return servicePackageService.getServicePackageById(servicePackageId);
     }
 
-    public ServicePackage getServicePackageByName(String name) throws ServicePackageException {
+    /*public ServicePackage getServicePackageByName(String name) throws ServicePackageException {
         return servicePackageService.getServicePackageByName(name);
     }
-
+*/
     public List<ServicePackage> getAllServicePackages() {
         return servicePackageService.getAllServicePackages();
     }
@@ -37,7 +37,7 @@ public class ServicePackageController {
         return servicePackageId;
     }
 
-    public Integer updateServicePackage(ServicePackage servicePackage) throws ServicePackageException {
+    /*public Integer updateServicePackage(ServicePackage servicePackage) throws ServicePackageException {
         Integer servicePackageId;
         if (servicePackageService.getServicePackageById(servicePackage.getId()) != null) {
             servicePackageId = servicePackageService.updateServicePackage(servicePackage);
@@ -54,5 +54,5 @@ public class ServicePackageController {
         } else {
             throw new ServicePackageNotFoundException();
         }
-    }
+    }*/
 }

@@ -13,7 +13,7 @@ public class InsolventUserController {
 
     public InsolventUserController(){}
 
-    public InsolventUser getInsolventUserById(Integer insolventUserId) throws UserException {
+    /*public InsolventUser getInsolventUserById(Integer insolventUserId) throws UserException {
         return insolventUserService.getInsolventUserById(insolventUserId);
     }
 
@@ -23,7 +23,7 @@ public class InsolventUserController {
 
     public InsolventUser getInsolventUserByUsername(String username) throws UserException {
         return insolventUserService.getInsolventUserByUsername(username);
-    }
+    }*/
 
     public List<InsolventUser> getAllInsolventUsers() {
         return insolventUserService.getAllInsolventUsers();

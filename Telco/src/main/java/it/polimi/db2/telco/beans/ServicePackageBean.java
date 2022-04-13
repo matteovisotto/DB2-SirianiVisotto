@@ -1,3 +1,4 @@
+/*
 package it.polimi.db2.telco.beans;
 
 import it.polimi.db2.telco.entities.OptionalProduct;
@@ -79,3 +80,4 @@ public class ServicePackageBean {
         this.services = services;
     }
 }
+*/

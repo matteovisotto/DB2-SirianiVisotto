@@ -2,7 +2,6 @@ package it.polimi.db2.telco.services;
 
 import it.polimi.db2.telco.entities.SuspendedOrder;
 import it.polimi.db2.telco.entities.SuspendedOrderId;
-import it.polimi.db2.telco.exceptions.suspendedOrder.SuspendedOrderNotFoundException;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -18,7 +17,7 @@ public class SuspendedOrderService {
 
     public SuspendedOrderService(){}
 
-    public SuspendedOrder getSuspendedOrderByOrderIdAndUserId(Integer orderId, Integer userId) throws SuspendedOrderNotFoundException {
+    /*public SuspendedOrder getSuspendedOrderByOrderIdAndUserId(Integer orderId, Integer userId) throws SuspendedOrderNotFoundException {
         SuspendedOrderId suspendedOrderId = new SuspendedOrderId();
         suspendedOrderId.setOrderId(orderId);
         suspendedOrderId.setUserId(userId);
@@ -39,7 +38,7 @@ public class SuspendedOrderService {
             throw new SuspendedOrderNotFoundException();
         }
         return suspendedOrders;
-    }
+    }*/
 
     public List<SuspendedOrder> getAllSuspendedOrders() {
         TypedQuery<SuspendedOrder> query = em.createQuery("SELECT s FROM SuspendedOrder s", SuspendedOrder.class);

@@ -1,7 +1,6 @@
 package it.polimi.db2.telco.services;
 
 import it.polimi.db2.telco.entities.Alert;
-import it.polimi.db2.telco.exceptions.alert.AlertNotFoundException;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,7 +15,7 @@ public class AlertService {
 
     public AlertService(){}
 
-    public Alert getAlertById(Integer alertId) throws AlertNotFoundException {
+    /*public Alert getAlertById(Integer alertId) throws AlertNotFoundException {
         Alert alert = em.find(Alert.class, alertId);
         if(alert == null){
             throw new AlertNotFoundException();
@@ -32,7 +31,7 @@ public class AlertService {
             throw new AlertNotFoundException();
         }
         return alerts;
-    }
+    }*/
 
     public List<Alert> getAllAlerts() {
         TypedQuery<Alert> query = em.createQuery("SELECT a FROM Alert a", Alert.class);

@@ -59,7 +59,7 @@ public class ServiceService {
         return service.getId();
     }
 
-    public Integer updateService(Service service) {
+    /*public Integer updateService(Service service) {
         service = em.merge(service);
         em.flush();
         return service.getId();
@@ -72,5 +72,5 @@ public class ServiceService {
         }
         em.remove(service);
         em.flush();
-    }
+    }*/
 }

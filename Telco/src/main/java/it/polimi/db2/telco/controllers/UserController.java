@@ -28,7 +28,7 @@ public class UserController {
         return user;
     }
 
-    public User getUserById(Integer userId) throws UserException {
+    /*public User getUserById(Integer userId) throws UserException {
         return userService.getUserById(userId);
     }
 
@@ -38,7 +38,7 @@ public class UserController {
 
     public User getUserByUsername(String username) throws UserException {
         return userService.getUserByUsername(username);
-    }
+    }*/
 
     public boolean checkIfUsernameIsAlreadyUsed(String username) {
         return userService.checkUsername(username);
@@ -54,7 +54,7 @@ public class UserController {
         return userId;
     }
 
-    public Integer updateUser(User user) throws UserException {
+    /*public Integer updateUser(User user) throws UserException {
         Integer userId;
         if (userService.getUserByEmail(user.getEmail()) != null) {
             if (userService.getUserByEmail(user.getEmail()).getUsername().equals(user.getUsername())) {
@@ -75,5 +75,5 @@ public class UserController {
         } else {
             throw new UserNotFoundException();
         }
-    }
+    }*/
 }

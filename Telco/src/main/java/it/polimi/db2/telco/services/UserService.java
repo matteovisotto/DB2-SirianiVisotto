@@ -65,7 +65,7 @@ public class UserService {
         return user.getId();
     }
 
-    public Integer updateUser(User user) {
+    /*public Integer updateUser(User user) {
         user = em.merge(user);
         em.flush();
         return user.getId();
@@ -78,5 +78,5 @@ public class UserService {
         }
         em.remove(user);
         em.flush();
-    }
+    }*/
 }

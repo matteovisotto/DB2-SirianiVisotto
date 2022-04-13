@@ -25,7 +25,7 @@ public class OptionalProductService {
         return optionalProduct;
     }
 
-    public OptionalProduct getOptionalProductByName(String name) throws OptionalProductNotFoundException {
+    /*public OptionalProduct getOptionalProductByName(String name) throws OptionalProductNotFoundException {
         TypedQuery<OptionalProduct> query = em.createQuery("SELECT o FROM OptionalProduct o WHERE o.name = :name", OptionalProduct.class);
         query.setParameter("name", name);
         OptionalProduct optionalProduct = query.getSingleResult();
@@ -33,7 +33,7 @@ public class OptionalProductService {
             throw new OptionalProductNotFoundException();
         }
         return optionalProduct;
-    }
+    }*/
 
     public boolean isOptionalProductAlreadyExisting(String name) {
         TypedQuery<OptionalProduct> query = em.createQuery("SELECT o FROM OptionalProduct o WHERE o.name = :name", OptionalProduct.class);
@@ -56,7 +56,7 @@ public class OptionalProductService {
         return optionalProduct.getId();
     }
 
-    public Integer updateOptionalProduct(OptionalProduct optionalProduct) {
+    /*public Integer updateOptionalProduct(OptionalProduct optionalProduct) {
         optionalProduct = em.merge(optionalProduct);
         em.flush();
         return optionalProduct.getId();
@@ -69,5 +69,5 @@ public class OptionalProductService {
         }
         em.remove(optionalProduct);
         em.flush();
-    }
+    }*/
 }

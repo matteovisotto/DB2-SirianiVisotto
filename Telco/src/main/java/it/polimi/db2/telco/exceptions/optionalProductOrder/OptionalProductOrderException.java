@@ -1,3 +1,4 @@
+/*
 package it.polimi.db2.telco.exceptions.optionalProductOrder;
 
 public class OptionalProductOrderException extends RuntimeException {
@@ -7,3 +8,4 @@ public class OptionalProductOrderException extends RuntimeException {
 
     public OptionalProductOrderException(){ super();}
 }
+*/

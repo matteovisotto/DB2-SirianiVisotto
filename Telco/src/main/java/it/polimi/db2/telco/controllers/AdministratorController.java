@@ -24,7 +24,7 @@ public class AdministratorController {
         return administrator;
     }
 
-    public Administrator getAdministratorById(Integer administratorId) throws AdministratorException {
+    /*public Administrator getAdministratorById(Integer administratorId) throws AdministratorException {
         return administratorService.getAdministratorById(administratorId);
     }
 
@@ -65,5 +65,5 @@ public class AdministratorController {
         } else {
             throw new AdministratorNotFoundException();
         }
-    }
+    }*/
 }

@@ -17,13 +17,13 @@ public class AdministratorService {
 
     public AdministratorService(){}
 
-    public Administrator getAdministratorById(Integer administratorId) throws AdministratorNotFoundException {
+    /*public Administrator getAdministratorById(Integer administratorId) throws AdministratorNotFoundException {
         Administrator administrator = em.find(Administrator.class, administratorId);
         if(administrator == null){
             throw new AdministratorNotFoundException();
         }
         return administrator;
-    }
+    }*/
 
     public Administrator getAdministratorByEmail(String email) {
         TypedQuery<Administrator> query = em.createQuery("SELECT a FROM Administrator a WHERE a.email = :email", Administrator.class);
@@ -35,7 +35,7 @@ public class AdministratorService {
         return administrators.get(0);
     }
 
-    public List<Administrator> getAdministratorsByRole(String role) throws AdministratorNotFoundException {
+    /*public List<Administrator> getAdministratorsByRole(String role) throws AdministratorNotFoundException {
         TypedQuery<Administrator> query = em.createQuery("SELECT a FROM Administrator a WHERE a.role = :role", Administrator.class);
         query.setParameter("role", role);
         List<Administrator> administrators = query.getResultList();
@@ -64,5 +64,5 @@ public class AdministratorService {
         }
         em.remove(administrator);
         em.flush();
-    }
+    }*/
 }

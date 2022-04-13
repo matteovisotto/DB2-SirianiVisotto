@@ -26,9 +26,9 @@ public class OrderController {
         return orderService.getOrderById(orderId);
     }
 
-    public Order getMyOrderByOrderId(Integer orderId, Integer userId) throws OrderException {
+    /*public Order getMyOrderByOrderId(Integer orderId, Integer userId) throws OrderException {
         return orderService.getMyOrderByOrderId(orderId, userId);
-    }
+    }*/
 
     public List<Order> getOrdersOfUser(Integer userId) throws OrderException, UserException {
         User user = userService.getUserById(userId);
@@ -54,7 +54,7 @@ public class OrderController {
         return orderId;
     }
 
-    public Integer updateOrder(Order order) throws OrderException {
+    /*public Integer updateOrder(Order order) throws OrderException {
         Integer orderId;
         if (orderService.getOrderById(order.getId()) != null) {
             orderId = orderService.updateOrder(order);
@@ -71,5 +71,5 @@ public class OrderController {
         } else {
             throw new OrderNotFoundException();
         }
-    }
+    }*/
 }

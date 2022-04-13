@@ -1,3 +1,4 @@
+/*
 package it.polimi.db2.telco.beans;
 
 import it.polimi.db2.telco.entities.Order;
@@ -35,3 +36,4 @@ public class SuspendedOrderBean {
 
 
 
+*/

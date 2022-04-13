@@ -1,3 +1,4 @@
+/*
 package it.polimi.db2.telco.services;
 
 import it.polimi.db2.telco.entities.ServiceInPackage;
@@ -49,3 +50,4 @@ public class ServiceInPackageService {
         em.flush();
     }
 }
+*/

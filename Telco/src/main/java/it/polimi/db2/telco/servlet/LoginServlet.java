@@ -43,14 +43,29 @@ public class LoginServlet extends HttpServlet {
                 user = userController.loginUserByUsername(username, sha256hex);
             }
         } catch (UserException e) {
-            resp.sendRedirect(getServletContext().getContextPath()+"/?evn=error&err=bad_credential");
+            String redirectTo = getServletContext().getContextPath() + "/";
+            if(req.getParameter("returnTo") != null){
+                redirectTo = req.getParameter("returnTo");
+                if (redirectTo.contains("&evn")){
+                    redirectTo = redirectTo.split("&evn")[0];
+                } else if (redirectTo.contains("evn")) {
+                    redirectTo = redirectTo.split("evn")[0];
+                }
+            }
+            if (redirectTo.endsWith("?")){
+                resp.sendRedirect(redirectTo + "evn=error&err=bad_credential");
+            } else {
+                resp.sendRedirect(redirectTo + "&evn=error&err=bad_credential");
+            }
             return;
         }
-
         req.getSession().setAttribute("user", user);
         String redirectTo = getServletContext().getContextPath()+"/";
         if(req.getParameter("returnTo") != null){
-            redirectTo = req.getParameter("returnTo");
+            redirectTo = req.getParameter("returnTo").split("(&|\\?)evn")[0];
+            if (redirectTo.endsWith("?")){
+                redirectTo = redirectTo.split("\\?")[0];
+            }
         }
         resp.sendRedirect(redirectTo);
     }

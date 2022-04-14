@@ -55,40 +55,41 @@ public class RegisterServlet extends HttpServlet {
         String password = req.getParameter("r_password");
         String passwordCheck = req.getParameter("r_password_c");
         String temp = name.replaceAll("\\s+","");
+        String redirectTo = "";
         if (temp.equals("")){
-            resp.sendRedirect(getServletContext().getContextPath()+"/?evn=error&err=invalid_name");
+            resp.sendRedirect(getCorrectPath(getServletContext().getContextPath() + "/", "evn=error&err=invalid_name", req));
             return;
         }
         temp = surname.replaceAll("\\s+","");
         if (temp.equals("")){
-            resp.sendRedirect(getServletContext().getContextPath()+"/?evn=error&err=invalid_surname");
+            resp.sendRedirect(getCorrectPath(getServletContext().getContextPath() + "/", "evn=error&err=invalid_surname", req));
             return;
         }
         temp = username.replaceAll("\\s+","");
         if (temp.equals("")){
-            resp.sendRedirect(getServletContext().getContextPath()+"/?evn=error&err=invalid_username");
+            resp.sendRedirect(getCorrectPath(getServletContext().getContextPath() + "/", "evn=error&err=invalid_username", req));
             return;
         }
         temp = password.replaceAll("\\s+","");
         if (temp.equals("")) {
-            resp.sendRedirect(getServletContext().getContextPath()+"/?evn=error&err=invalid_password");
+            resp.sendRedirect(getCorrectPath(getServletContext().getContextPath() + "/", "evn=error&err=invalid_password", req));
             return;
         }
         if(!password.equals(passwordCheck)){
-            resp.sendRedirect(getServletContext().getContextPath()+"/?evn=error&err=not_equal_password");
+            resp.sendRedirect(getCorrectPath(getServletContext().getContextPath() + "/", "evn=error&err=not_equal_password", req));
             return;
         }
         if (username.contains("@")){
-            resp.sendRedirect(getServletContext().getContextPath()+"/?evn=error&err=at_exception");
+            resp.sendRedirect(getCorrectPath(getServletContext().getContextPath() + "/", "evn=error&err=at_exception", req));
             return;
         }
         if(userController.checkIfUsernameIsAlreadyUsed(username)) {
-            resp.sendRedirect(getServletContext().getContextPath()+"/?evn=error&err=username_existing");
+            resp.sendRedirect(getCorrectPath(getServletContext().getContextPath() + "/", "evn=error&err=username_existing", req));
             return;
         }
 
         if(userController.checkIfEmailIsAlreadyUsed(email)){
-            resp.sendRedirect(getServletContext().getContextPath()+"/?evn=error&err=email_existing");
+            resp.sendRedirect(getCorrectPath(getServletContext().getContextPath() + "/", "evn=error&err=email_existing", req));
             return;
         }
 
@@ -103,10 +104,30 @@ public class RegisterServlet extends HttpServlet {
         userToRegister.setInsolvent(0);
         userController.createUser(userToRegister);
 
-        String redirectTo = getServletContext().getContextPath()+"/";
+        redirectTo = getServletContext().getContextPath()+"/";
         if(req.getParameter("returnTo") != null){
-            redirectTo = req.getParameter("returnTo");
+            redirectTo = req.getParameter("returnTo").split("(&|\\?)evn")[0];
+            if (redirectTo.endsWith("?")){
+                redirectTo = redirectTo.split("\\?")[0];
+            }
         }
         resp.sendRedirect(redirectTo);
+    }
+
+    private String getCorrectPath(String contextPath, String errorType, HttpServletRequest req){
+        String redirectTo = contextPath;
+        if(req.getParameter("returnTo") != null){
+            redirectTo = req.getParameter("returnTo");
+            if (redirectTo.contains("&evn")){
+                redirectTo = redirectTo.split("&evn")[0];
+            } else if (redirectTo.contains("evn")) {
+                redirectTo = redirectTo.split("evn")[0];
+            }
+        }
+        if (redirectTo.endsWith("?")){
+            return redirectTo + errorType;
+        } else {
+            return redirectTo + "&" + errorType;
+        }
     }
 }

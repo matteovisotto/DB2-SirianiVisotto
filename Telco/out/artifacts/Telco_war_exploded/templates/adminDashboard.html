@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>TelCo.</title>
+
+    <link rel="stylesheet" href="../css/bootstrap.css" data-th-href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" href="../css/style.css" data-th-href="@{/css/style.css}">
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+<div class="wrapper">
+
+
+    <!-- Page Content  -->
+    <div id="content">
+
+        <nav class="navbar navbar-expand-lg navbar-light dream-navbar shadow-sm">
+            <div class="container-fluid">
+                <a class="btn btn-toolbar text-white" href="index.html" data-th-href="@{/}">
+                    <h3><i class="fas fa-phone"></i> Co.</h3>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse text-white" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link text-white" href="#" data-th-href="@{/admin/dashboard}">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#" data-th-href="@{/admin/stats}">Sales report</a>
+                        </li>
+                    </ul>
+                </div>
+                    <a class="dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false"><div class="hstack gap-3"><strong data-th-text="|${user.getName()} ${user.getSurname()}|">Username</strong> <img src="assets/placeholder_user.png" data-th-src="@{/assets/placeholder_user.png}" class="rounded-circle profile-img" /></div></a>
+                    <ul class="dropdown-menu dropdown-menu-end profile-dropdown" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#" data-th-href="@{/admin/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+            </div>
+        </nav>
+        <div class="page">
+            <div class="row">
+                <div class="col-12">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="package-tab" data-bs-toggle="tab" data-bs-target="#package" type="button" role="tab" aria-controls="package" aria-selected="true">Packages</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="service-tab" data-bs-toggle="tab" data-bs-target="#service" type="button" role="tab" aria-controls="service" aria-selected="false">Services</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="optional-tab" data-bs-toggle="tab" data-bs-target="#optional" type="button" role="tab" aria-controls="optional" aria-selected="false">Optional products</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="package" role="tabpanel" aria-labelledby="package-tab">
+                          <h5 class="mt-3">PACKAGES</h5>
+                            <div class="row mt-3">
+                                <div class="col-md-6 col-sm-12">
+                                    <h6 class="text-primary">AVAILABLE</h6>
+                                    <table class="table table-striped">
+                                        <thead><th>Package</th><th>Services</th><th>Optional Product</th><th>Prices</th></thead>
+                                        <tbody>
+                                        <tr data-th-each="p: ${servicePackage}"><td data-th-text="${p.getName()}"></td><td><ul><li data-th-each="service: ${p.getServices()}"><span data-th-text="${service.getName()}"></span></li></ul></td><td><ul><li data-th-each="opt: ${p.getOptionalProducts()}"><span data-th-text="${opt.getName()}"></span></li></ul></td><td><ul><li data-th-each="pr: ${p.getPackagePrices()}"><span data-th-text="${pr.getValidityPeriod()}"></span> month = <span data-th-text="${pr.getPrice()}"></span> &euro;/month</li></ul></td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <h6 class="text-primary">ADD NEW</h6>
+                                    <form method="POST" action="" data-th-action="@{/admin/package/post}">
+                                        <div class="row mt-3">
+                                            <div class="col-12 mb-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="p_name"><i class="fas fa-user"></i> </span>
+                                                    <input type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="p_name" name="p_name">
+                                                </div>
+                                            </div>
+                                            <div class="col-6 mb-3">
+                                                <h6 class="text-primary">Included Services</h6>
+                                                <div class="form-check" data-th-each="s: ${service}">
+                                                    <input class="form-check-input" type="checkbox" name="p_services" data-th-value="${s.getId()}" data-th-id="'service'+${s.getId()}">
+                                                    <label class="form-check-label" data-th-for="'service'+${s.getId()}" data-th-text="${s.getName()}"></label>
+                                                </div>
+                                            </div>
+                                            <div class="col-6 mb-3">
+                                                <h6 class="text-primary">Optional products</h6>
+                                                <div class="form-check" data-th-each="o: ${optionalProduct}">
+                                                    <input class="form-check-input" type="checkbox" name="p_optionals" data-th-value="${o.getId()}" data-th-id="'optional'+${o.getId()}">
+                                                    <label class="form-check-label" data-th-for="'optional'+${o.getId()}" data-th-text="${o.getName()}"></label>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 mb-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="p_p_12"><i class="fas fa-euro-sign"></i></span>
+                                                    <input type="text" class="form-control" placeholder="12 Month price" aria-label="Price for 12" aria-describedby="p_p_12" name="p_p_12">
+                                                </div>
+                                            </div>
+                                            <div class="col-4 mb-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="p_p_24"><i class="fas fa-euro-sign"></i></span>
+                                                    <input type="text" class="form-control" placeholder="24 Month price" aria-label="Price for 24" aria-describedby="p_p_24" name="p_p_24">
+                                                </div>
+                                            </div>
+                                            <div class="col-4 mb-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="p_p_36"><i class="fas fa-euro-sign"></i></span>
+                                                    <input type="text" class="form-control" placeholder="36 Month price" aria-label="Price for 36" aria-describedby="p_p_36" name="p_p_36">
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <input type="submit" class="btn btn-success float-end" value="Add">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="service" role="tabpanel" aria-labelledby="service-tab">
+                            <h5 class="mt-3">SERVICES</h5>
+                            <div class="row mt-3">
+                                <div class="col-md-6 col-sm-12">
+                                    <h6 class="text-primary">AVAILABLE</h6>
+                                    <table class="table table-striped">
+                                        <thead><th>Service</th><th>Minutes</th><th>Sms</th><th>Internet</th><th>Extra Minutes</th><th>Extra Sms</th><th>Extra Internet</th></thead>
+                                        <tbody>
+                                        <tr data-th-each="s: ${service}"><td data-th-text="${s.getName()}"></td><td data-th-text="${s.getMin()}"></td><td data-th-text="${s.getSms()}"></td><td data-th-text="${s.getInternet()}"></td><td><span data-th-text="${s.getExtraMin()}"></span><span data-th-if="${s.getExtraMin() != null}"> &euro;/min</span></td><td><span data-th-text="${s.getExtraSms()}"></span><span data-th-if="${s.getExtraSms() != null}"> &euro;/sms</span></td><td><span data-th-text="${s.getExtraInternet()}"></span><span data-th-if="${s.getExtraInternet() != null}"> &euro;/Kb</span></td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <h6 class="text-primary">ADD NEW</h6>
+                                    <form method="POST" action="" data-th-action="@{/admin/service/post}">
+                                        <div class="row mt-3">
+                                            <div class="col-12 mb-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="s_name"><i class="fas fa-user"></i> </span>
+                                                    <input type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="s_name" name="s_name">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mb-3">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="serviceType" id="mobilePhone" value="mobilePhone">
+                                                    <label class="form-check-label" for="mobilePhone">Mobile phone</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="serviceType" id="fixedPhone" value="fixedPhone">
+                                                    <label class="form-check-label" for="fixedPhone">Fixed phone</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="serviceType" id="fixedInternet" value="fixedInternet">
+                                                    <label class="form-check-label" for="fixedInternet">Fixed internet</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="serviceType" id="mobileInternet" value="mobileInternet">
+                                                    <label class="form-check-label" for="mobileInternet">Mobile internet</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 mb-3 minute-div" >
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="s_min"><i class="fa-solid fa-phone"></i></span>
+                                                    <input type="text" class="form-control" placeholder="Minutes" aria-label="Minutes" aria-describedby="s_min" name="s_min">
+                                                </div>
+                                            </div>
+                                            <div class="col-4 mb-3 sms-div">
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="s_sms"><i class="fa-solid fa-comment-sms"></i></span>
+                                                    <input type="text" class="form-control" placeholder="Sms" aria-label="Sms" aria-describedby="s_sms" name="s_sms">
+                                                </div>
+                                            </div>
+                                            <div class="col-4 mb-3 internet-div">
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="s_internet"><i class="fa-solid fa-wifi"></i></span>
+                                                    <input type="text" class="form-control" placeholder="Internet" aria-label="Internet" aria-describedby="s_internet" name="s_internet">
+                                                </div>
+                                            </div>
+                                            <div class="col-4 mb-3 minute-div">
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="s_min_e"><i class="fas fa-euro-sign"></i></span>
+                                                    <input type="text" class="form-control" placeholder="Extra minutes" aria-label="Extra minutes" aria-describedby="s_min_e" name="s_min_e">
+                                                </div>
+                                            </div>
+                                            <div class="col-4 mb-3 sms-div">
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="s_sms_e"><i class="fas fa-euro-sign"></i></span>
+                                                    <input type="text" class="form-control" placeholder="Extra sms" aria-label="Extra sms" aria-describedby="s_sms_e" name="s_sms_e">
+                                                </div>
+                                            </div>
+                                            <div class="col-4 mb-3 internet-div">
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="s_internet_e"><i class="fas fa-euro-sign"></i></span>
+                                                    <input type="text" class="form-control" placeholder="Extra internet" aria-label="Extra internet" aria-describedby="s_internet_e" name="s_internet_e">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mb-3">
+                                                <input type="submit" class="btn btn-success mt-3 float-end" value="Add"/>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="optional" role="tabpanel" aria-labelledby="optional-tab">
+                            <h5 class="mt-3">OPTIONAL PRODUCTS</h5>
+                            <div class="row mt-3">
+                                <div class="col-md-6 col-sm-12">
+                                    <h6 class="text-primary">AVAILABLE</h6>
+                                    <table class="table table-striped">
+                                        <thead><th>Optional product</th><th>Description</th><th>&euro;/month</th></thead>
+                                        <tbody>
+                                        <tr data-th-each="o: ${optionalProduct}"><td data-th-text="${o.getName()}"></td><td data-th-text="${o.getDescription()}"></td><td><span data-th-text="${o.getPrice()}"></span> &euro;</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <h6 class="text-primary">ADD NEW</h6>
+                                    <form method="POST" action="" data-th-action="@{/admin/optional/post}">
+                                        <div class="row mt-3">
+                                            <div class="col-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="o_name"><i class="fas fa-user"></i> </span>
+                                                    <input type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="o_name" name="o_name">
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="o_price"><i class="fas fa-euro-sign"></i></span>
+                                                    <input type="text" class="form-control" placeholder="Price" aria-label="Price" aria-describedby="o_price" name="o_price">
+                                                </div>
+                                            </div>
+                                            <div class="col-8 mt-2">
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="o_description"><i class="fa-solid fa-font"></i></span>
+                                                    <textarea class="form-control" placeholder="Description" aria-label="Description" aria-describedby="o_description" name="o_description"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <input type="submit" class="btn btn-success mt-3 float-end" value="Add"/>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script   src="https://code.jquery.com/jquery-3.6.0.min.js"   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="   crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="../js/bootstrap.min.js" data-th-src="@{/js/bootstrap.min.js}"></script>
+    <!-- jQuery Custom Scroller CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-danger">
+            <div class="modal-header border-0">
+                <h3 class="text-white">Error</h3>
+            </div>
+            <div class="modal-body">
+                <p class="text-white" id="errorContent"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function (){
+        $('.internet-div').hide();
+        $('.sms-div').hide();
+        $('.minute-div').hide();
+
+        $('input[name="serviceType"]').on('click change', function(e) {
+            var val = $(e.target).val();
+            if(val === 'fixedPhone'){
+                $('.internet-div').hide();
+                $('.sms-div').hide();
+                $('.minute-div').hide();
+            } else if (val === 'mobilePhone') {
+                $('.internet-div').hide();
+                $('.sms-div').show();
+                $('.minute-div').show();
+            } else if (val === 'mobileInternet' || val === 'fixedInternet') {
+                $('.internet-div').show();
+                $('.sms-div').hide();
+                $('.minute-div').hide();
+            }
+        });
+
+    });
+</script>
+
+<script src="../js/errors.js" data-th-src="@{/js/errors.js}"></script>
+
+</body>
+
+</html>

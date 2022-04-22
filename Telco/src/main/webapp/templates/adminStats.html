@@ -65,16 +65,16 @@
                             <h5 class="mt-3">PURCHASE STATS</h5>
                             <div class="d-flex align-items-start">
                                 <div class="nav flex-column nav-pills me-5" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                    <button class="nav-link active" id="v-pills-averagePurchaseOptionalPackage-tab" data-bs-toggle="pill" data-bs-target="#averagePurchaseOptionalPackage" type="button" role="tab" aria-controls="v-pills-averagePurchaseOptionalPackage" aria-selected="true">Average purchase package</button>
-                                    <button class="nav-link" id="v-pills-totalPurchaseOptional-tab" data-bs-toggle="pill" data-bs-target="#totalPurchaseOptional" type="button" role="tab" aria-controls="v-pills-totalPurchaseOptional" aria-selected="false">Total optional purchase</button>
-                                    <button class="nav-link" id="v-pills-totalPurchasePackage-tab" data-bs-toggle="pill" data-bs-target="#totalPurchasePackage" type="button" role="tab" aria-controls="v-pills-totalPurchasePackage" aria-selected="false">Total package purchase</button>
-                                    <button class="nav-link" id="v-pills-totalPurchasePackageOptional-tab" data-bs-toggle="pill" data-bs-target="#totalPurchasePackageOptional" type="button" role="tab" aria-controls="v-pills-totalPurchasePackageOptional" aria-selected="false">Total package purchase with optional</button>
-                                    <button class="nav-link" id="v-pills-totalPurchasePackageValidity-tab" data-bs-toggle="pill" data-bs-target="#totalPurchasePackageValidity" type="button" role="tab" aria-controls="v-pills-totalPurchasePackageValidity" aria-selected="false">Total package purchase per validity period</button>
-                                    <button class="nav-link" id="v-pills-totValuePackege-tab" data-bs-toggle="pill" data-bs-target="#totValuePackage" type="button" role="tab" aria-controls="v-pills-totValuePackage" aria-selected="false">Total value per package with and without optionals</button>
+                                    <button class="nav-link active" id="v-pills-totalPurchasePackage-tab" data-bs-toggle="pill" data-bs-target="#totalPurchasePackage" type="button" role="tab" aria-controls="v-pills-totalPurchasePackage" aria-selected="false">Total purchases per package</button>
+                                    <button class="nav-link" id="v-pills-totalPurchasePackageValidity-tab" data-bs-toggle="pill" data-bs-target="#totalPurchasePackageValidity" type="button" role="tab" aria-controls="v-pills-totalPurchasePackageValidity" aria-selected="false">Total purchases per package and validity period</button>
+                                    <button class="nav-link" id="v-pills-totalPurchasePackageOptional-tab" data-bs-toggle="pill" data-bs-target="#totalPurchasePackageOptional" type="button" role="tab" aria-controls="v-pills-totalPurchasePackageOptional" aria-selected="false">Total purchases per package with and without optional products</button>
+                                    <button class="nav-link" id="v-pills-totValuePackage-tab" data-bs-toggle="pill" data-bs-target="#totValuePackage" type="button" role="tab" aria-controls="v-pills-totValuePackage" aria-selected="false">Total value per package with and without optional products</button>
+                                    <button class="nav-link" id="v-pills-averagePurchaseOptionalPackage-tab" data-bs-toggle="pill" data-bs-target="#averagePurchaseOptionalPackage" type="button" role="tab" aria-controls="v-pills-averagePurchaseOptionalPackage" aria-selected="true">Average number of optional products sold with each service package</button>
+                                    <button class="nav-link" id="v-pills-totalPurchaseOptional-tab" data-bs-toggle="pill" data-bs-target="#totalPurchaseOptional" type="button" role="tab" aria-controls="v-pills-totalPurchaseOptional" aria-selected="false">Total purchases per optional product</button>
                                 </div>
                                 <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="averagePurchaseOptionalPackage" role="tabpanel" aria-labelledby="averagePurchaseOptionalPackage-tab">
-                                        <h5 class="mt-3">Average purchase optional package</h5>
+                                    <div class="tab-pane fade" id="averagePurchaseOptionalPackage" role="tabpanel" aria-labelledby="averagePurchaseOptionalPackage-tab">
+                                        <h5 class="mt-3">Average number of optional products sold with each service package</h5>
                                         <div class="row mt-3">
                                             <div class="col-12">
                                                 <h6 class="text-primary">DATA</h6>
@@ -88,7 +88,7 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="totalPurchaseOptional" role="tabpanel" aria-labelledby="totalPurchaseOptional-tab">
-                                        <h5 class="mt-3">Total purchase optional</h5>
+                                        <h5 class="mt-3">Total purchases per optional product</h5>
                                         <div class="row mt-3">
                                             <div class="col-12">
                                                 <h6 class="text-primary">DATA</h6>
@@ -111,8 +111,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="totalPurchasePackage" role="tabpanel" aria-labelledby="totalPurchasePackage-tab">
-                                        <h5 class="mt-3">Total purchase package</h5>
+                                    <div class="tab-pane fade show active" id="totalPurchasePackage" role="tabpanel" aria-labelledby="totalPurchasePackage-tab">
+                                        <h5 class="mt-3">Total purchases per package</h5>
                                         <div class="row mt-3">
                                             <div class="col-12">
                                                 <h6 class="text-primary">DATA</h6>
@@ -126,7 +126,7 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="totalPurchasePackageOptional" role="tabpanel" aria-labelledby="totalPurchasePackageOptional-tab">
-                                        <h5 class="mt-3">Total purchase package optional</h5>
+                                        <h5 class="mt-3">Total purchases per package with and without optional products</h5>
                                         <div class="row mt-3">
                                             <div class="col-12">
                                                 <h6 class="text-primary">DATA</h6>
@@ -140,7 +140,7 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="totalPurchasePackageValidity" role="tabpanel" aria-labelledby="totalPurchasePackageValidity-tab">
-                                        <h5 class="mt-3">Total purchase package validity</h5>
+                                        <h5 class="mt-3">Total purchases per package and validity period</h5>
                                         <div class="row mt-3">
                                             <div class="col-12">
                                                 <h6 class="text-primary">DATA</h6>
@@ -154,7 +154,7 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="totValuePackage" role="tabpanel" aria-labelledby="totValuePackage-tab">
-                                        <h5 class="mt-3">Total value per package with and without optional</h5>
+                                        <h5 class="mt-3">Total value per package with and without optional products</h5>
                                         <div class="row mt-3">
                                             <div class="col-12">
                                                 <h6 class="text-primary">DATA</h6>

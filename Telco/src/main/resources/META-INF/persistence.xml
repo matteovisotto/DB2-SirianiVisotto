@@ -29,6 +29,8 @@
         <class>it.polimi.db2.telco.entities.Activation</class>
         <class>it.polimi.db2.telco.entities.Order</class>
         <class>it.polimi.db2.telco.entities.PaymentHistory</class>
+        <class>it.polimi.db2.telco.entities.TotValueOptionalNoOptionalId</class>
+        <class>it.polimi.db2.telco.entities.TotValueOptionalNoOptional</class>
         <properties>
             <property name="eclipselink.logging.level" value="FINE" />
             <property name="eclipselink.cache.shared.default" value="false" />

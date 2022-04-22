@@ -47,9 +47,6 @@ public class ServiceService {
     public List<Service> getAllServices() throws ServiceNotFoundException {
         TypedQuery<Service> query = em.createQuery("SELECT s FROM Service s", Service.class);
         List<Service> services = query.getResultList();
-        if(services.size() == 0){
-            throw new ServicePackageNotFoundException();
-        }
         return services;
     }
 

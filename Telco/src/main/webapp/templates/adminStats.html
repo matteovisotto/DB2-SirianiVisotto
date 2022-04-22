@@ -70,6 +70,7 @@
                                     <button class="nav-link" id="v-pills-totalPurchasePackage-tab" data-bs-toggle="pill" data-bs-target="#totalPurchasePackage" type="button" role="tab" aria-controls="v-pills-totalPurchasePackage" aria-selected="false">Total package purchase</button>
                                     <button class="nav-link" id="v-pills-totalPurchasePackageOptional-tab" data-bs-toggle="pill" data-bs-target="#totalPurchasePackageOptional" type="button" role="tab" aria-controls="v-pills-totalPurchasePackageOptional" aria-selected="false">Total package purchase with optional</button>
                                     <button class="nav-link" id="v-pills-totalPurchasePackageValidity-tab" data-bs-toggle="pill" data-bs-target="#totalPurchasePackageValidity" type="button" role="tab" aria-controls="v-pills-totalPurchasePackageValidity" aria-selected="false">Total package purchase per validity period</button>
+                                    <button class="nav-link" id="v-pills-totValuePackege-tab" data-bs-toggle="pill" data-bs-target="#totValuePackage" type="button" role="tab" aria-controls="v-pills-totValuePackage" aria-selected="false">Total value per package with and without optionals</button>
                                 </div>
                                 <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade show active" id="averagePurchaseOptionalPackage" role="tabpanel" aria-labelledby="averagePurchaseOptionalPackage-tab">
@@ -147,6 +148,20 @@
                                                     <thead><th>Package ID</th><th>Package name</th><th>Validity period</th><th>Total purchase</th></thead>
                                                     <tbody>
                                                     <tr data-th-each="t: ${totalPurchasePackageValidity}"><td data-th-text="${t.getId().getPackageId()}"></td><td data-th-text="${t.getPackageName()}"></td><td data-th-text="${t.getId().getValidityPeriod()}"></td><td data-th-text="${t.getTotPurchase()}"></td></tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="totValuePackage" role="tabpanel" aria-labelledby="totValuePackage-tab">
+                                        <h5 class="mt-3">Total value per package with and without optional</h5>
+                                        <div class="row mt-3">
+                                            <div class="col-12">
+                                                <h6 class="text-primary">DATA</h6>
+                                                <table class="table table-striped">
+                                                    <thead><th>Package ID</th><th>Package name</th><th>Has optional</th><th>Total value</th></thead>
+                                                    <tbody>
+                                                    <tr data-th-each="t: ${totValue}"><td data-th-text="${t.getId().getPackageId()}"></td><td data-th-text="${t.getPackageName()}"></td><td><span data-th-if="${t.getId().getWithOptional() == 1}">&#10004;</span><span data-th-if="${t.getId().getWithOptional() == 0}">&#10008;</span></td><td><span  data-th-text="${#numbers.formatDecimal(t.getTotValue(), 0, 2)}"></span> &euro;</td></tr>
                                                     </tbody>
                                                 </table>
                                             </div>

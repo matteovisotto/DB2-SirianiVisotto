@@ -42,6 +42,9 @@ public class AdminStatsServlet extends HttpServlet {
     InsolventUserController insolventUserController;
     @Inject
     SuspendedOrderController suspendedOrderController;
+    @Inject
+    TotValueOptionalNoOptionalController totValueOptionalNoOptionalController;
+
 
     @Override
     public void init() throws ServletException {
@@ -69,6 +72,7 @@ public class AdminStatsServlet extends HttpServlet {
         ctx.setVariable("totalPurchasePackageValidity", totalPurchasePackageValidityController.getAllTotalPurchasePackageValidity());
         ctx.setVariable("alerts", alertController.getAllAlerts());
         ctx.setVariable("insolventUsers", insolventUserController.getAllInsolventUsers());
+        ctx.setVariable("totValue", totValueOptionalNoOptionalController.getAllTotValueOptionalNoOptional());
         ctx.setVariable("suspendedOrders", suspendedOrderController.getAllSuspendedOrders().stream().map(o -> suspendedOrderController.toOrder(o)).collect(Collectors.toList()));
 
         TotalPurchaseOptional maxPurchase = totalPurchaseOptional.get(0);

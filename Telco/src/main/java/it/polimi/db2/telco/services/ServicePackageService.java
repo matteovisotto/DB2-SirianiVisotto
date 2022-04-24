@@ -63,7 +63,7 @@ public class ServicePackageService {
         return servicePackageId;
     }
 
-    public Integer updateServicePackage(ServicePackage servicePackage) {
+    /*public Integer updateServicePackage(ServicePackage servicePackage) {
         servicePackage = em.merge(servicePackage);
         em.flush();
         return servicePackage.getId();
@@ -76,5 +76,5 @@ public class ServicePackageService {
         }
         em.remove(servicePackage);
         em.flush();
-    }
+    }*/
 }

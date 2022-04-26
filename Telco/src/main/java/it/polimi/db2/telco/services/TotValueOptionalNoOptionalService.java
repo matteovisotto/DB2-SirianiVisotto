@@ -1,8 +1,6 @@
 package it.polimi.db2.telco.services;
 
 import it.polimi.db2.telco.entities.TotValueOptionalNoOptional;
-import it.polimi.db2.telco.entities.TotalPurchasePackageValidity;
-import it.polimi.db2.telco.exceptions.report.TotalPurchasePackageOptionalNotFoundException;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

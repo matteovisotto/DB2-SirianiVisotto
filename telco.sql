@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0-rc1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Creato il: Mar 06, 2022 alle 21:48
--- Versione del server: 10.5.13-MariaDB-0ubuntu0.21.10.1
--- Versione PHP: 8.0.8
+-- Generation Time: Apr 26, 2022 at 04:54 PM
+-- Server version: 10.5.15-MariaDB-0ubuntu0.21.10.1
+-- PHP Version: 8.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,24 +24,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `activation`
+-- Table structure for table `activation`
 --
 
 DROP TABLE IF EXISTS `activation`;
 CREATE TABLE IF NOT EXISTS `activation` (
-  `id` int(11) NOT NULL DEFAULT 0,
   `user_id` int(11) NOT NULL,
   `package_id` int(11) NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   `order_id` int(11) NOT NULL,
-  KEY `order_id` (`order_id`)
+  PRIMARY KEY (`order_id`),
+  KEY `package_id` (`package_id`),
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `administrator`
+-- Table structure for table `administrator`
 --
 
 DROP TABLE IF EXISTS `administrator`;
@@ -58,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `administrator` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `alerts`
+-- Table structure for table `alerts`
 --
 
 DROP TABLE IF EXISTS `alerts`;
@@ -76,30 +77,33 @@ CREATE TABLE IF NOT EXISTS `alerts` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `avarage_purchase_optional_package`
+-- Table structure for table `avarage_purchase_optional_package`
 --
 
 DROP TABLE IF EXISTS `avarage_purchase_optional_package`;
 CREATE TABLE IF NOT EXISTS `avarage_purchase_optional_package` (
   `package_id` int(11) NOT NULL,
-  `avg_optional` double NOT NULL DEFAULT 0
+  `package_name` varchar(255) NOT NULL,
+  `avg_optional` double NOT NULL DEFAULT 0,
+  PRIMARY KEY (`package_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `failed_payment`
+-- Table structure for table `failed_payment`
 --
 
 DROP TABLE IF EXISTS `failed_payment`;
 CREATE TABLE IF NOT EXISTS `failed_payment` (
   `user_id` int(11) NOT NULL,
   `last_failure` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `n_failures` int(11) NOT NULL DEFAULT 0
+  `n_failures` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Trigger `failed_payment`
+-- Triggers `failed_payment`
 --
 DROP TRIGGER IF EXISTS `raise_new_alert`;
 DELIMITER $$
@@ -120,7 +124,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `insolvent_user`
+-- Table structure for table `insolvent_user`
 --
 
 DROP TABLE IF EXISTS `insolvent_user`;
@@ -136,8 +140,8 @@ CREATE TABLE IF NOT EXISTS `insolvent_user` (
 -- --------------------------------------------------------
 
 --
--- Struttura stand-in per le viste `number_optional_package`
--- (Vedi sotto per la vista effettiva)
+-- Stand-in structure for view `number_optional_package`
+-- (See below for the actual view)
 --
 DROP VIEW IF EXISTS `number_optional_package`;
 CREATE TABLE IF NOT EXISTS `number_optional_package` (
@@ -148,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `number_optional_package` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `optional_product`
+-- Table structure for table `optional_product`
 --
 
 DROP TABLE IF EXISTS `optional_product`;
@@ -161,12 +165,12 @@ CREATE TABLE IF NOT EXISTS `optional_product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Trigger `optional_product`
+-- Triggers `optional_product`
 --
 DROP TRIGGER IF EXISTS `create_purchase_optional`;
 DELIMITER $$
 CREATE TRIGGER `create_purchase_optional` AFTER INSERT ON `optional_product` FOR EACH ROW BEGIN
-INSERT INTO total_purchase_optional (tot_purchase, optional_id) VALUES (0, new.id);
+INSERT INTO total_purchase_optional (tot_purchase, optional_id, optional_name) VALUES (0, new.id, new.name);
 END
 $$
 DELIMITER ;
@@ -181,7 +185,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `optional_product_in_package`
+-- Table structure for table `optional_product_in_package`
 --
 
 DROP TABLE IF EXISTS `optional_product_in_package`;
@@ -195,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `optional_product_in_package` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `optional_product_order`
+-- Table structure for table `optional_product_order`
 --
 
 DROP TABLE IF EXISTS `optional_product_order`;
@@ -207,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `optional_product_order` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Trigger `optional_product_order`
+-- Triggers `optional_product_order`
 --
 DROP TRIGGER IF EXISTS `optional_in_package_for_order`;
 DELIMITER $$
@@ -236,7 +240,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `orders`
+-- Table structure for table `orders`
 --
 
 DROP TABLE IF EXISTS `orders`;
@@ -248,13 +252,14 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `order_status` int(11) NOT NULL DEFAULT 0,
   `start_date` date NOT NULL,
   `price` double NOT NULL DEFAULT 0,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
-  KEY `orders_ibfk_1` (`user_id`),
-  KEY `orders_ibfk_2` (`package_id`)
+  KEY `orders_ibfk_2` (`package_id`),
+  KEY `user_id` (`user_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Trigger `orders`
+-- Triggers `orders`
 --
 DROP TRIGGER IF EXISTS `check_validity_period_validity`;
 DELIMITER $$
@@ -270,8 +275,12 @@ DELIMITER ;
 DROP TRIGGER IF EXISTS `retrieve_suspended_orders`;
 DELIMITER $$
 CREATE TRIGGER `retrieve_suspended_orders` AFTER UPDATE ON `orders` FOR EACH ROW BEGIN
+declare number int;
 IF new.order_status = 2 THEN
+SET number = (SELECT count(*) FROM suspended_orders WHERE order_id=new.id AND user_id=new.user_id);
+IF number = 0 THEN
 INSERT INTO suspended_orders (order_id, user_id) VALUES (new.id, new.user_id);
+END IF;
 ELSEIF new.order_status = 1 or new.order_status = 0 THEN
 DELETE FROM suspended_orders WHERE order_id = new.id;
 END IF;
@@ -321,7 +330,7 @@ DROP TRIGGER IF EXISTS `update_purchase_package_avg`;
 DELIMITER $$
 CREATE TRIGGER `update_purchase_package_avg` AFTER UPDATE ON `orders` FOR EACH ROW BEGIN
 IF new.order_status = 1 THEN
-UPDATE avarage_purchase_optional_package SET avg_optional = (SELECT AVG(number) FROM number_optional_package WHERE package_id = new.package_id) WHERE package_id=new.package_id;
+UPDATE avarage_purchase_optional_package SET avg_optional = IFNULL((SELECT SUM(number) FROM number_optional_package WHERE package_id = new.package_id),0)/(SELECT count(*) FROM orders where package_id=new.package_id) WHERE package_id=new.package_id;
 END IF;
 END
 $$
@@ -330,7 +339,7 @@ DROP TRIGGER IF EXISTS `update_purchase_package_optional`;
 DELIMITER $$
 CREATE TRIGGER `update_purchase_package_optional` BEFORE UPDATE ON `orders` FOR EACH ROW BEGIN
 DECLARE counter int;
-SET counter = (SELECT count(*) FROM optional_product_order WHERE order_id = new.id GROUP BY order_id);
+SET counter = IFNULL((SELECT count(*) FROM optional_product_order WHERE order_id = new.id GROUP BY order_id), 0);
 IF (old.order_status = 0 or old.order_status=2) and new.order_status = 1 THEN 
 IF counter = 0 THEN
 UPDATE total_purchase_package_optional set tot_purchase = tot_purchase + 1 where package_id = new.package_id AND has_optional_product = 0;
@@ -350,11 +359,25 @@ END IF;
 END
 $$
 DELIMITER ;
+DROP TRIGGER IF EXISTS `update_tot_value_package`;
+DELIMITER $$
+CREATE TRIGGER `update_tot_value_package` BEFORE UPDATE ON `orders` FOR EACH ROW BEGIN
+DECLARE optional_price double;
+DECLARE validity_price double;
+SET optional_price = (SELECT COALESCE(SUM(o.price),0) FROM optional_product_order AS x JOIN optional_product AS o ON o.id = x.optional_id WHERE x.order_id = new.id);
+SET validity_price = (optional_price * old.validity_period);
+IF (old.order_status = 0 or old.order_status=2) and new.order_status = 1 THEN 
+UPDATE tot_value_optional_no_optional SET tot_value = tot_value + new.price where package_id = new.package_id AND with_optional = 1;
+UPDATE tot_value_optional_no_optional SET tot_value = tot_value + (new.price - validity_price) where package_id = new.package_id AND with_optional = 0;
+END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `package_price`
+-- Table structure for table `package_price`
 --
 
 DROP TABLE IF EXISTS `package_price`;
@@ -370,7 +393,7 @@ CREATE TABLE IF NOT EXISTS `package_price` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `payment_history`
+-- Table structure for table `payment_history`
 --
 
 DROP TABLE IF EXISTS `payment_history`;
@@ -386,7 +409,7 @@ CREATE TABLE IF NOT EXISTS `payment_history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Trigger `payment_history`
+-- Triggers `payment_history`
 --
 DROP TRIGGER IF EXISTS `create_activation_record`;
 DELIMITER $$
@@ -439,7 +462,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `service`
+-- Table structure for table `service`
 --
 
 DROP TABLE IF EXISTS `service`;
@@ -458,7 +481,7 @@ CREATE TABLE IF NOT EXISTS `service` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `service_in_package`
+-- Table structure for table `service_in_package`
 --
 
 DROP TABLE IF EXISTS `service_in_package`;
@@ -472,7 +495,7 @@ CREATE TABLE IF NOT EXISTS `service_in_package` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `service_package`
+-- Table structure for table `service_package`
 --
 
 DROP TABLE IF EXISTS `service_package`;
@@ -483,30 +506,35 @@ CREATE TABLE IF NOT EXISTS `service_package` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Trigger `service_package`
+-- Triggers `service_package`
 --
 DROP TRIGGER IF EXISTS `create_purchase_optional_avg`;
 DELIMITER $$
 CREATE TRIGGER `create_purchase_optional_avg` AFTER INSERT ON `service_package` FOR EACH ROW BEGIN
-INSERT INTO avarage_purchase_optional_package (package_id, avg_optional) VALUES (new.id, 0);
+INSERT INTO avarage_purchase_optional_package (package_id, package_name, avg_optional) VALUES (new.id, new.name, 0);
 END
 $$
 DELIMITER ;
 DROP TRIGGER IF EXISTS `create_purchase_package`;
 DELIMITER $$
 CREATE TRIGGER `create_purchase_package` AFTER INSERT ON `service_package` FOR EACH ROW BEGIN 
-INSERT INTO total_purchase_package (package_id, tot_purchase) VALUES (NEW.id, 0);
+INSERT INTO total_purchase_package (package_id, package_name, tot_purchase) VALUES (NEW.id, NEW.name, 0);
 END
 $$
 DELIMITER ;
 DROP TRIGGER IF EXISTS `create_purchase_package_optional`;
 DELIMITER $$
-CREATE TRIGGER `create_purchase_package_optional` AFTER INSERT ON `service_package` FOR EACH ROW BEGIN INSERT INTO total_purchase_package_optional (tot_purchase, package_id, has_optional_product) VALUES (0, new.id, 0), (0, new.id, 1); END
+CREATE TRIGGER `create_purchase_package_optional` AFTER INSERT ON `service_package` FOR EACH ROW BEGIN INSERT INTO total_purchase_package_optional (tot_purchase, package_id, package_name, has_optional_product) VALUES (0, new.id, NEW.name, 0), (0, new.id, NEW.name, 1); END
 $$
 DELIMITER ;
 DROP TRIGGER IF EXISTS `create_purchase_package_validity`;
 DELIMITER $$
-CREATE TRIGGER `create_purchase_package_validity` AFTER INSERT ON `service_package` FOR EACH ROW BEGIN INSERT INTO total_purchase_package_validity (tot_purchase, package_id, validity_period) VALUES (0, new.id, 12), (0, new.id, 24), (0, new.id, 36); END
+CREATE TRIGGER `create_purchase_package_validity` AFTER INSERT ON `service_package` FOR EACH ROW BEGIN INSERT INTO total_purchase_package_validity (tot_purchase, package_id, package_name, validity_period) VALUES (0, new.id, NEW.name, 12), (0, new.id, NEW.name, 24), (0, new.id, NEW.name, 36); END
+$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `create_tot_value_package`;
+DELIMITER $$
+CREATE TRIGGER `create_tot_value_package` AFTER INSERT ON `service_package` FOR EACH ROW BEGIN INSERT INTO tot_value_optional_no_optional (tot_value, package_id, package_name, with_optional) VALUES (0, new.id, NEW.name, 0), (0, new.id, NEW.name, 1); END
 $$
 DELIMITER ;
 DROP TRIGGER IF EXISTS `delete_purchase_optional_avg`;
@@ -537,73 +565,104 @@ DELETE FROM total_purchase_package_validity WHERE package_id = old.id;
 END
 $$
 DELIMITER ;
+DROP TRIGGER IF EXISTS `delete_tot_value_package`;
+DELIMITER $$
+CREATE TRIGGER `delete_tot_value_package` AFTER DELETE ON `service_package` FOR EACH ROW BEGIN
+DELETE FROM tot_value_optional_no_optional WHERE package_id = old.id;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `suspended_orders`
+-- Table structure for table `suspended_orders`
 --
 
 DROP TABLE IF EXISTS `suspended_orders`;
 CREATE TABLE IF NOT EXISTS `suspended_orders` (
   `order_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`order_id`,`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `total_purchase_optional`
+-- Table structure for table `total_purchase_optional`
 --
 
 DROP TABLE IF EXISTS `total_purchase_optional`;
 CREATE TABLE IF NOT EXISTS `total_purchase_optional` (
   `optional_id` int(11) NOT NULL,
-  `tot_purchase` int(11) NOT NULL DEFAULT 0
+  `optional_name` varchar(255) NOT NULL,
+  `tot_purchase` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`optional_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `total_purchase_package`
+-- Table structure for table `total_purchase_package`
 --
 
 DROP TABLE IF EXISTS `total_purchase_package`;
 CREATE TABLE IF NOT EXISTS `total_purchase_package` (
   `package_id` int(11) NOT NULL,
-  `tot_purchase` int(11) NOT NULL
+  `package_name` varchar(255) NOT NULL,
+  `tot_purchase` int(11) NOT NULL,
+  PRIMARY KEY (`package_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `total_purchase_package_optional`
+-- Table structure for table `total_purchase_package_optional`
 --
 
 DROP TABLE IF EXISTS `total_purchase_package_optional`;
 CREATE TABLE IF NOT EXISTS `total_purchase_package_optional` (
   `tot_purchase` int(11) NOT NULL DEFAULT 0,
   `package_id` int(11) NOT NULL,
-  `has_optional_product` int(11) NOT NULL
+  `package_name` varchar(255) NOT NULL,
+  `has_optional_product` int(11) NOT NULL,
+  PRIMARY KEY (`package_id`,`has_optional_product`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `total_purchase_package_validity`
+-- Table structure for table `total_purchase_package_validity`
 --
 
 DROP TABLE IF EXISTS `total_purchase_package_validity`;
 CREATE TABLE IF NOT EXISTS `total_purchase_package_validity` (
   `package_id` int(11) NOT NULL,
+  `package_name` varchar(255) NOT NULL,
   `tot_purchase` int(11) NOT NULL,
-  `validity_period` int(11) NOT NULL
+  `validity_period` int(11) NOT NULL,
+  PRIMARY KEY (`package_id`,`validity_period`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `user`
+-- Table structure for table `tot_value_optional_no_optional`
+--
+
+DROP TABLE IF EXISTS `tot_value_optional_no_optional`;
+CREATE TABLE IF NOT EXISTS `tot_value_optional_no_optional` (
+  `package_id` int(11) NOT NULL,
+  `with_optional` int(11) NOT NULL,
+  `package_name` varchar(255) NOT NULL,
+  `tot_value` double DEFAULT 0,
+  PRIMARY KEY (`package_id`,`with_optional`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
 --
 
 DROP TABLE IF EXISTS `user`;
@@ -621,7 +680,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Trigger `user`
+-- Triggers `user`
 --
 DROP TRIGGER IF EXISTS `create_failure_user`;
 DELIMITER $$
@@ -650,65 +709,67 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struttura per vista `number_optional_package`
+-- Structure for view `number_optional_package`
 --
 DROP TABLE IF EXISTS `number_optional_package`;
 
 DROP VIEW IF EXISTS `number_optional_package`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`mattia`@`%` SQL SECURITY DEFINER VIEW `number_optional_package`  AS SELECT `o1`.`package_id` AS `package_id`, count(`o`.`optional_id`) AS `number` FROM (`optional_product_order` `o` join `orders` `o1` on(`o`.`order_id` = `o1`.`id`)) GROUP BY `o`.`order_id`, `o1`.`user_id` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`mattia`@`%` SQL SECURITY DEFINER VIEW `number_optional_package`  AS SELECT `o1`.`package_id` AS `package_id`, count(`o`.`optional_id`) AS `number` FROM (`optional_product_order` `o` join `orders` `o1` on(`o`.`order_id` = `o1`.`id`)) GROUP BY `o`.`order_id`, `o1`.`user_id``user_id`  ;
 
 --
--- Limiti per le tabelle scaricate
+-- Constraints for dumped tables
 --
 
 --
--- Limiti per la tabella `activation`
+-- Constraints for table `activation`
 --
 ALTER TABLE `activation`
-  ADD CONSTRAINT `activation_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `activation_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `activation_ibfk_2` FOREIGN KEY (`package_id`) REFERENCES `service_package` (`id`),
+  ADD CONSTRAINT `activation_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
--- Limiti per la tabella `alerts`
+-- Constraints for table `alerts`
 --
 ALTER TABLE `alerts`
   ADD CONSTRAINT `alerts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limiti per la tabella `optional_product_in_package`
+-- Constraints for table `optional_product_in_package`
 --
 ALTER TABLE `optional_product_in_package`
   ADD CONSTRAINT `optional_product_in_package_ibfk_1` FOREIGN KEY (`package_id`) REFERENCES `service_package` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `optional_product_in_package_ibfk_2` FOREIGN KEY (`optional_product_id`) REFERENCES `optional_product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limiti per la tabella `optional_product_order`
+-- Constraints for table `optional_product_order`
 --
 ALTER TABLE `optional_product_order`
   ADD CONSTRAINT `optional_product_order_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `optional_product_order_ibfk_2` FOREIGN KEY (`optional_id`) REFERENCES `optional_product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limiti per la tabella `orders`
+-- Constraints for table `orders`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`package_id`) REFERENCES `service_package` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Limiti per la tabella `package_price`
+-- Constraints for table `package_price`
 --
 ALTER TABLE `package_price`
   ADD CONSTRAINT `package_price_ibfk_1` FOREIGN KEY (`package_id`) REFERENCES `service_package` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limiti per la tabella `payment_history`
+-- Constraints for table `payment_history`
 --
 ALTER TABLE `payment_history`
   ADD CONSTRAINT `payment_history_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `payment_history_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limiti per la tabella `service_in_package`
+-- Constraints for table `service_in_package`
 --
 ALTER TABLE `service_in_package`
   ADD CONSTRAINT `service_in_package_ibfk_1` FOREIGN KEY (`package_id`) REFERENCES `service_package` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,

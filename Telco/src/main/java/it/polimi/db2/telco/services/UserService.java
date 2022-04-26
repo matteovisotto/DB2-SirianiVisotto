@@ -1,13 +1,10 @@
 package it.polimi.db2.telco.services;
 
 import it.polimi.db2.telco.entities.User;
-import it.polimi.db2.telco.exceptions.user.UserEmailAlreadyExistingException;
 import it.polimi.db2.telco.exceptions.user.UserNotFoundException;
-import it.polimi.db2.telco.exceptions.user.UserUsernameAlreadyExistingException;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
@@ -64,19 +61,4 @@ public class UserService {
         em.flush();
         return user.getId();
     }
-
-    /*public Integer updateUser(User user) {
-        user = em.merge(user);
-        em.flush();
-        return user.getId();
-    }
-
-
-    public void deleteUser(User user) {
-        if (!em.contains(user)) {
-            user = em.merge(user);
-        }
-        em.remove(user);
-        em.flush();
-    }*/
 }

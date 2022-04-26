@@ -1,16 +1,12 @@
 package it.polimi.db2.telco.services;
 
-import it.polimi.db2.telco.entities.OptionalProduct;
 import it.polimi.db2.telco.entities.Service;
-import it.polimi.db2.telco.entities.ServicePackage;
 import it.polimi.db2.telco.exceptions.service.ServiceNotFoundException;
-import it.polimi.db2.telco.exceptions.servicePackage.ServicePackageNotFoundException;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Stateless
@@ -55,19 +51,4 @@ public class ServiceService {
         em.flush();
         return service.getId();
     }
-
-    /*public Integer updateService(Service service) {
-        service = em.merge(service);
-        em.flush();
-        return service.getId();
-    }
-
-
-    public void deleteService(Service service) {
-        if (!em.contains(service)) {
-            service = em.merge(service);
-        }
-        em.remove(service);
-        em.flush();
-    }*/
 }

@@ -15,24 +15,6 @@ public class AlertService {
 
     public AlertService(){}
 
-    /*public Alert getAlertById(Integer alertId) throws AlertNotFoundException {
-        Alert alert = em.find(Alert.class, alertId);
-        if(alert == null){
-            throw new AlertNotFoundException();
-        }
-        return alert;
-    }
-
-    public List<Alert> getAlertsOfUser(Integer userId) throws AlertNotFoundException {
-        TypedQuery<Alert> query = em.createQuery("SELECT a FROM Alert a WHERE a.user.id = :userId", Alert.class);
-        query.setParameter("userId", userId);
-        List<Alert> alerts = query.getResultList();
-        if (alerts.size() == 0) {
-            throw new AlertNotFoundException();
-        }
-        return alerts;
-    }*/
-
     public List<Alert> getAllAlerts() {
         TypedQuery<Alert> query = em.createQuery("SELECT a FROM Alert a", Alert.class);
         return query.getResultList();

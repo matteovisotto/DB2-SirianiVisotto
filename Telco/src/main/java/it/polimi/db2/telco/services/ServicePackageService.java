@@ -62,19 +62,4 @@ public class ServicePackageService {
         });
         return servicePackageId;
     }
-
-    /*public Integer updateServicePackage(ServicePackage servicePackage) {
-        servicePackage = em.merge(servicePackage);
-        em.flush();
-        return servicePackage.getId();
-    }
-
-
-    public void deleteServicePackage(ServicePackage servicePackage) {
-        if (!em.contains(servicePackage)) {
-            servicePackage = em.merge(servicePackage);
-        }
-        em.remove(servicePackage);
-        em.flush();
-    }*/
 }

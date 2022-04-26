@@ -28,18 +28,6 @@ public class UserController {
         return user;
     }
 
-    /*public User getUserById(Integer userId) throws UserException {
-        return userService.getUserById(userId);
-    }
-
-    public User getUserByEmail(String mail) throws UserException {
-        return userService.getUserByEmail(mail);
-    }
-
-    public User getUserByUsername(String username) throws UserException {
-        return userService.getUserByUsername(username);
-    }*/
-
     public boolean checkIfUsernameIsAlreadyUsed(String username) {
         return userService.checkUsername(username);
     }
@@ -53,27 +41,4 @@ public class UserController {
         userId = userService.createUser(user);
         return userId;
     }
-
-    /*public Integer updateUser(User user) throws UserException {
-        Integer userId;
-        if (userService.getUserByEmail(user.getEmail()) != null) {
-            if (userService.getUserByEmail(user.getEmail()).getUsername().equals(user.getUsername())) {
-                userId = userService.updateUser(user);
-            } else {
-                throw new UserNotCorrespondentException();
-            }
-        } else {
-            throw new UserNotFoundException();
-        }
-        return userId;
-    }
-
-    public void deleteUser(Integer userId) throws UserException {
-        User user = userService.getUserById(userId);
-        if (user != null) {
-            userService.deleteUser(user);
-        } else {
-            throw new UserNotFoundException();
-        }
-    }*/
 }

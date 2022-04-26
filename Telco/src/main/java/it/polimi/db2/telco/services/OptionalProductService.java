@@ -1,7 +1,6 @@
 package it.polimi.db2.telco.services;
 
 import it.polimi.db2.telco.entities.OptionalProduct;
-import it.polimi.db2.telco.entities.User;
 import it.polimi.db2.telco.exceptions.optionalProduct.OptionalProductNotFoundException;
 
 import javax.persistence.EntityManager;
@@ -25,16 +24,6 @@ public class OptionalProductService {
         return optionalProduct;
     }
 
-    /*public OptionalProduct getOptionalProductByName(String name) throws OptionalProductNotFoundException {
-        TypedQuery<OptionalProduct> query = em.createQuery("SELECT o FROM OptionalProduct o WHERE o.name = :name", OptionalProduct.class);
-        query.setParameter("name", name);
-        OptionalProduct optionalProduct = query.getSingleResult();
-        if (optionalProduct == null) {
-            throw new OptionalProductNotFoundException();
-        }
-        return optionalProduct;
-    }*/
-
     public boolean isOptionalProductAlreadyExisting(String name) {
         TypedQuery<OptionalProduct> query = em.createQuery("SELECT o FROM OptionalProduct o WHERE o.name = :name", OptionalProduct.class);
         query.setParameter("name", name);
@@ -55,19 +44,4 @@ public class OptionalProductService {
         em.flush();
         return optionalProduct.getId();
     }
-
-    /*public Integer updateOptionalProduct(OptionalProduct optionalProduct) {
-        optionalProduct = em.merge(optionalProduct);
-        em.flush();
-        return optionalProduct.getId();
-    }
-
-
-    public void deleteOptionalProduct(OptionalProduct optionalProduct) {
-        if (!em.contains(optionalProduct)) {
-            optionalProduct = em.merge(optionalProduct);
-        }
-        em.remove(optionalProduct);
-        em.flush();
-    }*/
 }

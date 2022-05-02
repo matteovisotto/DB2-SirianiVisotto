@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 26, 2022 at 04:54 PM
+-- Generation Time: May 02, 2022 at 10:16 PM
 -- Server version: 10.5.15-MariaDB-0ubuntu0.21.10.1
 -- PHP Version: 8.0.8
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `telco`
 --
+CREATE DATABASE IF NOT EXISTS `telco` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `telco`;
 
 -- --------------------------------------------------------
 
